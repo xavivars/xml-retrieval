@@ -17,17 +17,36 @@
  * 02111-1307, USA.
  */
 
-import utils.DocumentReader;
+package utils;
 
-public class Test {
+import java.util.ArrayList;
+
+import org.w3c.dom.Element;
+
+/**
+ * 
+ * @author Enrique Benimeli Bofarull
+ *
+ */
+public class DocumentReader extends XMLReader {
 
 	/**
-	 * @param args
+	 * 
+	 * @param fileName
 	 */
-	public static void main(String[] args) {
-		DocumentReader docReader = new DocumentReader("000.xml");
-		docReader.analize();
-		docReader.readDocument();
+	public DocumentReader(final String fileName) {
+		super(fileName);
 	}
-
+	
+	public final void readDocument() {
+		Element root = getDocument().getDocumentElement();
+		ArrayList<Element> children = this.readChildren(root);
+		
+		for( Element e : children) {
+			System.err.println("element: <" + e.getNodeName() +">");
+		}
+		
+	}
+	
+	
 }
