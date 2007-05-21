@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="cross-dics" basedir="." default="cross">
+
+	<description>XML Retrieval</description>
+	
+	<!-- Directories -->
+	<property name="build.dir" location="classes" />
+	<property name="src.dir" location="src/" />
+	<property name="log.dir" location="log" />
+	<property name="lib.dir" location="lib" />
+	<property name="zip.dir" location="zip" />
+	<property name="appName" value="xml-retrieval" />
+	
+	
+	<!-- PROPERTIES -->
+	<!-- Memory -->
+	<property name="minMem" value="32" />
+	<property name="maxMem" value="150" />
+	<!-- Time Stamp -->
+	<tstamp>
+		<format property="pack.timestamp" pattern="yyMMdd-HHmm" />
+	</tstamp>
+	<!-- Main class -->
+	<property name="mainClass" value="Test" />
+	<!-- Log files -->
+	<property name="outputFile" value="${log.dir}/xml-retrieval.log" />
+
+	
+	<!-- TASKS -->
+	
+	<!-- Prepare -->
+	<target name="prepare">
+		<mkdir dir="${log.dir}" />
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${lib.dir}" />
+		<mkdir dir="${zip.dir}" />
+	</target>
+
+	<!-- Compile -->
+	<target name="compile" depends="prepare">
+		<echo message="Compiling Java sources..." />
+		<javac destdir="${build.dir}/" deprecation="on">
+			<include name="**/*.java" />
+			<src path="${src.dir}" />
+		</javac>
+		<antcall target="jar" />
+		<echo message="Done!" />
+	</target>
+
+
+	<!-- Test action -->
+	<target name="test" depends="compile" >
+		<echo message="Running..." />
+		<java classname="${mainClass}" classpath="${lib.dir}/${appName}.jar" fork="true" output="${outputFile}">
+			<jvmarg value="-Xms${minMem}m" />
+			<jvmarg value="-Xmx${maxMem}m" />
+			<!--
+			<arg value="" />
+			-->
+		</java>
+		<antcall target="clean" />
+		<echo message="Results in '${log.dir}/${outputFile}'" />
+		<echo message="Done!" />
+	</target>
+
+	<!-- Clean -->
+	<target name="clean">
+	</target>
+
+	<!-- Pack -->
+	<target name="pack" depends="prepare">
+		<echo message="Packing files..." />
+		<delete>
+			<fileset dir="${zip.dir}/" includes="*.tar.gz"/>
+		</delete>
+		
+		<tar tarfile="${zip.dir}/${zip.file}.tar">
+			<tarfileset dir="../">
+				<include name="cross-dics/build.xml"/>
+				<include name="cross-dics/src/*.java"/>
+				<include name="cross-dics/src/utils/*.java"/>
+				<include name="cross-dics/lib/xml-retrieval.jar"/>
+				<include name="cross-dics/log"/>
+				<include name="cross-dics/META-INF/manifest.mf"/>
+				<include name="cross-dics/AUTHORS"/>
+				<include name="cross-dics/COPYING"/>
+				<include name="cross-dics/README"/>								
+			</tarfileset>
+		</tar>
+		<gzip zipfile="${zip.dir}/${zip.file}.tar.gz" src="${zip.dir}/${zip.file}.tar"/>
+		<delete file="${zip.dir}/${zip.file}.tar" />
+		<echo message="Done!" />
+	</target>
+
+	<!-- Help -->
+	<target name="help">
+		<echo message="Usage: ant [options ...]" />
+		<echo message="" />
+		<echo message="Where options include;" />
+	</target>
+
+	<target name="jar">
+		<mkdir dir="lib"/>
+		<jar destfile="lib/${appName}.jar" basedir="${build.dir}/"
+		manifest="META-INF/manifest.mf"/>
+	</target>
+
+</project>
