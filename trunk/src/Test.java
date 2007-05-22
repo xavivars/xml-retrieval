@@ -27,9 +27,10 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		DocumentReader docReader = new DocumentReader("000.xml");
-		docReader.analize();
-		WordList wordList = docReader.readDocument();
+		//DocumentReader docReader = new DocumentReader("000.xml");
+		DirectoryReader dirReader = new DirectoryReader();
+		
+		WordList wordList = dirReader.createIndex();
 		
 		for (Word word : wordList) {
 			word.printInfo();
