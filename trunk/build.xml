@@ -102,7 +102,7 @@
 	<target name="jar">
 		<mkdir dir="lib"/>
 		<jar destfile="lib/${appName}.jar" basedir="${build.dir}/"
-		manifest="META-INF/manifest.mf"/>
+		manifest="meta-inf/manifest.mf"/>
 	</target>
 
 </project>
