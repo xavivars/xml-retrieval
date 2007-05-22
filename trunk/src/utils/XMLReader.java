@@ -253,9 +253,9 @@ public class XMLReader {
 		StringTokenizer tokens = new StringTokenizer(text, " ");
 		while( tokens.hasMoreElements()) {
 			String token = tokens.nextToken();
-			if (isValidToken(token)) {
-			token = token.toLowerCase();
-			Word word = new Word(token);
+			String newToken = formatToken(token);
+			if (newToken != null) {
+			Word word = new Word(newToken);
 			word.setPath(path);
 			word.setDocument(document);
 			getWordMap().addWord(word);
@@ -267,22 +267,29 @@ public class XMLReader {
 	}
 	
 	/**
-	 * Alguna forma de comprobar que el token NO es , . \n etc
+	 * Formateamos el token, eliminando comas, puntos, etc.
 	 * @param token
 	 * @return
 	 */
-	private final boolean isValidToken(final String token) {
-		// sólo para probar...
-		if (token.length() == 1) {
-			if (token.equals("\n")) {
-				return false;
-			}
-			if (token.equals(",")) {
-				return false;
-			}
+	private final String formatToken(final String token) {
+		String newToken;
+		String [] temp;
 			
+		newToken = token.toLowerCase();
+		
+		if (newToken.length() == 1) {
+			if (newToken.matches("\\W")) {
+				newToken = null;
+			}
 		}
-		return true;
+		else {
+			temp = newToken.split("\\W");
+			if (temp.length == 1) {
+				newToken = temp[0];
+			}
+		}
+			
+		return newToken;
 	}
 
 	/**
