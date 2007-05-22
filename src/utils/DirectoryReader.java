@@ -48,7 +48,7 @@ public class DirectoryReader {
 	 * @param directory
 	 * @return
 	 */
-	public WordList createIndex (final String directory) {
+	public WordMap createIndex (final String directory) {
 		WordMap wordMap = new WordMap();
 		
 		ArrayList < File > listFiles;
@@ -59,9 +59,10 @@ public class DirectoryReader {
 		
 		for ( File file: listFiles) {
 			currentDoc = new DocumentReader(file.getPath(), wordMap);
+			currentDoc.analize();
 			index.addAll(currentDoc.readDocument());
 		}
-		return index;
+		return wordMap;
 	}
 	
 	

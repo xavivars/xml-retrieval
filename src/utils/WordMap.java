@@ -18,6 +18,7 @@ public class WordMap extends HashMap<String, WordList> {
 		if (this.containsKey(word.getValue())) {
 			wordList = get(word.getValue());
 		} else {
+			System.out.println("New word: " + word.getValue() );
 			wordList = new WordList();
 		}
 		wordList.add(word);
