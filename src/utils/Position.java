@@ -22,7 +22,7 @@ package utils;
 /**
  * 
  * @author ebenimeli
- *
+ * 
  */
 public class Position {
 
@@ -30,23 +30,23 @@ public class Position {
 	 * 
 	 */
 	private int pos;
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 */
 	public Position() {
 		pos = 1;
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 */
 	public final void next() {
 		pos++;
 	}
-	
+
 	/**
 	 * 
 	 * @return

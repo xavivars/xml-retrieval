@@ -1,11 +1,9 @@
-
 public class ListFiles {
 
 	public void method() {
 		String hola;
 	}
-	
-	
+
 	/**
 	 * @param args
 	 */

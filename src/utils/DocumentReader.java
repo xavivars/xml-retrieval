@@ -24,7 +24,7 @@ import org.w3c.dom.Element;
 /**
  * 
  * @author Enrique Benimeli Bofarull
- *
+ * 
  */
 public class DocumentReader extends XMLReader {
 
@@ -36,10 +36,10 @@ public class DocumentReader extends XMLReader {
 		super(fileName);
 		setWordMap(wordMap);
 	}
-	
+
 	/**
 	 * 
-	 * @return 
+	 * @return
 	 */
 	public final WordList readDocument() {
 		System.out.println("Reading document '" + getFileName() + "'");
@@ -50,5 +50,4 @@ public class DocumentReader extends XMLReader {
 		return wordList;
 	}
 
-	
 }
