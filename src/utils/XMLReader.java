@@ -114,16 +114,24 @@ public class XMLReader {
 	 * @param tagName
 	 * @return
 	 */
-	protected void readChildren(final Element e) {
+	protected void readChildren(final Element e, String path) {
 		if (e.hasChildNodes()) {
 			final NodeList children = e.getChildNodes();
 			for (int i = 0; i < children.getLength(); i++) {
 				final Node child = children.item(i);
 				if (child instanceof Element) {
-					System.out.println("Found: <" + child.getNodeName() + ">");
+					//System.out.println("Found: <" + child.getNodeName() + ">");
 					final Element childElement = (Element) child;
-					this.readChildren(childElement);
+					this.readChildren(childElement, path + "/" + child.getNodeName()+ "[" + (i+1) +"]");
 				}
+				if (child instanceof Text) {
+					Text text = (Text)child;
+					System.out.println("Found: '" + text.getData() + "'");
+					System.out.println("Path: " + path);
+					//final Element childElement = (Element) child;
+					//this.readChildren(childElement);
+				}
+				
 			}
 		}
 	}
