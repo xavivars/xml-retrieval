@@ -20,6 +20,7 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import org.w3c.dom.Element;
 
@@ -42,12 +43,13 @@ public class DocumentReader extends XMLReader {
 	 * 
 	 * @return Por ahora devuelve un Object (null)
 	 */
-	public final Object readDocument() {
+	public final WordList readDocument() {
 		Element root = getDocument().getDocumentElement();
 		String path = "/article[1]";
 		readChildren(root, path);
-		return null;
+		WordList wordList = getWordList();
+		return wordList;
 	}
-	
+
 	
 }

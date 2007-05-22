@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -64,12 +65,23 @@ public class XMLReader {
 	 */
 	protected File dicFile;
 
+	/**
+	 * 
+	 */
+	protected String fileName;
+	
+	/**
+	 * 
+	 */
+	protected WordList wordList;
 
 	/**
 	 * 
 	 * @param fileName
 	 */
 	protected XMLReader(final String fileName) {
+		wordList = new WordList();
+		setFileName(fileName);
 		setDicFile(new File(fileName));
 		try {
 			setFactory(DocumentBuilderFactory.newInstance());
@@ -137,11 +149,9 @@ public class XMLReader {
 					this.readChildren(childElement, path + "/" + child.getNodeName()+ "[" + (pos.getPos()) +"]");
 				}
 				if (child instanceof Text) {
-					Text text = (Text)child;
-					System.out.println("Found: '" + text.getData() + "'");
-					System.out.println("Path: " + path);
-					//final Element childElement = (Element) child;
-					//this.readChildren(childElement);
+					Text textElement = (Text)child;
+					String text = textElement.getData();
+					tokenize(text, this.getFileName(), path);
 				}
 				
 			}
@@ -225,15 +235,58 @@ public class XMLReader {
 	protected final void setFactory(final DocumentBuilderFactory factory) {
 		this.factory = factory;
 	}
-	
+
 	/**
 	 * 
 	 * @param path
 	 * @return
 	 */
-	private final WordList tokenize(final String path) {
-		
-		return null;
+	private final void tokenize(final String text, final String document, final String path) {
+		StringTokenizer tokens = new StringTokenizer(text, " ");
+		while( tokens.hasMoreElements()) {
+			String token = tokens.nextToken();
+			Word word = new Word(token);
+			word.setPath(path);
+			word.setDocument(document);
+			addWord(word);
+		}
 	}
+
+	/**
+	 * @return the fileName
+	 */
+	protected String getFileName() {
+		return fileName;
+	}
+
+	/**
+	 * @param fileName the fileName to set
+	 */
+	protected void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
+	/**
+	 * 
+	 * @param word
+	 */
+	private final void addWord(final Word word) {
+		wordList.add(word);
+	}
+
+	/**
+	 * @return the wordList
+	 */
+	public WordList getWordList() {
+		return wordList;
+	}
+
+	/**
+	 * @param wordList the wordList to set
+	 */
+	public void setWordList(WordList wordList) {
+		this.wordList = wordList;
+	}
+
 
 }

@@ -30,6 +30,16 @@ public class Word {
 	
 	/**
 	 * 
+	 */
+	private String document;
+	
+	/**
+	 * 
+	 */
+	private String path;
+	
+	/**
+	 * 
 	 * @param value
 	 */
 	public Word(final String value) {
@@ -49,5 +59,41 @@ public class Word {
 	public final void setValue(String value) {
 		this.value = value;
 	}
+
+	/**
+	 * @return the document
+	 */
+	public final String getDocument() {
+		return document;
+	}
+
+	/**
+	 * @param document the document to set
+	 */
+	public final void setDocument(String document) {
+		this.document = document;
+	}
+
+	/**
+	 * @return the path
+	 */
+	public final String getPath() {
+		return path;
+	}
+
+	/**
+	 * @param path the path to set
+	 */
+	public final void setPath(String path) {
+		this.path = path;
+	}
+	
+	public final void printInfo() {
+		System.out.println("Word:      '" + getValue() + "'");
+		System.out.println("Documento: '" + getDocument() + "'");
+		System.out.println("Path:      '" + getPath() + "'");
+	}
+	
+	
 	
 }
