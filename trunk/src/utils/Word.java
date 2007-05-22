@@ -28,23 +28,23 @@ public class Word {
 	 * 
 	 */
 	private String value;
-	
+
 	/**
 	 * 
 	 */
 	private String document;
-	
+
 	/**
 	 * 
 	 */
 	private String path;
-	
+
 	/**
 	 * 
 	 * @param value
 	 */
 	public Word(final String value) {
-		setValue(value);		
+		setValue(value);
 	}
 
 	/**
@@ -55,7 +55,8 @@ public class Word {
 	}
 
 	/**
-	 * @param value the value to set
+	 * @param value
+	 *            the value to set
 	 */
 	public final void setValue(String value) {
 		this.value = value;
@@ -69,7 +70,8 @@ public class Word {
 	}
 
 	/**
-	 * @param document the document to set
+	 * @param document
+	 *            the document to set
 	 */
 	public final void setDocument(String document) {
 		this.document = document;
@@ -83,22 +85,21 @@ public class Word {
 	}
 
 	/**
-	 * @param path the path to set
+	 * @param path
+	 *            the path to set
 	 */
 	public final void setPath(String path) {
 		this.path = path;
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 */
 	public final void printInfo() {
 		System.out.println("Word:      '" + getValue() + "'");
 		System.out.println("Documento: '" + getDocument() + "'");
 		System.out.println("Path:      '" + getPath() + "'");
 	}
-	
-	
-	
+
 }

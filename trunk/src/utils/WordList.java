@@ -1,4 +1,5 @@
 package utils;
+
 /*
  * Copyright (C) 2007 
  * 
@@ -20,13 +21,11 @@ package utils;
 
 import java.util.ArrayList;
 
-
 /**
  * 
  * @author ebenimeli
- *
+ * 
  */
 public class WordList extends ArrayList<Word> {
 
-	
 }

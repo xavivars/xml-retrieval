@@ -26,7 +26,7 @@ import utils.DirectoryReader;
 /**
  * 
  * @author ebenimeli
- *
+ * 
  */
 public class Test {
 
@@ -34,17 +34,15 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//DocumentReader docReader = new DocumentReader("000.xml");
+		// DocumentReader docReader = new DocumentReader("000.xml");
 		DirectoryReader dirReader = new DirectoryReader();
-		
+
 		WordMap wordMap = dirReader.createIndex(args[0]);
 
 		/*
-		for (Word word : wordList) {
-			word.printInfo();
-			System.out.println("");
-		}
-		*/
+		 * for (Word word : wordList) { word.printInfo();
+		 * System.out.println(""); }
+		 */
 	}
 
 }

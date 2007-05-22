@@ -36,6 +36,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
+import org.xml.sax.*;
 
 /**
  * 
@@ -68,7 +69,7 @@ public class XMLReader {
 	 * 
 	 */
 	protected String fileName;
-	
+
 	/**
 	 * 
 	 */
@@ -78,7 +79,7 @@ public class XMLReader {
 	 * 
 	 */
 	protected WordMap wordMap;
-	
+
 	/**
 	 * 
 	 * @param fileName
@@ -94,7 +95,7 @@ public class XMLReader {
 			pce.printStackTrace();
 			System.err.println("Error parsing XML document.");
 			System.exit(-1);
-		} catch( final Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			System.exit(-1);
 		}
@@ -102,14 +103,17 @@ public class XMLReader {
 
 	/**
 	 * 
-	 *
+	 * 
 	 */
 	public final void analize() {
 		try {
-			//getBuilder().setEntityResolver(er)
+			// MyEntityResolver mer = new MyEntityResolver();
+			// getBuilder().setEntityResolver(mer);
+
 			setDocument(getBuilder().parse(getDicFile()));
-		} catch( final FileNotFoundException fnfe) {
-			System.err.println("Error: could not find '" + getDicFile() +"' file.");
+		} catch (final FileNotFoundException fnfe) {
+			System.err.println("Error: could not find '" + getDicFile()
+					+ "' file.");
 			System.exit(-1);
 		} catch (final SAXException saxE) {
 			saxE.printStackTrace();
@@ -121,7 +125,8 @@ public class XMLReader {
 			System.exit(-1);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			System.err.println("Error: the XML document is probably not well-formed");
+			System.err
+					.println("Error: the XML document is probably not well-formed");
 			System.exit(-1);
 		} finally {
 			setBuilder(null);
@@ -136,13 +141,14 @@ public class XMLReader {
 	 * @return
 	 */
 	protected void readChildren(final Element e, String path) {
-		HashMap<String,Position> positions = new HashMap<String,Position>();
+		HashMap<String, Position> positions = new HashMap<String, Position>();
 		if (e.hasChildNodes()) {
 			final NodeList children = e.getChildNodes();
 			for (int i = 0; i < children.getLength(); i++) {
 				final Node child = children.item(i);
 				if (child instanceof Element) {
-					//System.out.println("Found: <" + child.getNodeName() + ">");
+					// System.out.println("Found: <" + child.getNodeName() +
+					// ">");
 					String nodeName = child.getNodeName();
 					Position pos = null;
 					if (!positions.containsKey(nodeName)) {
@@ -152,22 +158,24 @@ public class XMLReader {
 						pos = positions.get(nodeName);
 						pos.next();
 					}
-					
+
 					final Element childElement = (Element) child;
-					this.readChildren(childElement, path + "/" + child.getNodeName()+ "[" + (pos.getPos()) +"]");
+					this.readChildren(childElement, path + "/"
+							+ child.getNodeName() + "[" + (pos.getPos()) + "]");
 				}
 				if (child instanceof Text) {
-					Text textElement = (Text)child;
+					Text textElement = (Text) child;
 					String text = textElement.getData();
 					tokenize(text, this.getFileName(), path);
 				}
-				
+
 			}
 		}
 	}
 
 	/**
 	 * En caso que fuera necesario acceder al valor de algún atributo.
+	 * 
 	 * @param e
 	 * @param attrName
 	 * @return
@@ -196,7 +204,8 @@ public class XMLReader {
 	}
 
 	/**
-	 * @param builder the builder to set
+	 * @param builder
+	 *            the builder to set
 	 */
 	protected final void setBuilder(final DocumentBuilder builder) {
 		this.builder = builder;
@@ -210,7 +219,8 @@ public class XMLReader {
 	}
 
 	/**
-	 * @param dicFile the dicFile to set
+	 * @param dicFile
+	 *            the dicFile to set
 	 */
 	protected final void setDicFile(final File dicFile) {
 		this.dicFile = dicFile;
@@ -224,7 +234,8 @@ public class XMLReader {
 	}
 
 	/**
-	 * @param document the document to set
+	 * @param document
+	 *            the document to set
 	 */
 	protected final void setDocument(final Document document) {
 		this.document = document;
@@ -238,7 +249,8 @@ public class XMLReader {
 	}
 
 	/**
-	 * @param factory the factory to set
+	 * @param factory
+	 *            the factory to set
 	 */
 	protected final void setFactory(final DocumentBuilderFactory factory) {
 		this.factory = factory;
@@ -249,48 +261,49 @@ public class XMLReader {
 	 * @param path
 	 * @return
 	 */
-	private final void tokenize(final String text, final String document, final String path) {
+	private final void tokenize(final String text, final String document,
+			final String path) {
 		StringTokenizer tokens = new StringTokenizer(text, " ");
-		while( tokens.hasMoreElements()) {
+		while (tokens.hasMoreElements()) {
 			String token = tokens.nextToken();
 			String newToken = formatToken(token);
 			if (newToken != null) {
-			Word word = new Word(newToken);
-			word.setPath(path);
-			word.setDocument(document);
-			// añadimos el 'word' al WordMap
-			getWordMap().addWord(word);
-			// añadimos el 'word' al WordList
-			addWord(word);
+				Word word = new Word(newToken);
+				word.setPath(path);
+				word.setDocument(document);
+				// añadimos el 'word' al WordMap
+				getWordMap().addWord(word);
+				// añadimos el 'word' al WordList
+				addWord(word);
 			} else {
 				System.out.println("'" + token + "' is not a valid token");
 			}
 		}
 	}
-	
+
 	/**
 	 * Formateamos el token, eliminando comas, puntos, etc.
+	 * 
 	 * @param token
 	 * @return
 	 */
 	private final String formatToken(final String token) {
 		String newToken;
-		String [] temp;
-			
+		String[] temp;
+
 		newToken = token.toLowerCase();
-		
+
 		if (newToken.length() == 1) {
 			if (newToken.matches("\\W")) {
 				newToken = null;
 			}
-		}
-		else {
+		} else {
 			temp = newToken.split("\\W");
 			if (temp.length == 1) {
 				newToken = temp[0];
 			}
 		}
-			
+
 		return newToken;
 	}
 
@@ -302,12 +315,13 @@ public class XMLReader {
 	}
 
 	/**
-	 * @param fileName the fileName to set
+	 * @param fileName
+	 *            the fileName to set
 	 */
 	protected void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	
+
 	/**
 	 * 
 	 * @param word
@@ -324,7 +338,8 @@ public class XMLReader {
 	}
 
 	/**
-	 * @param wordList the wordList to set
+	 * @param wordList
+	 *            the wordList to set
 	 */
 	public void setWordList(WordList wordList) {
 		this.wordList = wordList;
@@ -338,11 +353,11 @@ public class XMLReader {
 	}
 
 	/**
-	 * @param wordMap the wordMap to set
+	 * @param wordMap
+	 *            the wordMap to set
 	 */
 	protected void setWordMap(WordMap wordMap) {
 		this.wordMap = wordMap;
 	}
-
 
 }
