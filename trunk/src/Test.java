@@ -20,6 +20,7 @@
 import utils.DocumentReader;
 import utils.Word;
 import utils.WordList;
+import utils.DirectoryReader;
 
 public class Test {
 
@@ -30,7 +31,7 @@ public class Test {
 		//DocumentReader docReader = new DocumentReader("000.xml");
 		DirectoryReader dirReader = new DirectoryReader();
 		
-		WordList wordList = dirReader.createIndex();
+		WordList wordList = dirReader.createIndex(args[0]);
 		
 		for (Word word : wordList) {
 			word.printInfo();
