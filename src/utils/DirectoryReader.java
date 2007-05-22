@@ -4,36 +4,43 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class DirectoryReader {
-		
-	public DirectoryReader () {
-		
-	}
 	
-	public ArrayList < File > readDirectory (File dir) {
+	public DirectoryReader () {
+	
+	}
+			
+	private ArrayList < File > readDirectory (File dir) {
 		
 		File [] childs;
 		String name;
-		ArrayList < File > listFiles = new ArrayList < File > ();
+		ArrayList < File > list = new ArrayList < File > ();
 				
 		if (dir.isDirectory()) {
 			childs = dir.listFiles();
 			for (File currentChild: childs) {
-				listFiles.addAll(readDirectory(currentChild));
+				list.addAll(readDirectory(currentChild));
 			}
 		}
 		else {
 			name = dir.getName();
 			if(name.matches("\\w\\d{4}.xml"))
-				listFiles.add(dir);
+				list.add(dir);
 		}
-		return listFiles;
+		return list;
 	}
 	
-	public void createIndex (ArrayList < File > files) {
+	public WordList createIndex (String directory) {
+		ArrayList < File > listFiles;
+		DocumentReader currentDoc;
 		WordList index = new WordList();
-		for ( File file: files) {
-			index.addAll(arg0)
+		
+		listFiles = readDirectory(new File (directory));
+		
+		for ( File file: listFiles) {
+			currentDoc = new DocumentReader (file.getPath());
+			index.addAll(currentDoc.readDocument());
 		}
+		return index;
 	}
 	
 	
