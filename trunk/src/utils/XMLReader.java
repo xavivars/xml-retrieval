@@ -114,19 +114,18 @@ public class XMLReader {
 	 * @param tagName
 	 * @return
 	 */
-	protected ArrayList<org.w3c.dom.Element> readChildren(final Element e) {
-		final ArrayList<org.w3c.dom.Element> eList = new ArrayList<org.w3c.dom.Element>();
+	protected void readChildren(final Element e) {
 		if (e.hasChildNodes()) {
 			final NodeList children = e.getChildNodes();
 			for (int i = 0; i < children.getLength(); i++) {
 				final Node child = children.item(i);
 				if (child instanceof Element) {
+					System.out.println("Found: <" + child.getNodeName() + ">");
 					final Element childElement = (Element) child;
-					eList.add(childElement);
+					this.readChildren(childElement);
 				}
 			}
 		}
-		return eList;
 	}
 
 	/**
@@ -205,7 +204,6 @@ public class XMLReader {
 	 */
 	protected final void setFactory(final DocumentBuilderFactory factory) {
 		this.factory = factory;
-		factory.setValidating(false);
 	}
 
 }

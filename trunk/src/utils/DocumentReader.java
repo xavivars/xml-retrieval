@@ -40,12 +40,7 @@ public class DocumentReader extends XMLReader {
 	
 	public final void readDocument() {
 		Element root = getDocument().getDocumentElement();
-		ArrayList<Element> children = this.readChildren(root);
-		
-		for( Element e : children) {
-			System.err.println("element: <" + e.getNodeName() +">");
-		}
-		
+		readChildren(root);
 	}
 	
 	
