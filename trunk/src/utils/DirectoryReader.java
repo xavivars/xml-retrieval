@@ -12,6 +12,7 @@ public class DirectoryReader {
 	public ArrayList < File > readDirectory (File dir) {
 		
 		File [] childs;
+		String name;
 		ArrayList < File > listFiles = new ArrayList < File > ();
 				
 		if (dir.isDirectory()) {
@@ -21,10 +22,20 @@ public class DirectoryReader {
 			}
 		}
 		else {
-			listFiles.add(dir);
+			name = dir.getName();
+			if(name.matches("\\w\\d{4}.xml"))
+				listFiles.add(dir);
 		}
 		return listFiles;
 	}
+	
+	public void createIndex (ArrayList < File > files) {
+		WordList index = new WordList();
+		for ( File file: files) {
+			index.addAll(arg0)
+		}
+	}
+	
 	
 	/**
 	 * @param args
@@ -40,6 +51,7 @@ public class DirectoryReader {
 		else {
 			dr = new DirectoryReader ();
 			listFiles = dr.readDirectory(new File (args[0]));
+			
 			for (File file: listFiles) {
 				System.out.println("File: " + file.getPath());
 			}
