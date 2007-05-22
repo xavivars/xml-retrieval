@@ -18,6 +18,8 @@
  */
 
 import utils.DocumentReader;
+import utils.Word;
+import utils.WordList;
 
 public class Test {
 
@@ -27,7 +29,12 @@ public class Test {
 	public static void main(String[] args) {
 		DocumentReader docReader = new DocumentReader("000.xml");
 		docReader.analize();
-		docReader.readDocument();
+		WordList wordList = docReader.readDocument();
+		
+		for (Word word : wordList) {
+			word.printInfo();
+			System.out.println("");
+		}
 	}
 
 }
