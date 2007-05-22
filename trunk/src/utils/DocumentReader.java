@@ -19,9 +19,6 @@
 
 package utils;
 
-import java.util.ArrayList;
-import java.util.StringTokenizer;
-
 import org.w3c.dom.Element;
 
 /**
@@ -42,7 +39,7 @@ public class DocumentReader extends XMLReader {
 	
 	/**
 	 * 
-	 * @return Por ahora devuelve un Object (null)
+	 * @return 
 	 */
 	public final WordList readDocument() {
 		System.out.println("Reading document '" + getFileName() + "'");
