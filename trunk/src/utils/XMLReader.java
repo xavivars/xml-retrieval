@@ -77,6 +77,11 @@ public class XMLReader {
 
 	/**
 	 * 
+	 */
+	protected WordMap wordMap;
+	
+	/**
+	 * 
 	 * @param fileName
 	 */
 	protected XMLReader(final String fileName) {
@@ -253,6 +258,7 @@ public class XMLReader {
 			Word word = new Word(token);
 			word.setPath(path);
 			word.setDocument(document);
+			getWordMap().addWord(word);
 			addWord(word);
 			} else {
 				System.out.println("'" + token + "' is not a valid token");
@@ -313,6 +319,20 @@ public class XMLReader {
 	 */
 	public void setWordList(WordList wordList) {
 		this.wordList = wordList;
+	}
+
+	/**
+	 * @return the wordMap
+	 */
+	protected WordMap getWordMap() {
+		return wordMap;
+	}
+
+	/**
+	 * @param wordMap the wordMap to set
+	 */
+	protected void setWordMap(WordMap wordMap) {
+		this.wordMap = wordMap;
 	}
 
 
