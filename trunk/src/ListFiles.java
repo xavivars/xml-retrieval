@@ -13,10 +13,5 @@ public class ListFiles {
 		// TODO Auto-generated method stub
 		System.out.println("Hola Don Pepito");
 	}
-	
-	public final void metodoQuique() {
-		//Esto es una prueba de lo jodido del svn
-		System.out.println();
-	}
 
 }
