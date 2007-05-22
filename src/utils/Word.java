@@ -1,4 +1,5 @@
 package utils;
+
 /*
  * Copyright (C) 2007 
  * 
@@ -88,6 +89,10 @@ public class Word {
 		this.path = path;
 	}
 	
+	/**
+	 * 
+	 *
+	 */
 	public final void printInfo() {
 		System.out.println("Word:      '" + getValue() + "'");
 		System.out.println("Documento: '" + getDocument() + "'");

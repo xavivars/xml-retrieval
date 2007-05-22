@@ -88,8 +88,11 @@ public class XMLReader {
 			setBuilder(getFactory().newDocumentBuilder());
 		} catch (final ParserConfigurationException pce) {
 			pce.printStackTrace();
+			System.err.println("Error parsing XML document.");
+			System.exit(-1);
 		} catch( final Exception e) {
 			e.printStackTrace();
+			System.exit(-1);
 		}
 	}
 
@@ -245,11 +248,35 @@ public class XMLReader {
 		StringTokenizer tokens = new StringTokenizer(text, " ");
 		while( tokens.hasMoreElements()) {
 			String token = tokens.nextToken();
+			if (isValidToken(token)) {
+			token = token.toLowerCase();
 			Word word = new Word(token);
 			word.setPath(path);
 			word.setDocument(document);
 			addWord(word);
+			} else {
+				System.out.println("'" + token + "' is not a valid token");
+			}
 		}
+	}
+	
+	/**
+	 * Alguna forma de comprobar que el token NO es , . \n etc
+	 * @param token
+	 * @return
+	 */
+	private final boolean isValidToken(final String token) {
+		// sólo para probar...
+		if (token.length() == 1) {
+			if (token.equals("\n")) {
+				return false;
+			}
+			if (token.equals(",")) {
+				return false;
+			}
+			
+		}
+		return true;
 	}
 
 	/**
