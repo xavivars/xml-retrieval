@@ -3,12 +3,26 @@ package utils;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author 
+ *
+ */
 public class DirectoryReader {
 	
+	/**
+	 * 
+	 *
+	 */
 	public DirectoryReader () {
 	
 	}
-			
+		
+	/**
+	 * 
+	 * @param dir
+	 * @return
+	 */
 	private ArrayList < File > readDirectory (File dir) {
 		
 		File [] childs;
@@ -29,7 +43,14 @@ public class DirectoryReader {
 		return list;
 	}
 	
-	public WordList createIndex (String directory) {
+	/**
+	 * 
+	 * @param directory
+	 * @return
+	 */
+	public WordList createIndex (final String directory) {
+		WordMap wordMap = new WordMap();
+		
 		ArrayList < File > listFiles;
 		DocumentReader currentDoc;
 		WordList index = new WordList();
@@ -37,7 +58,7 @@ public class DirectoryReader {
 		listFiles = readDirectory(new File (directory));
 		
 		for ( File file: listFiles) {
-			currentDoc = new DocumentReader (file.getPath());
+			currentDoc = new DocumentReader(file.getPath(), wordMap);
 			index.addAll(currentDoc.readDocument());
 		}
 		return index;

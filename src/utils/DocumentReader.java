@@ -35,8 +35,9 @@ public class DocumentReader extends XMLReader {
 	 * 
 	 * @param fileName
 	 */
-	public DocumentReader(final String fileName) {
+	public DocumentReader(final String fileName, WordMap wordMap) {
 		super(fileName);
+		setWordMap(wordMap);
 	}
 	
 	/**
@@ -44,6 +45,7 @@ public class DocumentReader extends XMLReader {
 	 * @return Por ahora devuelve un Object (null)
 	 */
 	public final WordList readDocument() {
+		System.out.println("Reading document '" + getFileName() + "'");
 		Element root = getDocument().getDocumentElement();
 		String path = "/article[1]";
 		readChildren(root, path);
