@@ -40,7 +40,8 @@ public class DocumentReader extends XMLReader {
 	
 	public final void readDocument() {
 		Element root = getDocument().getDocumentElement();
-		readChildren(root);
+		String path = "/article[1]";
+		readChildren(root, path);
 	}
 	
 	
