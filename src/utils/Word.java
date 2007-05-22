@@ -1,3 +1,4 @@
+package utils;
 /*
  * Copyright (C) 2007 
  * 
@@ -17,42 +18,36 @@
  * 02111-1307, USA.
  */
 
-package utils;
-
 /**
  * 
- * @author ebenimeli
- *
  */
-public class Position {
+public class Word {
 
 	/**
 	 * 
 	 */
-	private int pos;
+	private String value;
 	
 	/**
 	 * 
-	 *
+	 * @param value
 	 */
-	public Position() {
-		pos = 1;
-	}
-	
-	/**
-	 * 
-	 *
-	 */
-	public final void next() {
-		pos++;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public final int getPos() {
-		return pos;
+	public Word(final String value) {
+		setValue(value);		
 	}
 
+	/**
+	 * @return the value
+	 */
+	public final String getValue() {
+		return value;
+	}
+
+	/**
+	 * @param value the value to set
+	 */
+	public final void setValue(String value) {
+		this.value = value;
+	}
+	
 }

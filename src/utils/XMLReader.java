@@ -149,7 +149,7 @@ public class XMLReader {
 	}
 
 	/**
-	 * 
+	 * En caso que fuera necesario acceder al valor de algún atributo.
 	 * @param e
 	 * @param attrName
 	 * @return
@@ -224,6 +224,16 @@ public class XMLReader {
 	 */
 	protected final void setFactory(final DocumentBuilderFactory factory) {
 		this.factory = factory;
+	}
+	
+	/**
+	 * 
+	 * @param path
+	 * @return
+	 */
+	private final WordList tokenize(final String path) {
+		
+		return null;
 	}
 
 }

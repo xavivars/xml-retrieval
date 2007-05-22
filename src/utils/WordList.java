@@ -1,3 +1,4 @@
+package utils;
 /*
  * Copyright (C) 2007 
  * 
@@ -17,42 +18,15 @@
  * 02111-1307, USA.
  */
 
-package utils;
+import java.util.ArrayList;
+
 
 /**
  * 
  * @author ebenimeli
  *
  */
-public class Position {
+public class WordList extends ArrayList<Word> {
 
-	/**
-	 * 
-	 */
-	private int pos;
 	
-	/**
-	 * 
-	 *
-	 */
-	public Position() {
-		pos = 1;
-	}
-	
-	/**
-	 * 
-	 *
-	 */
-	public final void next() {
-		pos++;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public final int getPos() {
-		return pos;
-	}
-
 }
