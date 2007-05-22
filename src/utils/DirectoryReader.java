@@ -58,8 +58,10 @@ public class DirectoryReader {
 		listFiles = readDirectory(new File (directory));
 		
 		for ( File file: listFiles) {
+			// wordMap se irá construyendo
 			currentDoc = new DocumentReader(file.getPath(), wordMap);
 			currentDoc.analize();
+			// además creamos un wordList (aunque no es necesario)
 			index.addAll(currentDoc.readDocument());
 		}
 		return wordMap;

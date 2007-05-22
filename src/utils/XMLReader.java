@@ -21,7 +21,6 @@ package utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
@@ -107,6 +106,7 @@ public class XMLReader {
 	 */
 	public final void analize() {
 		try {
+			//getBuilder().setEntityResolver(er)
 			setDocument(getBuilder().parse(getDicFile()));
 		} catch( final FileNotFoundException fnfe) {
 			System.err.println("Error: could not find '" + getDicFile() +"' file.");
@@ -258,7 +258,9 @@ public class XMLReader {
 			Word word = new Word(newToken);
 			word.setPath(path);
 			word.setDocument(document);
+			// añadimos el 'word' al WordMap
 			getWordMap().addWord(word);
+			// añadimos el 'word' al WordList
 			addWord(word);
 			} else {
 				System.out.println("'" + token + "' is not a valid token");
