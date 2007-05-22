@@ -22,6 +22,7 @@ package utils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -115,14 +116,25 @@ public class XMLReader {
 	 * @return
 	 */
 	protected void readChildren(final Element e, String path) {
+		HashMap<String,Position> positions = new HashMap<String,Position>();
 		if (e.hasChildNodes()) {
 			final NodeList children = e.getChildNodes();
 			for (int i = 0; i < children.getLength(); i++) {
 				final Node child = children.item(i);
 				if (child instanceof Element) {
 					//System.out.println("Found: <" + child.getNodeName() + ">");
+					String nodeName = child.getNodeName();
+					Position pos = null;
+					if (!positions.containsKey(nodeName)) {
+						positions.put(nodeName, new Position());
+						pos = positions.get(nodeName);
+					} else {
+						pos = positions.get(nodeName);
+						pos.next();
+					}
+					
 					final Element childElement = (Element) child;
-					this.readChildren(childElement, path + "/" + child.getNodeName()+ "[" + (i+1) +"]");
+					this.readChildren(childElement, path + "/" + child.getNodeName()+ "[" + (pos.getPos()) +"]");
 				}
 				if (child instanceof Text) {
 					Text text = (Text)child;

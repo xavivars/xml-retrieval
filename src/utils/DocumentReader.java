@@ -38,10 +38,15 @@ public class DocumentReader extends XMLReader {
 		super(fileName);
 	}
 	
-	public final void readDocument() {
+	/**
+	 * 
+	 * @return Por ahora devuelve un Object (null)
+	 */
+	public final Object readDocument() {
 		Element root = getDocument().getDocumentElement();
 		String path = "/article[1]";
 		readChildren(root, path);
+		return null;
 	}
 	
 	
