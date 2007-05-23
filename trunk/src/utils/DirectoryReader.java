@@ -58,11 +58,11 @@ public class DirectoryReader {
 		while (it.hasNext()) {
 			Map.Entry <String, WordList> e = (Map.Entry <String, WordList>) it.next();
 			stopWords.add(new WordFrequency(e.getKey(),e.getValue().size()));
-			Collections.sort(stopWords);
 		}
 		
+		Collections.sort(stopWords);
+		
 		// Eliminamos las palabras más frecuentes del WordMap
-				
 		for (int i = stopWords.size() - thresold -1 ; i < stopWords.size() -1 ; i++) {
 			index.remove(stopWords.get(i).getValue());
 		}
