@@ -17,11 +17,11 @@ public class WordFrequency extends Word implements Comparable < WordFrequency>{
 		return frequency;
 	}
 
-	public void setFrequency(Integer frequency) {
+	public void setFrequency(final Integer frequency) {
 		this.frequency = frequency;
 	}
 
-	public int compareTo(WordFrequency arg0) {
+	public int compareTo(final WordFrequency arg0) {
 		// TODO Auto-generated method stub
 		
 		if (arg0.getFrequency() < getFrequency()) {

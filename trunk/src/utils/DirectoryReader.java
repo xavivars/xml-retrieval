@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
 
-
 /**
  * 
  * @author
@@ -29,20 +28,20 @@ public class DirectoryReader {
 	 * @return
 	 */
 	public ArrayList<File> readDirectory(File dir) {
-
 		File[] childs;
 		String name;
-		ArrayList<File> list = new ArrayList<File>();
+		final ArrayList<File> list = new ArrayList<File>();
 
 		if (dir.isDirectory()) {
 			childs = dir.listFiles();
-			for (File currentChild : childs) {
+			for (final File currentChild : childs) {
 				list.addAll(readDirectory(currentChild));
 			}
 		} else {
 			name = dir.getName();
-			if (name.matches("\\w\\d{4}.xml"))
+			if (name.matches("\\w\\d{4}.xml")) {
 				list.add(dir);
+			}
 		}
 		return list;
 	}
@@ -53,24 +52,38 @@ public class DirectoryReader {
 	 * @return
 	 */
 	public WordMap createIndex(final String directory) {
-		WordMap wordMap = new WordMap();
+		final WordMap wordMap = new WordMap();
 
-		HashMap<String,String> notWellFormed = new HashMap<String,String>();
+		final HashMap<String,String> notWellFormed = new HashMap<String,String>();
 		// los siguientes archivos XML parecen no validar con la DTD
 		// y dan problemas en el indexado. Por ahora los omitimos.
 		notWellFormed.put("xml/cg/1995/g1069.xml", null);
 		notWellFormed.put("xml/cg/1996/g5071.xml", null);
 		notWellFormed.put("xml/cg/1997/g6110.xml", null);
+		notWellFormed.put("xml/dt/1995/d1024.xml", null);
+		notWellFormed.put("xml/pd/1995/p4008.xml", null);
+		notWellFormed.put("xml/so/1995/s6088.xml", null);
+		notWellFormed.put("xml/tc/1995/t0453.xml", null);
+		notWellFormed.put("xml/tc/1995/t0624.xml", null);
+		notWellFormed.put("xml/tc/1995/t0957.xml", null);
+		notWellFormed.put("xml/tc/1995/t1073.xml", null);
+		notWellFormed.put("xml/tc/1996/t0714.xml", null);
+		notWellFormed.put("xml/tc/1996/t0892.xml", null);
+		notWellFormed.put("xml/tc/1997/t0162.xml", null);
+		notWellFormed.put("xml/tc/1998/t0527.xml", null);
 		
 		ArrayList<File> listFiles;
 		DocumentReader currentDoc;
-		WordList wl = new WordList();
+		final WordList wl = new WordList();
 
+		try {
 		listFiles = readDirectory(new File(directory));
 
 		System.out.println(listFiles.size() + " archivos.");
-		for (File file : listFiles) {
+		int i = 0;
+		for (final File file : listFiles) {
 			// wordMap se irá construyendo
+			System.out.println("[" + i + "]: " + file.getPath());
 
 			System.out.println("File: " + file.getPath());
 			
@@ -80,13 +93,16 @@ public class DirectoryReader {
 			currentDoc.analize();
 			// además creamos un wordList (aunque no es necesario)
 
-			WordList wordList = currentDoc.readDocument();
+			final WordList wordList = currentDoc.readDocument();
 			currentDoc = null;
 			}
 			//index.addAll(wordList);
+			i++;
 
 		}
-
+		} catch( Exception e ) {
+			e.printStackTrace();
+		}
 		
 		return wordMap;
 	}
@@ -96,8 +112,7 @@ public class DirectoryReader {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(final String[] args) {
 		DirectoryReader dr;
 		ArrayList<File> listFiles = new ArrayList<File>();
 
@@ -107,7 +122,7 @@ public class DirectoryReader {
 			dr = new DirectoryReader();
 			listFiles = dr.readDirectory(new File(args[0]));
 
-			for (File file : listFiles) {
+			for (final File file : listFiles) {
 				System.out.println("File: " + file.getPath());
 			}
 		}

@@ -28,4 +28,9 @@ import java.util.ArrayList;
  */
 public class WordList extends ArrayList<Word> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 }

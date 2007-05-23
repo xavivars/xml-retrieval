@@ -11,9 +11,14 @@ public class WordMap extends HashMap<String, WordList> {
 
 	/**
 	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
 	 * @param word
 	 */
-	public final void addWord(Word word) {
+	public final void addWord(final Word word) {
 		WordList wordList = null;
 		if (containsKey(word.getValue())) {
 			wordList = get(word.getValue());
