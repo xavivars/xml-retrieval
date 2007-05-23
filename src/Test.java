@@ -34,10 +34,16 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// DocumentReader docReader = new DocumentReader("000.xml");
+		WordMap wm = new WordMap();
+		DocumentReader docReader = new DocumentReader("a1006.xml", wm);
+		docReader.analize();
+		docReader.readDocument();
+		
+		/*
 		DirectoryReader dirReader = new DirectoryReader();
 
 		WordMap wordMap = dirReader.createIndex(args[0]);
+		*/
 
 		/*
 		 * for (Word word : wordList) { word.printInfo();
