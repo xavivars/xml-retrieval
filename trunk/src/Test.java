@@ -22,6 +22,7 @@
 
 import utils.DocumentReader;
 import utils.Word;
+import utils.WordCounter;
 import utils.WordList;
 import utils.WordMap;
 import utils.DirectoryReader;
@@ -46,7 +47,7 @@ public class Test {
 		
 		DirectoryReader dirReader = new DirectoryReader();
 		
-
+		
 		WordMap wordMap = dirReader.createIndex(args[0]);
 
 		/*
