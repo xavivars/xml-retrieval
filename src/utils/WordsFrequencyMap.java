@@ -83,6 +83,7 @@ public class WordsFrequencyMap extends HashMap < String, Integer> {
 			}
 			
 			dos.writeBytes("</stop-words>\n");
+			dos.writeBytes("<!-- " + nStopWords + " stop-words -->\n");
 			fos = null;
 			bos = null;
 			dos.close();
