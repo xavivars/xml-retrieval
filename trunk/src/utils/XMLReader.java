@@ -107,8 +107,6 @@ public class XMLReader {
 	 */
 	public final void analize() {
 		try {
-			// MyEntityResolver mer = new MyEntityResolver();
-			// getBuilder().setEntityResolver(mer);
 			setDocument(getBuilder().parse(getDicFile()));
 		} catch (final FileNotFoundException fnfe) {
 			System.err.println("Error: could not find '" + getDicFile()
@@ -271,11 +269,12 @@ public class XMLReader {
 				word.setPath(path);
 				word.setDocument(document);
 				// añadimos el 'word' al WordMap
+				//System.out.println("Add '" + word.getValue() + "'");
 				getWordMap().addWord(word);
 				// añadimos el 'word' al WordList
-				addWord(word);
+				//addWord(word);
 			} else {
-				System.out.println("'" + token + "' is not a valid token");
+				//System.out.println("'" + token + "' is not a valid token");
 			}
 		}
 	}

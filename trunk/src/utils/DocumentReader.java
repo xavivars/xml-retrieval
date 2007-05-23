@@ -42,12 +42,13 @@ public class DocumentReader extends XMLReader {
 	 * @return
 	 */
 	public final WordList readDocument() {
-		System.out.println("Reading document '" + getFileName() + "'");
+		//System.out.println("Reading document '" + getFileName() + "'");
 		Element root = getDocument().getDocumentElement();
 		String path = "/article[1]";
 		readChildren(root, path);
-		WordList wordList = getWordList();
-		return wordList;
+		System.out.println("WordMap size: " + getWordMap().size());
+		//WordList wordList = getWordList();
+		return null;
 	}
 
 }
