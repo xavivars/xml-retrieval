@@ -2,7 +2,11 @@ package utils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.HashMap;
+
 
 /**
  * 
@@ -43,6 +47,29 @@ public class DirectoryReader {
 		return list;
 	}
 
+	private void removeStopWords (WordMap index) {
+		
+		
+		ArrayList < WordFrequency > stopWords = new ArrayList < WordFrequency > ();
+		Iterator it = index.entrySet().iterator();
+		int thresold = 20;
+		
+		// Recorremos el WordMap y lo copiamos al ArrayList
+		while (it.hasNext()) {
+			Map.Entry <String, WordList> e = (Map.Entry <String, WordList>) it.next();
+			stopWords.add(new WordFrequency(e.getKey(),e.getValue().size()));
+			Collections.sort(stopWords);
+		}
+		
+		// Eliminamos las palabras más frecuentes del WordMap
+				
+		for (int i = stopWords.size() - thresold -1 ; i < stopWords.size() -1 ; i++) {
+			index.remove(stopWords.get(i).getValue());
+		}
+			
+		
+	}
+	
 	/**
 	 * 
 	 * @param directory
@@ -60,27 +87,37 @@ public class DirectoryReader {
 		
 		ArrayList<File> listFiles;
 		DocumentReader currentDoc;
-		WordList index = new WordList();
+		WordList wl = new WordList();
 
 		listFiles = readDirectory(new File(directory));
 
 		System.out.println(listFiles.size() + " archivos.");
 		for (File file : listFiles) {
 			// wordMap se irá construyendo
+
 			System.out.println("File: " + file.getPath());
 			
 			if (!notWellFormed.containsKey(file.getPath())) {
 			currentDoc = new DocumentReader(file.getPath(), wordMap);
+
 			currentDoc.analize();
 			// además creamos un wordList (aunque no es necesario)
+
 			WordList wordList = currentDoc.readDocument();
 			currentDoc = null;
 			}
 			//index.addAll(wordList);
+
 		}
+		
+		removeStopWords(wordMap);
+		
+		
 		return wordMap;
 	}
 
+	
+	
 	/**
 	 * @param args
 	 */
