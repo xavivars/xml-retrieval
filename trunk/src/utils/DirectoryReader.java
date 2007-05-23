@@ -28,7 +28,7 @@ public class DirectoryReader {
 	 * @param dir
 	 * @return
 	 */
-	private ArrayList<File> readDirectory(File dir) {
+	public ArrayList<File> readDirectory(File dir) {
 
 		File[] childs;
 		String name;
@@ -47,29 +47,6 @@ public class DirectoryReader {
 		return list;
 	}
 
-	private void removeStopWords (WordMap index) {
-		
-		
-		ArrayList < WordFrequency > stopWords = new ArrayList < WordFrequency > ();
-		Iterator it = index.entrySet().iterator();
-		int thresold = 20;
-		
-		// Recorremos el WordMap y lo copiamos al ArrayList
-		while (it.hasNext()) {
-			Map.Entry <String, WordList> e = (Map.Entry <String, WordList>) it.next();
-			stopWords.add(new WordFrequency(e.getKey(),e.getValue().size()));
-		}
-		
-		Collections.sort(stopWords);
-		
-		// Eliminamos las palabras más frecuentes del WordMap
-		for (int i = stopWords.size() - thresold -1 ; i < stopWords.size() -1 ; i++) {
-			index.remove(stopWords.get(i).getValue());
-		}
-			
-		
-	}
-	
 	/**
 	 * 
 	 * @param directory
@@ -109,9 +86,7 @@ public class DirectoryReader {
 			//index.addAll(wordList);
 
 		}
-		
-		removeStopWords(wordMap);
-		
+
 		
 		return wordMap;
 	}

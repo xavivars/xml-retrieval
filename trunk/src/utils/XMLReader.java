@@ -258,7 +258,7 @@ public class XMLReader {
 	 * @param path
 	 * @return
 	 */
-	private final void tokenize(final String text, final String document,
+	protected void tokenize(final String text, final String document,
 			final String path) {
 		StringTokenizer tokens = new StringTokenizer(text, " ");
 		while (tokens.hasMoreElements()) {
@@ -285,7 +285,7 @@ public class XMLReader {
 	 * @param token
 	 * @return
 	 */
-	private final String formatToken(final String token) {
+	protected final String formatToken(final String token) {
 		String newToken;
 		String[] temp;
 
