@@ -289,15 +289,15 @@ public class XMLReader {
 		String[] temp;
 
 		newToken = token.toLowerCase();
-
-		if (newToken.length() == 1) {
-			if (newToken.matches("\\W")) {
-				newToken = null;
-			}
-		} else {
+		if ((newToken.matches("\\w+[\\W\\d]+\\w+") || newToken.matches("\\W+")) && !newToken.matches("\\d+")) {
+			newToken = null;
+		}
+		else {
 			temp = newToken.split("\\W");
-			if (temp.length == 1) {
-				newToken = temp[0];
+			for (String t: temp) {
+				if(t.compareTo(" ") != 0 && t.compareTo("") != 0) {
+					newToken = t;
+				}
 			}
 		}
 
