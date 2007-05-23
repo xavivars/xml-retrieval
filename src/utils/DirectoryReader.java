@@ -117,7 +117,7 @@ public class DirectoryReader {
 		//wordsFrequencyMap.print(150);
 		// si la palabra aparece < 500000 veces
 		// es decir, imprimir todas las palabras
-		wordsFrequencyMap.printXML("stop-words.xml", 500000);
+		wordsFrequencyMap.printXML("stop-words.xml", 500000, 2);
 
 		return wordMap;
 	}

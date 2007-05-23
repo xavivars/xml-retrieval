@@ -56,7 +56,7 @@ public class WordsFrequencyMap extends HashMap < String, Integer> {
 		System.out.println("Stop words: " + nStopWords);
 	}
 	
-	public void printXML(final String fileName, int limit) {
+	public void printXML(final String fileName, int top, int bottom) {
 		BufferedOutputStream bos;
 		FileOutputStream fos;
 		DataOutputStream dos;
@@ -76,7 +76,7 @@ public class WordsFrequencyMap extends HashMap < String, Integer> {
 			while (it.hasNext()) {
 				String key = (String)it.next();
 				Integer value = (Integer)this.get(key);
-				if (value <= limit) {
+				if (value >= bottom && value <= top) {
 					dos.writeBytes("\t<word f=\"" + value + "\">" + key + "</word>\n");
 					nStopWords++;
 				}
