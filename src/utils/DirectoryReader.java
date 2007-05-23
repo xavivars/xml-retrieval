@@ -2,6 +2,7 @@ package utils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * 
@@ -50,18 +51,32 @@ public class DirectoryReader {
 	public WordMap createIndex(final String directory) {
 		WordMap wordMap = new WordMap();
 
+		HashMap<String,String> notWellFormed = new HashMap<String,String>();
+		// los siguientes archivos XML parecen no validar con la DTD
+		// y dan problemas en el indexado. Por ahora los omitimos.
+		notWellFormed.put("xml/cg/1995/g1069.xml", null);
+		notWellFormed.put("xml/cg/1996/g5071.xml", null);
+		notWellFormed.put("xml/cg/1997/g6110.xml", null);
+		
 		ArrayList<File> listFiles;
 		DocumentReader currentDoc;
 		WordList index = new WordList();
 
 		listFiles = readDirectory(new File(directory));
 
+		System.out.println(listFiles.size() + " archivos.");
 		for (File file : listFiles) {
 			// wordMap se irá construyendo
+			System.out.println("File: " + file.getPath());
+			
+			if (!notWellFormed.containsKey(file.getPath())) {
 			currentDoc = new DocumentReader(file.getPath(), wordMap);
 			currentDoc.analize();
 			// además creamos un wordList (aunque no es necesario)
-			index.addAll(currentDoc.readDocument());
+			WordList wordList = currentDoc.readDocument();
+			currentDoc = null;
+			}
+			//index.addAll(wordList);
 		}
 		return wordMap;
 	}

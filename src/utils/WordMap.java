@@ -15,12 +15,15 @@ public class WordMap extends HashMap<String, WordList> {
 	 */
 	public final void addWord(Word word) {
 		WordList wordList = null;
-		if (this.containsKey(word.getValue())) {
+		if (containsKey(word.getValue())) {
 			wordList = get(word.getValue());
+			wordList.add(word);
 		} else {
-			System.out.println("New word: " + word.getValue());
+			//System.out.println("New word: " + word.getValue());
 			wordList = new WordList();
+			wordList.add(word);
+			put(word.getValue(), wordList);
 		}
-		wordList.add(word);
+		
 	}
 }
