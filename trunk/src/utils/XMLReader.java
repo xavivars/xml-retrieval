@@ -122,7 +122,7 @@ public class XMLReader {
 		} catch (final Exception e) {
 			e.printStackTrace();
 			System.err
-					.println("Error: the XML document is probably not well-formed");
+			.println("Error: the XML document is probably not well-formed");
 			//System.exit(-1);
 		} finally {
 			setBuilder(null);

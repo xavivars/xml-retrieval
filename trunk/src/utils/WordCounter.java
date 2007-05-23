@@ -1,16 +1,29 @@
 package utils;
 
-
 import java.util.StringTokenizer;
 
+import org.w3c.dom.Element;
+
+/**
+ * 
+ * @author
+ *
+ */
 public class WordCounter extends XMLReader {
 	
+	/**
+	 * 
+	 */
 	private WordsFrequencyMap wordsFrequency; 
 
+	/**
+	 * 
+	 * @param fileName
+	 * @param wf
+	 */
 	protected WordCounter(String fileName, WordsFrequencyMap wf) {
 		super(fileName);
 		setWordsFrequency(wf);
-		// TODO Auto-generated constructor stub
 	}
 	
 	
@@ -32,13 +45,35 @@ public class WordCounter extends XMLReader {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public final WordList readDocument() {
+		try {
+		final Element root = getDocument().getDocumentElement();
+		final String path = "/article[1]";
+		readChildren(root, path);
+		//System.out.println("WordMap size: " + getWordMap().size());
+		} catch( NullPointerException npe) {
+			npe.printStackTrace();
+		}
+		return null;
+	}
 
-
+	/**
+	 * 
+	 * @return
+	 */
 	public WordsFrequencyMap getWordsFrequency() {
 		return wordsFrequency;
 	}
 
-
+	/**
+	 * 
+	 * @param wordsFrequency
+	 */
 	public void setWordsFrequency(WordsFrequencyMap wordsFrequency) {
 		this.wordsFrequency = wordsFrequency;
 	}
