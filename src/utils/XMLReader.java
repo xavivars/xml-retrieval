@@ -109,7 +109,6 @@ public class XMLReader {
 		try {
 			// MyEntityResolver mer = new MyEntityResolver();
 			// getBuilder().setEntityResolver(mer);
-
 			setDocument(getBuilder().parse(getDicFile()));
 		} catch (final FileNotFoundException fnfe) {
 			System.err.println("Error: could not find '" + getDicFile()
