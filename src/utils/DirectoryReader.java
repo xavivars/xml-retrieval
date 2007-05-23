@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
 
+
 /**
  * 
  * @author
@@ -53,6 +54,7 @@ public class DirectoryReader {
 	 */
 	public WordMap createIndex(final String directory) {
 		final WordMap wordMap = new WordMap();
+		final WordsFrequencyMap wordsFrequencyMap = new WordsFrequencyMap();
 
 		final HashMap<String,String> notWellFormed = new HashMap<String,String>();
 		// los siguientes archivos XML parecen no validar con la DTD
@@ -71,44 +73,54 @@ public class DirectoryReader {
 		notWellFormed.put("xml/tc/1996/t0892.xml", null);
 		notWellFormed.put("xml/tc/1997/t0162.xml", null);
 		notWellFormed.put("xml/tc/1998/t0527.xml", null);
-		
+
 		ArrayList<File> listFiles;
 		DocumentReader currentDoc;
+		WordCounter wordCounter;
 		final WordList wl = new WordList();
 
 		try {
-		listFiles = readDirectory(new File(directory));
+			listFiles = readDirectory(new File(directory));
 
-		System.out.println(listFiles.size() + " archivos.");
-		int i = 0;
-		for (final File file : listFiles) {
-			// wordMap se irá construyendo
-			System.out.println("[" + i + "]: " + file.getPath());
+			System.out.println(listFiles.size() + " archivos.");
+			int i = 0;
+			for (final File file : listFiles) {
+				// wordMap se irá construyendo
+				System.out.println("[" + i + "]: " + file.getPath());
 
-			System.out.println("File: " + file.getPath());
-			
-			if (!notWellFormed.containsKey(file.getPath())) {
-			currentDoc = new DocumentReader(file.getPath(), wordMap);
+				System.out.println("File: " + file.getPath());
 
-			currentDoc.analize();
-			// además creamos un wordList (aunque no es necesario)
+				if (!notWellFormed.containsKey(file.getPath())) {
 
-			final WordList wordList = currentDoc.readDocument();
-			currentDoc = null;
+					// 1. Extraer palabra-frecuencia
+					
+					wordCounter = new WordCounter(file.getPath(), wordsFrequencyMap);
+					wordCounter.analize();
+					wordCounter.readDocument();
+
+					// 2. Indexar (habría que pasar un parámetro nuevo - wordsFrequencyMap)
+					
+					//currentDoc = new DocumentReader(file.getPath(), wordMap);
+					//currentDoc.analize();
+					// además creamos un wordList (aunque no es necesario)
+					//final WordList wordList = currentDoc.readDocument();
+					currentDoc = null;
+				}
+				//index.addAll(wordList);
+				i++;
+
 			}
-			//index.addAll(wordList);
-			i++;
-
-		}
 		} catch( Exception e ) {
 			e.printStackTrace();
 		}
-		
+
+		wordsFrequencyMap.print(150);
+
 		return wordMap;
 	}
 
-	
-	
+
+
 	/**
 	 * @param args
 	 */
