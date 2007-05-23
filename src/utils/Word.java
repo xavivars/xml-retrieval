@@ -27,7 +27,7 @@ public class Word {
 	/**
 	 * 
 	 */
-	private String value;
+	protected String value;
 
 	/**
 	 * 
@@ -38,6 +38,7 @@ public class Word {
 	 * 
 	 */
 	private String path;
+	
 
 	/**
 	 * 
