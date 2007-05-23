@@ -15,7 +15,7 @@
 	<!-- PROPERTIES -->
 	<!-- Memory -->
 	<property name="minMem" value="32" />
-	<property name="maxMem" value="150" />
+	<property name="maxMem" value="600" />
 	<!-- Time Stamp -->
 	<tstamp>
 		<format property="pack.timestamp" pattern="yyMMdd-HHmm" />
@@ -55,7 +55,6 @@
 			<jvmarg value="-Xms${minMem}m" />
 			<jvmarg value="-Xmx${maxMem}m" />
 			<arg value="xml" />
-			
 		</java>
 		<antcall target="clean" />
 		<echo message="Results in '${log.dir}/${outputFile}'" />

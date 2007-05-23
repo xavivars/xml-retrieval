@@ -59,7 +59,7 @@ public class Word {
 	 * @param value
 	 *            the value to set
 	 */
-	public final void setValue(String value) {
+	public final void setValue(final String value) {
 		this.value = value;
 	}
 
@@ -74,7 +74,7 @@ public class Word {
 	 * @param document
 	 *            the document to set
 	 */
-	public final void setDocument(String document) {
+	public final void setDocument(final String document) {
 		this.document = document;
 	}
 
@@ -89,7 +89,7 @@ public class Word {
 	 * @param path
 	 *            the path to set
 	 */
-	public final void setPath(String path) {
+	public final void setPath(final String path) {
 		this.path = path;
 	}
 

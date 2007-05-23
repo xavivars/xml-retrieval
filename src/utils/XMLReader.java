@@ -36,7 +36,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
-import org.xml.sax.*;
 
 /**
  * 
@@ -124,7 +123,7 @@ public class XMLReader {
 			e.printStackTrace();
 			System.err
 					.println("Error: the XML document is probably not well-formed");
-			System.exit(-1);
+			//System.exit(-1);
 		} finally {
 			setBuilder(null);
 			setFactory(null);
@@ -137,8 +136,8 @@ public class XMLReader {
 	 * @param tagName
 	 * @return
 	 */
-	protected void readChildren(final Element e, String path) {
-		HashMap<String, Position> positions = new HashMap<String, Position>();
+	protected void readChildren(final Element e, final String path) {
+		final HashMap<String, Position> positions = new HashMap<String, Position>();
 		if (e.hasChildNodes()) {
 			final NodeList children = e.getChildNodes();
 			for (int i = 0; i < children.getLength(); i++) {
@@ -146,7 +145,7 @@ public class XMLReader {
 				if (child instanceof Element) {
 					// System.out.println("Found: <" + child.getNodeName() +
 					// ">");
-					String nodeName = child.getNodeName();
+					final String nodeName = child.getNodeName();
 					Position pos = null;
 					if (!positions.containsKey(nodeName)) {
 						positions.put(nodeName, new Position());
@@ -157,13 +156,13 @@ public class XMLReader {
 					}
 
 					final Element childElement = (Element) child;
-					this.readChildren(childElement, path + "/"
+					readChildren(childElement, path + "/"
 							+ child.getNodeName() + "[" + (pos.getPos()) + "]");
 				}
 				if (child instanceof Text) {
-					Text textElement = (Text) child;
-					String text = textElement.getData();
-					tokenize(text, this.getFileName(), path);
+					final Text textElement = (Text) child;
+					final String text = textElement.getData();
+					tokenize(text, getFileName(), path);
 				}
 
 			}
@@ -260,17 +259,17 @@ public class XMLReader {
 	 */
 	protected void tokenize(final String text, final String document,
 			final String path) {
-		StringTokenizer tokens = new StringTokenizer(text, " ");
+		final StringTokenizer tokens = new StringTokenizer(text, " ");
 		while (tokens.hasMoreElements()) {
-			String token = tokens.nextToken();
-			String newToken = formatToken(token);
+			final String token = tokens.nextToken();
+			final String newToken = formatToken(token);
 			if (newToken != null) {
-				Word word = new Word(newToken);
+				final Word word = new Word(newToken);
 				word.setPath(path);
 				word.setDocument(document);
 				// añadimos el 'word' al WordMap
 				//System.out.println("Add '" + word.getValue() + "'");
-				getWordMap().addWord(word);
+				//getWordMap().addWord(word);
 				// añadimos el 'word' al WordList
 				//addWord(word);
 			} else {
@@ -316,16 +315,8 @@ public class XMLReader {
 	 * @param fileName
 	 *            the fileName to set
 	 */
-	protected void setFileName(String fileName) {
+	protected void setFileName(final String fileName) {
 		this.fileName = fileName;
-	}
-
-	/**
-	 * 
-	 * @param word
-	 */
-	private final void addWord(final Word word) {
-		wordList.add(word);
 	}
 
 	/**
@@ -339,7 +330,7 @@ public class XMLReader {
 	 * @param wordList
 	 *            the wordList to set
 	 */
-	public void setWordList(WordList wordList) {
+	public void setWordList(final WordList wordList) {
 		this.wordList = wordList;
 	}
 
@@ -354,7 +345,7 @@ public class XMLReader {
 	 * @param wordMap
 	 *            the wordMap to set
 	 */
-	protected void setWordMap(WordMap wordMap) {
+	protected void setWordMap(final WordMap wordMap) {
 		this.wordMap = wordMap;
 	}
 
