@@ -40,25 +40,15 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		/*
-		WordMap wm = new WordMap();
-		DocumentReader docReader = new DocumentReader("xml/cg/1995/g1062.xml", wm);
-		docReader.analize();
-		docReader.readDocument();
-		*/
-		
-		
-		DirectoryReader dirReader = new DirectoryReader();
-		
-		
-		WordMap wordMap = dirReader.createIndex(args[0]);
-		
-		/*
 		StopWordReader swr = new StopWordReader("stop-words.xml");
 		swr.analize();
 		StopWordMap swm = swr.readDocument();
 		swm.print();
-		*/
+
+		DirectoryReader dirReader = new DirectoryReader();
+		WordMap wordMap = dirReader.createIndex(args[0], swm);
+		wordMap.print();
+
 		
 
 		/*

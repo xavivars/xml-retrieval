@@ -52,7 +52,7 @@ public class DirectoryReader {
 	 * @param directory
 	 * @return
 	 */
-	public WordMap createIndex(final String directory) {
+	public WordMap createIndex(final String directory, StopWordMap stopWordMap) {
 		final WordMap wordMap = new WordMap();
 		final WordsFrequencyMap wordsFrequencyMap = new WordsFrequencyMap();
 
@@ -93,15 +93,18 @@ public class DirectoryReader {
 				if (!notWellFormed.containsKey(file.getPath())) {
 
 					// 1. Extraer palabra-frecuencia
-					
+					/*
 					wordCounter = new WordCounter(file.getPath(), wordsFrequencyMap);
 					wordCounter.analize();
 					wordCounter.readDocument();
+					*/
+					
+					
 
 					// 2. Indexar (habría que pasar un parámetro nuevo - wordsFrequencyMap)
 					
-					//currentDoc = new DocumentReader(file.getPath(), wordMap);
-					//currentDoc.analize();
+					currentDoc = new DocumentReader(file.getPath(), wordMap, stopWordMap);
+					currentDoc.analize();
 					// además creamos un wordList (aunque no es necesario)
 					//final WordList wordList = currentDoc.readDocument();
 					currentDoc = null;

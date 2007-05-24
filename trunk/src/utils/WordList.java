@@ -33,4 +33,10 @@ public class WordList extends ArrayList<Word> {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
+	public final void print() {
+		for (Word w : this) {
+			w.printInfo();
+		}
+	}
 }
