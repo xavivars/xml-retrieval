@@ -287,12 +287,13 @@ public class XMLReader {
 	protected final String formatToken(final String token) {
 		String newToken;
 		String[] temp;
+		String finalPunct = "[\\.,?!;:\\]\\)\\}]";
+		String beginningPunct = "[\\(\\[\\{]";
 
 		newToken = token.toLowerCase();
-		if ((newToken.matches("\\w+[\\W\\d]+\\w+") || newToken.matches("\\W+")) && !newToken.matches("\\d+")) {
-			newToken = null;
-		}
-		else {
+		//Quitar signos de puntuación de final y principio de palabra
+		if (newToken.matches(beginningPunct + "\\w+") || newToken.matches("\\w+" + finalPunct) ||
+				newToken.matches(beginningPunct + "\\w+" + finalPunct)) {
 			temp = newToken.split("\\W");
 			for (String t: temp) {
 				if(t.compareTo(" ") != 0 && t.compareTo("") != 0) {
@@ -300,6 +301,11 @@ public class XMLReader {
 				}
 			}
 		}
+		// Si no es un número o una palabra
+		else if (!newToken.matches("\\d+") && !newToken.matches("[\\w&&[^\\d]]+")) {
+			newToken = null;
+		}
+		
 
 		return newToken;
 	}
