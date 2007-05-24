@@ -33,10 +33,12 @@ public class DocumentReader extends XMLReader {
 	 * 
 	 * @param fileName
 	 */
-	public DocumentReader(final String fileName, WordMap wordMap, final StopWordMap stopWordMap) {
+	public DocumentReader(final String fileName, WordMap wordMap, final StopWordMap stopWordMap, RootIndexMap rootIndexMap, Integer reference) {
 		super(fileName);
 		setWordMap(wordMap);
 		setStopWordMap(stopWordMap);
+                setRootIndexMap(rootIndexMap);
+                setReference(reference);
 	}
 
 	/**
