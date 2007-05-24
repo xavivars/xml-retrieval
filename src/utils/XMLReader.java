@@ -78,6 +78,12 @@ public class XMLReader {
 	 * 
 	 */
 	protected WordMap wordMap;
+	
+	/**
+	 * 
+	 */
+	protected StopWordMap stopWordMap;
+
 
 	/**
 	 * 
@@ -269,7 +275,11 @@ public class XMLReader {
 				word.setDocument(document);
 				// añadimos el 'word' al WordMap
 				//System.out.println("Add '" + word.getValue() + "'");
-				//getWordMap().addWord(word);
+				
+				if (getStopWordMap().containsKey(word.getValue())) {
+					getWordMap().addWord(word);					
+				}
+
 				// añadimos el 'word' al WordList
 				//addWord(word);
 			} else {
@@ -354,5 +364,20 @@ public class XMLReader {
 	protected void setWordMap(final WordMap wordMap) {
 		this.wordMap = wordMap;
 	}
+	
+	/**
+	 * @return the stopWordMap
+	 */
+	protected StopWordMap getStopWordMap() {
+		return stopWordMap;
+	}
+
+	/**
+	 * @param stopWordMap the stopWordMap to set
+	 */
+	protected void setStopWordMap(StopWordMap stopWordMap) {
+		this.stopWordMap = stopWordMap;
+	}
+
 
 }

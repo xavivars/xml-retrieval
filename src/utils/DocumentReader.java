@@ -28,13 +28,15 @@ import org.w3c.dom.Element;
  */
 public class DocumentReader extends XMLReader {
 
+	
 	/**
 	 * 
 	 * @param fileName
 	 */
-	public DocumentReader(final String fileName, final WordMap wordMap) {
+	public DocumentReader(final String fileName, final WordMap wordMap, final StopWordMap stopWordMap) {
 		super(fileName);
 		setWordMap(wordMap);
+		setStopWordMap(stopWordMap);
 	}
 
 	/**
@@ -54,4 +56,5 @@ public class DocumentReader extends XMLReader {
 		}
 		return null;
 	}
+
 }
