@@ -43,8 +43,7 @@ public class ReferenceList extends ArrayList < Integer > {
 		for (Integer w : this) {
                     dos.writeBytes("<ref>" + w + "</ref>\n");
 		}
-		dos.writeBytes("</word>\n");
-		} catch (IOException ioe) {
+                } catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 		
