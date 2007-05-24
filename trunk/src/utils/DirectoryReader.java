@@ -54,6 +54,7 @@ public class DirectoryReader {
 	 */
 	public void createIndexes(final String directory, StopWordMap stopWordMap) {
 		WordMap wordMap = new WordMap();
+                WordMap rootIndexMap = new WordMap();
 		final WordsFrequencyMap wordsFrequencyMap = new WordsFrequencyMap();
                 int fileNumber = 0;
                 int length = 0;
@@ -106,7 +107,7 @@ public class DirectoryReader {
 
 					// 2. Indexar (habría que pasar un parámetro nuevo - wordsFrequencyMap)
                                                                             
-					currentDoc = new DocumentReader(file.getPath(), wordMap, stopWordMap);
+					currentDoc = new DocumentReader(file.getPath(), wordMap, stopWordMap, rootIndexMap, fileNumber);
 					// además creamos un wordList (aunque no es necesario)
 					final WordList wordList = currentDoc.readDocument();
 					currentDoc = null;
@@ -124,7 +125,8 @@ public class DirectoryReader {
 				//index.addAll(wordList);
 				i++;
 			}
-                        wordMap.printXML("index_" + (fileNumber + 1) +".xml");                        
+                        wordMap.printXML("index_" + (fileNumber + 1) +".xml");  
+                        rootIndexMap.printXML("root_index.xml");
 		} catch( Exception e ) {
 			e.printStackTrace();
 		}	

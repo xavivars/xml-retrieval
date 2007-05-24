@@ -83,8 +83,16 @@ public class XMLReader {
 	 * 
 	 */
 	protected StopWordMap stopWordMap;
+        
+        /**
+         *
+         *
+         */
+        protected RootIndexMap rootIndexMap;
 
 
+        protected Integer reference;
+        
 	/**
 	 * 
 	 * @param fileName
@@ -278,7 +286,8 @@ public class XMLReader {
 					getWordMap().addWord(word);
 					//System.out.println("Add '" + word.getValue() + "'");
 				}
-
+                                getRootIndexMap().addReference(word,reference);
+                                
 				// añadimos el 'word' al WordList
 				//addWord(word);
 			} else {
@@ -376,6 +385,34 @@ public class XMLReader {
 	 */
 	protected void setStopWordMap(StopWordMap stopWordMap) {
 		this.stopWordMap = stopWordMap;
+	}
+        
+        /**
+	 * @return the rootIndexMap
+	 */
+	protected RootIndexMap getRootIndexMap() {
+		return rootIndexMap;
+	}
+                
+        /**
+	 * @param WordMap the rootIndexMap to set
+	 */
+	protected void setRootIndexMap(RootIndexMap map) {
+		this.rootIndexMap = map;
+	}
+
+        /**
+	 * @return the referemce
+	 */
+	protected Integer getReference() {
+		return reference;
+	}
+                
+        /**
+	 * @param Integer the reference to set
+	 */
+	protected void setReference(Integer ref) {
+		this.reference = ref;
 	}
 
 
