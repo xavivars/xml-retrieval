@@ -40,21 +40,16 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		StopWordReader swr = new StopWordReader("stop-words.xml");
+		StopWordReader swr = new StopWordReader("stop-words-ok.xml");
 		swr.analize();
 		StopWordMap swm = swr.readDocument();
-		swm.print();
+		//swm.print();
 
 		DirectoryReader dirReader = new DirectoryReader();
 		WordMap wordMap = dirReader.createIndex(args[0], swm);
-		wordMap.print();
+		//wordMap.print();
+		wordMap.printXML("index.xml");
 
-		
-
-		/*
-		 * for (Word word : wordList) { word.printInfo();
-		 * System.out.println(""); }
-		 */
 	}
 
 }
