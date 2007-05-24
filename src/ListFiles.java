@@ -1,5 +1,7 @@
 import utils.Query;
 import utils.QueryReader;
+import utils.StopWord;
+import utils.StopWordMap;
 
 public class ListFiles {
 
@@ -9,8 +11,11 @@ public class ListFiles {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Query query;
+		StopWordMap stopWords = new StopWordMap ();
 		
-		QueryReader qr = new QueryReader(args[0]);
+		stopWords.put("and", new StopWord("and"));
+		
+		QueryReader qr = new QueryReader(args[0],stopWords);
 		
 		qr.analize();
 		query = qr.readDocument();
