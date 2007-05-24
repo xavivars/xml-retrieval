@@ -54,7 +54,7 @@ public class DirectoryReader {
 	 */
 	public void createIndexes(final String directory, StopWordMap stopWordMap) {
 		WordMap wordMap = new WordMap();
-                WordMap rootIndexMap = new WordMap();
+                RootIndexMap rootIndexMap = new RootIndexMap();
 		final WordsFrequencyMap wordsFrequencyMap = new WordsFrequencyMap();
                 int fileNumber = 0;
                 int length = 0;
