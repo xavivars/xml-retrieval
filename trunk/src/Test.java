@@ -47,18 +47,18 @@ public class Test {
 		docReader.readDocument();
 		*/
 		
-		/*
+		
 		DirectoryReader dirReader = new DirectoryReader();
 		
 		
 		WordMap wordMap = dirReader.createIndex(args[0]);
-		*/
 		
+		/*
 		StopWordReader swr = new StopWordReader("stop-words.xml");
 		swr.analize();
 		StopWordMap swm = swr.readDocument();
 		swm.print();
-		
+		*/
 		
 
 		/*
