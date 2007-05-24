@@ -98,15 +98,13 @@ public class DirectoryReader {
 					wordCounter.analize();
 					wordCounter.readDocument();
 					*/
-					
-					
 
 					// 2. Indexar (habría que pasar un parámetro nuevo - wordsFrequencyMap)
 					
 					currentDoc = new DocumentReader(file.getPath(), wordMap, stopWordMap);
 					currentDoc.analize();
 					// además creamos un wordList (aunque no es necesario)
-					//final WordList wordList = currentDoc.readDocument();
+					final WordList wordList = currentDoc.readDocument();
 					currentDoc = null;
 				}
 				//index.addAll(wordList);
