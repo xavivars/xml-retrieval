@@ -58,7 +58,7 @@ public class DirectoryReader {
 		final WordsFrequencyMap wordsFrequencyMap = new WordsFrequencyMap();
                 int fileNumber = 0;
                 int length = 0;
-                int maxSizeIndex = 5;  //15 MB de tamaño máximo
+                int maxSizeIndex = 10;  //15 MB de tamaño máximo
 
 		final HashMap<String,String> notWellFormed = new HashMap<String,String>();
 		// los siguientes archivos XML parecen no validar con la DTD
@@ -107,7 +107,7 @@ public class DirectoryReader {
 
 					// 2. Indexar (habría que pasar un parámetro nuevo - wordsFrequencyMap)
                                                                             
-					currentDoc = new DocumentReader(file.getPath(), wordMap, stopWordMap, rootIndexMap, fileNumber);
+					currentDoc = new DocumentReader(file.getPath(), wordMap, stopWordMap, rootIndexMap, fileNumber + 1);
 					// además creamos un wordList (aunque no es necesario)
 					final WordList wordList = currentDoc.readDocument();
 					currentDoc = null;
