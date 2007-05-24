@@ -10,10 +10,12 @@ import org.w3c.dom.Text;
 public class QueryReader extends XMLReader {
 
 	private Query query;
+	private StopWordMap stopWords;
 	
-	public QueryReader(String fileName) {
+	public QueryReader(String fileName, StopWordMap swm) {
 		super(fileName);
 		query = new Query ();
+		stopWords = swm;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -53,7 +55,10 @@ public class QueryReader extends XMLReader {
 					final String text = textElement.getData();
 					final String [] words = text.split("\\s+");
 					for(String word: words) {
-						query.add(new SimpleWord(word));
+						word = word.toLowerCase();
+						if(!word.isEmpty() && !stopWords.containsKey(word)) {
+							query.add(new SimpleWord(word));
+						}
 //						System.out.println(word);
 						
 					}
