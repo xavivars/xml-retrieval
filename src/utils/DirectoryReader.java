@@ -53,7 +53,7 @@ public class DirectoryReader {
 	 * @return
 	 */
 	public WordMap createIndex(final String directory, StopWordMap stopWordMap) {
-		final WordMap wordMap = new WordMap();
+		WordMap wordMap = new WordMap();
 		final WordsFrequencyMap wordsFrequencyMap = new WordsFrequencyMap();
 
 		final HashMap<String,String> notWellFormed = new HashMap<String,String>();
@@ -93,16 +93,16 @@ public class DirectoryReader {
 				if (!notWellFormed.containsKey(file.getPath())) {
 
 					// 1. Extraer palabra-frecuencia
-					/*
-					wordCounter = new WordCounter(file.getPath(), wordsFrequencyMap);
-					wordCounter.analize();
-					wordCounter.readDocument();
-					*/
+					
+					//wordCounter = new WordCounter(file.getPath(), wordsFrequencyMap);
+					//wordCounter.readDocument();
+					//wordsFrequencyMap.print(150);
+					// si la palabra aparece < 500000 veces
+					// es decir, imprimir todas las palabras
+					//wordsFrequencyMap.printXML("stop-words-ok.xml", 500000, 2);
 
 					// 2. Indexar (habría que pasar un parámetro nuevo - wordsFrequencyMap)
-					
 					currentDoc = new DocumentReader(file.getPath(), wordMap, stopWordMap);
-					currentDoc.analize();
 					// además creamos un wordList (aunque no es necesario)
 					final WordList wordList = currentDoc.readDocument();
 					currentDoc = null;
@@ -115,10 +115,6 @@ public class DirectoryReader {
 			e.printStackTrace();
 		}
 
-		//wordsFrequencyMap.print(150);
-		// si la palabra aparece < 500000 veces
-		// es decir, imprimir todas las palabras
-		wordsFrequencyMap.printXML("stop-words.xml", 500000, 2);
 
 		return wordMap;
 	}

@@ -274,10 +274,9 @@ public class XMLReader {
 				word.setPath(path);
 				word.setDocument(document);
 				// añadimos el 'word' al WordMap
-				//System.out.println("Add '" + word.getValue() + "'");
-				
 				if (getStopWordMap().containsKey(word.getValue())) {
-					getWordMap().addWord(word);					
+					getWordMap().addWord(word);
+					//System.out.println("Add '" + word.getValue() + "'");
 				}
 
 				// añadimos el 'word' al WordList
