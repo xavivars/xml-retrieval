@@ -33,7 +33,7 @@ public class DocumentReader extends XMLReader {
 	 * 
 	 * @param fileName
 	 */
-	public DocumentReader(final String fileName, final WordMap wordMap, final StopWordMap stopWordMap) {
+	public DocumentReader(final String fileName, WordMap wordMap, final StopWordMap stopWordMap) {
 		super(fileName);
 		setWordMap(wordMap);
 		setStopWordMap(stopWordMap);
@@ -44,13 +44,13 @@ public class DocumentReader extends XMLReader {
 	 * @return
 	 */
 	public final WordList readDocument() {
+		this.analize();
+		
 		try {
-		//System.out.println("Reading document '" + getFileName() + "'");
 		final Element root = getDocument().getDocumentElement();
 		final String path = "/article[1]";
 		readChildren(root, path);
 		System.out.println("WordMap size: " + getWordMap().size());
-		//WordList wordList = getWordList();
 		} catch( NullPointerException npe) {
 			npe.printStackTrace();
 		}

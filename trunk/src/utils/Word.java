@@ -1,5 +1,7 @@
 package utils;
 
+import java.io.DataOutputStream;
+
 /*
  * Copyright (C) 2007 
  * 
@@ -82,5 +84,17 @@ public class Word extends SimpleWord {
 		System.out.println("Documento: '" + getDocument() + "'");
 		System.out.println("Path:      '" + getPath() + "'");
 	}
+	
+	public final void printXML(DataOutputStream dos ) {
+		try {
+			dos.writeBytes("\t<loc>\n");
+			dos.writeBytes("\t\t<doc>" + getDocument()+ "</doc>\n");
+			dos.writeBytes("\t\t<ref>" + getPath()+ "</ref>\n");
+			dos.writeBytes("\t</loc>\n");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 }

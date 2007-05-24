@@ -19,6 +19,8 @@ package utils;
  * 02111-1307, USA.
  */
 
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -38,5 +40,20 @@ public class WordList extends ArrayList<Word> {
 		for (Word w : this) {
 			w.printInfo();
 		}
+	}
+	
+	public final void printXML(DataOutputStream dos ) {
+		try {
+		dos.writeBytes("<word>\n");
+		dos.writeBytes("<value>" + get(0).getValue() + "</value>\n");
+		
+		for (Word w : this) {
+			w.printXML(dos);
+		}
+		dos.writeBytes("</word>\n");
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+		
 	}
 }
