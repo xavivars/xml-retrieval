@@ -22,12 +22,7 @@ package utils;
 /**
  * 
  */
-public class Word {
-
-	/**
-	 * 
-	 */
-	protected String value;
+public class Word extends SimpleWord {
 
 	/**
 	 * 
@@ -45,22 +40,7 @@ public class Word {
 	 * @param value
 	 */
 	public Word(final String value) {
-		setValue(value);
-	}
-
-	/**
-	 * @return the value
-	 */
-	public final String getValue() {
-		return value;
-	}
-
-	/**
-	 * @param value
-	 *            the value to set
-	 */
-	public final void setValue(final String value) {
-		this.value = value;
+		super(value);
 	}
 
 	/**
