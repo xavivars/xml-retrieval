@@ -77,7 +77,7 @@ public class Word extends SimpleWord {
 	 * 
 	 * 
 	 */
-	public final void printInfo() {
+	public void printInfo() {
 		System.out.println("Word:      '" + getValue() + "'");
 		System.out.println("Documento: '" + getDocument() + "'");
 		System.out.println("Path:      '" + getPath() + "'");

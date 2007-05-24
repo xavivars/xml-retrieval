@@ -5,7 +5,7 @@ package utils;
  * @author ebenimeli
  *
  */
-public abstract class SimpleWord {
+public class SimpleWord {
 
 	/**
 	 * 
@@ -40,4 +40,13 @@ public abstract class SimpleWord {
 	protected void setValue(String value) {
 		this.value = value;
 	}
+	
+	/**
+	 * 
+	 * 
+	 */
+	public void printInfo() {
+		System.out.println("Word:      '" + getValue() + "'");
+	}
+
 }

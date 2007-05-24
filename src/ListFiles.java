@@ -1,15 +1,23 @@
-public class ListFiles {
+import utils.Query;
+import utils.QueryReader;
 
-	public void method() {
-		String hola;
-	}
+public class ListFiles {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String newToken;
+		Query query;
+		
+		QueryReader qr = new QueryReader(args[0]);
+		
+		qr.analize();
+		query = qr.readDocument();
+		query.print();
+		
+		
+		/*String newToken;
 		String[] temp;
 		String finalPunct = "[\\.,?!;:\\]\\)\\}]";
 		String beginningPunct = "[\\(\\[\\{]";
@@ -31,7 +39,7 @@ public class ListFiles {
 			}
 			
 			System.out.println(newToken);
-		}
+		}*/
 	}
 }
 
