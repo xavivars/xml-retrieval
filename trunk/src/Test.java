@@ -21,6 +21,8 @@
  */
 
 import utils.DocumentReader;
+import utils.StopWordMap;
+import utils.StopWordReader;
 import utils.Word;
 import utils.WordCounter;
 import utils.WordList;
@@ -45,10 +47,19 @@ public class Test {
 		docReader.readDocument();
 		*/
 		
+		/*
 		DirectoryReader dirReader = new DirectoryReader();
 		
 		
 		WordMap wordMap = dirReader.createIndex(args[0]);
+		*/
+		
+		StopWordReader swr = new StopWordReader("stop-words.xml");
+		swr.analize();
+		StopWordMap swm = swr.readDocument();
+		swm.print();
+		
+		
 
 		/*
 		 * for (Word word : wordList) { word.printInfo();
