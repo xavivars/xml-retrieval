@@ -46,10 +46,8 @@ public class Test {
 		//swm.print();
 
 		DirectoryReader dirReader = new DirectoryReader();
-		WordMap wordMap = dirReader.createIndex(args[0], swm);
+		dirReader.createIndexes(args[0], swm);
 		//wordMap.print();
-		wordMap.printXML("index.xml");
-
 	}
 
 }

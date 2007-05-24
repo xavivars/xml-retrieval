@@ -52,9 +52,12 @@ public class DirectoryReader {
 	 * @param directory
 	 * @return
 	 */
-	public WordMap createIndex(final String directory, StopWordMap stopWordMap) {
+	public void createIndexes(final String directory, StopWordMap stopWordMap) {
 		WordMap wordMap = new WordMap();
 		final WordsFrequencyMap wordsFrequencyMap = new WordsFrequencyMap();
+                int fileNumber = 0;
+                int length = 0;
+                int maxSizeIndex = 5;  //15 MB de tamaño máximo
 
 		final HashMap<String,String> notWellFormed = new HashMap<String,String>();
 		// los siguientes archivos XML parecen no validar con la DTD
@@ -62,6 +65,7 @@ public class DirectoryReader {
 		notWellFormed.put("xml/cg/1995/g1069.xml", null);
 		notWellFormed.put("xml/cg/1996/g5071.xml", null);
 		notWellFormed.put("xml/cg/1997/g6110.xml", null);
+                notWellFormed.put("xml/tk/1995/k0454.xml", null);
 		notWellFormed.put("xml/dt/1995/d1024.xml", null);
 		notWellFormed.put("xml/pd/1995/p4008.xml", null);
 		notWellFormed.put("xml/so/1995/s6088.xml", null);
@@ -81,11 +85,10 @@ public class DirectoryReader {
 
 		try {
 			listFiles = readDirectory(new File(directory));
-
 			System.out.println(listFiles.size() + " archivos.");
 			int i = 0;
 			for (final File file : listFiles) {
-				// wordMap se irá construyendo
+                                // wordMap se irá construyendo
 				System.out.println("[" + i + "]: " + file.getPath());
 
 				System.out.println("File: " + file.getPath());
@@ -102,21 +105,29 @@ public class DirectoryReader {
 					//wordsFrequencyMap.printXML("stop-words-ok.xml", 500000, 2);
 
 					// 2. Indexar (habría que pasar un parámetro nuevo - wordsFrequencyMap)
+                                                                            
 					currentDoc = new DocumentReader(file.getPath(), wordMap, stopWordMap);
 					// además creamos un wordList (aunque no es necesario)
 					final WordList wordList = currentDoc.readDocument();
 					currentDoc = null;
-				}
+                                        
+                                        length += file.length();
+                                        // Guardamos el índice y creamos uno nuevo vacío
+                                        if (length / (1024*1024) > maxSizeIndex) {
+                                            length = 0;
+                                            fileNumber++;
+                                            wordMap.printXML("index_" + fileNumber +".xml");
+                                            wordMap = new WordMap();
+                                        }
+                                        System.out.println(length / (1024*1024));
+                                }
 				//index.addAll(wordList);
 				i++;
-
 			}
+                        wordMap.printXML("index_" + (fileNumber + 1) +".xml");                        
 		} catch( Exception e ) {
 			e.printStackTrace();
-		}
-
-
-		return wordMap;
+		}	
 	}
 
 
