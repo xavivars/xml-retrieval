@@ -1,7 +1,7 @@
-import utils.Query;
-import utils.QueryReader;
+import query.Query;
 import utils.StopWord;
 import utils.StopWordMap;
+import xml.QueryReader;
 
 public class ListFiles {
 
