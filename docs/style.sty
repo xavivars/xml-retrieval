@@ -1,10 +1,9 @@
-% Paquetes
-\usepackage{natbib} % estilo autor-a� para la bibliograf�
-\bibpunct{(}{)}{;}{a}{,}{,} % required for natbib \usepackage[spanish]{babel}
+\usepackage{natbib}
+\bibpunct{(}{)}{;}{a}{,}{,}
 %\usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage[latin1]{inputenc}
-\usepackage[dvips]{graphicx}
+%\usepackage[dvips]{graphicx}
 
 % LINKS
 %\usepackage[pdftex]{hyperref}
@@ -12,33 +11,6 @@
 
 %\renewenvironment{table}{\begin{footnotesize}\begin{table}}{	\end{table}	\end{footnotesize}}
 
-
-\newenvironment{translation}
-{
-\addtocounter{exampleCounter}{1}
-\begin{small}
-\begin{tabular}{l}
-%\line(1,0){200}
-%\hline
-{\small \textbf{Ejemplo \arabic{exampleCounter}}.\hspace{4cm}}\\
-%\line(1,0){200}
-%\hline
-\end{tabular}
-}
-% Here the examples
-{
-\end{small}
-}
-
-\newenvironment{example}[1][]
-{
-\begin{quote}
-\guillemotleft
-}
-{
-\guillemotright
-\end{quote}
-}
 
 
 
