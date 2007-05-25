@@ -26,6 +26,70 @@ package query;
 
 import java.util.ArrayList;
 
-public class WordPaths extends ArrayList<String>{
+/**
+ * 
+ * @author ebenimeli
+ *
+ */
+public class WordPaths {
 
+	/**
+	 * 
+	 */
+	private String name;
+	
+	/**
+	 * 
+	 */
+	private double weight;
+	
+	/**
+	 * 
+	 */
+	private ArrayList<String> paths;
+
+	/**
+	 * @return the name
+	 */
+	public final String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public final void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the paths
+	 */
+	public final ArrayList<String> getPaths() {
+		return paths;
+	}
+
+	/**
+	 * @param paths the paths to set
+	 */
+	public final void setPaths(ArrayList<String> paths) {
+		this.paths = paths;
+	}
+
+	/**
+	 * @return the weight
+	 */
+	public final double getWeight() {
+		return weight;
+	}
+
+	/**
+	 * @param weight the weight to set
+	 */
+	public final void setWeight(double weight) {
+		this.weight = weight;
+	}
+	
+	
+	
 }

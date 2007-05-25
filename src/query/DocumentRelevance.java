@@ -24,6 +24,8 @@
 
 package query;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author ebenimeli
@@ -39,7 +41,7 @@ public class DocumentRelevance {
 	/**
 	 * 
 	 */
-	private WordPaths wordPaths;
+	private ArrayList<WordPaths> wordPaths;
 
 	/**
 	 * @return the weight
@@ -58,25 +60,18 @@ public class DocumentRelevance {
 	/**
 	 * @return the wordPaths
 	 */
-	public final WordPaths getWordPaths() {
+	public final ArrayList<WordPaths> getWordPaths() {
 		return wordPaths;
 	}
 
 	/**
 	 * @param wordPaths the wordPaths to set
 	 */
-	public final void setWordPaths(WordPaths wordPaths) {
+	public final void setWordPaths(ArrayList<WordPaths> wordPaths) {
 		this.wordPaths = wordPaths;
 	}
-	
-	/**
-	 * 
-	 * @param path
-	 */
-	public final void addPath(final String path) {
-		this.addPath(path);
-	}
-	
+
+
 	
 	
 }
