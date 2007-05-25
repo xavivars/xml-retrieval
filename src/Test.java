@@ -22,9 +22,9 @@
  * 02111-1307, USA.
  */
 
+import index.IndexFactory;
 import utils.StopWordMap;
-import utils.StopWordReader;
-import utils.IndexFactory;
+import xml.StopWordReader;
 
 /**
  * 

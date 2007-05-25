@@ -4,6 +4,8 @@ import java.util.StringTokenizer;
 
 import org.w3c.dom.Element;
 
+import xml.XMLReader;
+
 /**
  * 
  * @author

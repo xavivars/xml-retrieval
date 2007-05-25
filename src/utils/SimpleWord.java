@@ -31,7 +31,7 @@ public class SimpleWord {
 	/**
 	 * @return the value
 	 */
-	protected String getValue() {
+	public String getValue() {
 		return value;
 	}
 
@@ -39,7 +39,7 @@ public class SimpleWord {
 	 * @param value
 	 *            the value to set
 	 */
-	protected void setValue(String value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 
