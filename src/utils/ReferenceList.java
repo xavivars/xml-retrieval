@@ -39,6 +39,10 @@ public class ReferenceList extends ArrayList<Integer> {
 	 */
 	private static final long serialVersionUID = 1L;
 
+        
+        private int occurrences;
+        
+        
 	/**
 	 * Creates a new instance of ReferenceList
 	 * 
@@ -73,10 +77,35 @@ public class ReferenceList extends ArrayList<Integer> {
 			for (final Integer w : this) {
 				dos.writeBytes("<ref>" + w + "</ref>\n");
 			}
+                        dos.writeBytes("<ocu>" + occurrences + "</ocu>\n");
 		} catch (final IOException ioe) {
 			ioe.printStackTrace();
 		}
 
 	}
+        
+        public boolean exists (Integer ref) {
+            boolean find = false;
+            
+            for(int i = 0 ; i < size() && !find ; i++) {
+                if (ref.intValue() == get(i)) {
+                    find = true;
+                }
+            }
+            
+            return find;
+        }
 
+        public int getOccurrences () {
+            return occurrences;
+        }
+        
+        public void setOccurrences (int o) {
+            occurrences = o;
+        }
+        
+        public void incOccurrences () {
+            occurrences++;
+        }
+         
 }
