@@ -24,51 +24,49 @@
 
 package query;
 
-import java.util.ArrayList;
-
 /**
  * 
  * @author ebenimeli
  *
  */
-public class Document {
+public class DocumentRelevance {
 
 	/**
 	 * 
 	 */
-	private String name;
+	private double weight;
 	
 	/**
 	 * 
 	 */
-	private ArrayList<String> paths;
+	private WordPaths wordPaths;
 
 	/**
-	 * @return the name
+	 * @return the weight
 	 */
-	public final String getName() {
-		return name;
+	public final double getWeight() {
+		return weight;
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param weight the weight to set
 	 */
-	public final void setName(String name) {
-		this.name = name;
+	public final void setWeight(double weight) {
+		this.weight = weight;
 	}
 
 	/**
-	 * @return the paths
+	 * @return the wordPaths
 	 */
-	public final ArrayList<String> getPaths() {
-		return paths;
+	public final WordPaths getWordPaths() {
+		return wordPaths;
 	}
 
 	/**
-	 * @param paths the paths to set
+	 * @param wordPaths the wordPaths to set
 	 */
-	public final void setPaths(ArrayList<String> paths) {
-		this.paths = paths;
+	public final void setWordPaths(WordPaths wordPaths) {
+		this.wordPaths = wordPaths;
 	}
 	
 	/**
@@ -76,7 +74,9 @@ public class Document {
 	 * @param path
 	 */
 	public final void addPath(final String path) {
-		paths.add(path);
+		this.addPath(path);
 	}
+	
+	
 	
 }

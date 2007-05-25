@@ -71,6 +71,13 @@ public class WordResult {
 		this.documents = documents;
 	}
 	
+	/**
+	 * 
+	 * @param document
+	 */
+	public final void addDocument(final Document document) {
+		documents.add(document);
+	}
 	
 	
 }

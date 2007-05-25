@@ -31,52 +31,6 @@ import java.util.ArrayList;
  * @author ebenimeli
  *
  */
-public class Document {
+public class Relevance extends ArrayList<DocumentRelevance>{
 
-	/**
-	 * 
-	 */
-	private String name;
-	
-	/**
-	 * 
-	 */
-	private ArrayList<String> paths;
-
-	/**
-	 * @return the name
-	 */
-	public final String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public final void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the paths
-	 */
-	public final ArrayList<String> getPaths() {
-		return paths;
-	}
-
-	/**
-	 * @param paths the paths to set
-	 */
-	public final void setPaths(ArrayList<String> paths) {
-		this.paths = paths;
-	}
-	
-	/**
-	 * 
-	 * @param path
-	 */
-	public final void addPath(final String path) {
-		paths.add(path);
-	}
-	
 }
