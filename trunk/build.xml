@@ -54,7 +54,8 @@
 		<java classname="${mainClass}" classpath="${lib.dir}/${appName}.jar" fork="true" output="${outputFile}">
 			<jvmarg value="-Xms${minMem}m" />
 			<jvmarg value="-Xmx${maxMem}m" />
-			<arg value="xml" />
+			<arg value="xml/an" />
+			<arg value="stop-words-ok.xml" />
 		</java>
 		<antcall target="clean" />
 		<echo message="Results in '${log.dir}/${outputFile}'" />

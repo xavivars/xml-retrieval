@@ -293,11 +293,10 @@ public class XMLReader {
 				// añadimos el 'word' al WordMap
 				if (getStopWordMap().containsKey(word.getValue())) {
 					getWordMap().addWord(word);
+                                        getRootIndexMap().addReference(word, reference);
 					// System.out.println("Add '" + word.getValue() + "'");
 				}
-				getRootIndexMap().addReference(word, reference);
-
-				// añadimos el 'word' al WordList
+                                 //Añadimos el 'word' al WordList
 				// addWord(word);
 			} else {
 				// System.out.println("'" + token + "' is not a valid token");

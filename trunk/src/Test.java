@@ -40,8 +40,8 @@ public class Test {
 	 */
 	public static void main(String[] args) {
 
-		// Stop-words
-		final StopWordReader swr = new StopWordReader("stop-words-ok.xml");
+		final StopWordReader swr = new StopWordReader(args[1]);
+
 		final StopWordMap swm = swr.readDocument();
 
 		// Index

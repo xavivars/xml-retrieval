@@ -59,12 +59,16 @@ public class RootIndexMap extends HashMap<String, ReferenceList> {
 		ReferenceList referenceList = null;
 		if (containsKey(word.getValue())) {
 			referenceList = get(word.getValue());
-			referenceList.addReference(reference);
+                        if (!referenceList.exists(reference)) {
+                            referenceList.addReference(reference);
+                        }
+                        referenceList.incOccurrences();
 			put(word.getValue(), referenceList);
 		} else {
 			// System.out.println("New word: " + word.getValue());
 			referenceList = new ReferenceList();
 			referenceList.add(reference);
+                        referenceList.setOccurrences(1);
 			put(word.getValue(), referenceList);
 		}
 	}
