@@ -25,8 +25,12 @@
 
 package query;
 
+import utils.RootIndexMap;
 import utils.StopWordMap;
+import utils.WordMap;
+import xml.IndexReader;
 import xml.QueryReader;
+import xml.RootIndexReader;
 
 /**
  * 
@@ -65,8 +69,10 @@ public class QueryManager {
 		WordResultList wordResultList = null;
 		
 		wordResultList = new WordResultList();
-
-		// Búsqueda
+		
+		RootIndexMap rootIndexMap = readRootIndexMap();
+		
+		WordMap indexMap = readIndexMap(0);
 		
 		
 		
@@ -80,8 +86,8 @@ public class QueryManager {
 	 * @return
 	 */
 	public final WordResultList processQuery(final String queryFileName) {
-		QueryReader queryReader = new QueryReader(queryFileName, this.getStopWordMap());
-		Query query = queryReader.readDocument();
+		final QueryReader queryReader = new QueryReader(queryFileName, getStopWordMap());
+		final Query query = queryReader.readDocument();
 
 		WordResultList wordResultList = processQuery(query);
 		
@@ -102,5 +108,32 @@ public class QueryManager {
 	public final void setStopWordMap(StopWordMap stopWordMap) {
 		this.stopWordMap = stopWordMap;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private final RootIndexMap readRootIndexMap() {
+		final RootIndexReader rootIndexReader = new RootIndexReader();
+		RootIndexMap rootIndexMap = null;
+		
+		rootIndexMap = rootIndexReader.read();
+		
+		
+		return rootIndexMap;	
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private final WordMap readIndexMap(int i) {
+		final IndexReader indexReader = new IndexReader(i);
+		WordMap indexMap = null;
+		indexMap = indexReader.read();
+		return indexMap;	
+	}
+
+	
 	
 }
