@@ -10,11 +10,11 @@ import java.util.Set;
 
 /**
  * 
- * @author 
- *
+ * @author
+ * 
  */
-public class WordsFrequencyMap extends HashMap < String, Integer> {
-	
+public class WordsFrequencyMap extends HashMap<String, Integer> {
+
 	/**
 	 * 
 	 */
@@ -24,64 +24,69 @@ public class WordsFrequencyMap extends HashMap < String, Integer> {
 	 * 
 	 * @param newToken
 	 */
-	protected void addWord (String newToken) {
+	protected void addWord(String newToken) {
 		if (containsKey(newToken)) {
 			Integer freq = get(newToken);
 			freq++;
 			put(newToken, freq);
-		}
-		else {
-			put(newToken,new Integer(1));
+		} else {
+			put(newToken, new Integer(1));
 		}
 	}
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 */
 	public final void print(int limit) {
-		Set keySet = this.keySet();
-		Iterator it = keySet.iterator();
-		
+		final Set keySet = keySet();
+		final Iterator it = keySet.iterator();
+
 		int nStopWords = 0;
 		while (it.hasNext()) {
-			String key = (String)it.next();
-			Integer value = (Integer)this.get(key);
+			final String key = (String) it.next();
+			final Integer value = get(key);
 			if (value <= limit) {
-			System.out.println(key + " (" + value + ")");
-			nStopWords++;
+				System.out.println(key + " (" + value + ")");
+				nStopWords++;
 			}
 		}
-		
+
 		System.out.println("Stop words: " + nStopWords);
 	}
-	
+
+	/**
+	 * 
+	 * @param fileName
+	 * @param top
+	 * @param bottom
+	 */
 	public void printXML(final String fileName, int top, int bottom) {
 		BufferedOutputStream bos;
 		FileOutputStream fos;
 		DataOutputStream dos;
-		Set keySet = this.keySet();
-		Iterator it = keySet.iterator();
-		
-		
+		final Set keySet = keySet();
+		final Iterator it = keySet.iterator();
+
 		try {
 			fos = new FileOutputStream(fileName);
 			bos = new BufferedOutputStream(fos);
 			dos = new DataOutputStream(bos);
 			dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
 			dos.writeBytes("<stop-words>\n");
-			
+
 			int nStopWords = 0;
-			
+
 			while (it.hasNext()) {
-				String key = (String)it.next();
-				Integer value = (Integer)this.get(key);
-				if (value >= bottom && value <= top) {
-					dos.writeBytes("\t<word f=\"" + value + "\">" + key + "</word>\n");
+				final String key = (String) it.next();
+				final Integer value = get(key);
+				if ((value >= bottom) && (value <= top)) {
+					dos.writeBytes("\t<word f=\"" + value + "\">" + key
+							+ "</word>\n");
 					nStopWords++;
 				}
 			}
-			
+
 			dos.writeBytes("</stop-words>\n");
 			dos.writeBytes("<!-- " + nStopWords + " stop-words -->\n");
 			fos = null;
@@ -94,6 +99,5 @@ public class WordsFrequencyMap extends HashMap < String, Integer> {
 			eg.printStackTrace();
 		}
 	}
-	
-	
+
 }

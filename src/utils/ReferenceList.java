@@ -14,39 +14,54 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *
+ * 
  * @author david
  */
-public class ReferenceList extends ArrayList < Integer > {
-    
-    /** Creates a new instance of ReferenceList */
-    public ReferenceList() {
-    }
-    
-    public void addReference (Integer reference) {
-        boolean find = false;
-       
-        for(int i = 0 ; i < size() && !find ; i++) {
-            if (i == reference) {
-                find = true;
-            }
-        }
-        if (!find) {
-            add(reference);
-        }
-    }
-    
-  public final void printXML(DataOutputStream dos ) {
-		try {
-			
-		
-		for (Integer w : this) {
-                    dos.writeBytes("<ref>" + w + "</ref>\n");
+public class ReferenceList extends ArrayList<Integer> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Creates a new instance of ReferenceList
+	 * 
+	 */
+	public ReferenceList() {
+	}
+
+	/**
+	 * 
+	 * @param reference
+	 */
+	public void addReference(Integer reference) {
+		boolean find = false;
+
+		for (int i = 0; (i < size()) && !find; i++) {
+			if (i == reference) {
+				find = true;
+			}
 		}
-                } catch (IOException ioe) {
+		if (!find) {
+			add(reference);
+		}
+	}
+
+	/**
+	 * 
+	 * @param dos
+	 */
+	public final void printXML(DataOutputStream dos) {
+		try {
+
+			for (final Integer w : this) {
+				dos.writeBytes("<ref>" + w + "</ref>\n");
+			}
+		} catch (final IOException ioe) {
 			ioe.printStackTrace();
 		}
-		
+
 	}
-    
+
 }

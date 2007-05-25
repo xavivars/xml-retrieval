@@ -3,7 +3,7 @@ package utils;
 /**
  * 
  * @author ebenimeli
- *
+ * 
  */
 public class StopWord extends SimpleWord {
 
@@ -11,15 +11,15 @@ public class StopWord extends SimpleWord {
 	 * 
 	 */
 	private Integer frequency;
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 */
 	public StopWord() {
 		super();
 	}
-	
+
 	/**
 	 * 
 	 * @param value
@@ -36,7 +36,8 @@ public class StopWord extends SimpleWord {
 	}
 
 	/**
-	 * @param frequency the frequency to set
+	 * @param frequency
+	 *            the frequency to set
 	 */
 	public final void setFrequency(Integer frequency) {
 		this.frequency = frequency;

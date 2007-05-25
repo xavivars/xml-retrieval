@@ -28,17 +28,18 @@ import org.w3c.dom.Element;
  */
 public class DocumentReader extends XMLReader {
 
-	
 	/**
 	 * 
 	 * @param fileName
 	 */
-	public DocumentReader(final String fileName, WordMap wordMap, final StopWordMap stopWordMap, RootIndexMap rootIndexMap, Integer reference) {
+	public DocumentReader(final String fileName, WordMap wordMap,
+			final StopWordMap stopWordMap, RootIndexMap rootIndexMap,
+			Integer reference) {
 		super(fileName);
 		setWordMap(wordMap);
 		setStopWordMap(stopWordMap);
-                setRootIndexMap(rootIndexMap);
-                setReference(reference);
+		setRootIndexMap(rootIndexMap);
+		setReference(reference);
 	}
 
 	/**
@@ -46,14 +47,14 @@ public class DocumentReader extends XMLReader {
 	 * @return
 	 */
 	public final WordList readDocument() {
-		this.analize();
-		
+		analize();
+
 		try {
-		final Element root = getDocument().getDocumentElement();
-		final String path = "/article[1]";
-		readChildren(root, path);
-		System.out.println("WordMap size: " + getWordMap().size());
-		} catch( NullPointerException npe) {
+			final Element root = getDocument().getDocumentElement();
+			final String path = "/article[1]";
+			readChildren(root, path);
+			// System.out.println("WordMap size: " + getWordMap().size());
+		} catch (final NullPointerException npe) {
 			npe.printStackTrace();
 		}
 		return null;

@@ -35,25 +35,32 @@ public class WordList extends ArrayList<Word> {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
+	/**
+	 * 
+	 * 
+	 */
 	public final void print() {
-		for (Word w : this) {
+		for (final Word w : this) {
 			w.printInfo();
 		}
 	}
-	
-	public final void printXML(DataOutputStream dos ) {
+
+	/**
+	 * 
+	 * @param dos
+	 */
+	public final void printXML(DataOutputStream dos) {
 		try {
-		dos.writeBytes("<word>\n");
-		dos.writeBytes("<value>" + get(0).getValue() + "</value>\n");
-		
-		for (Word w : this) {
-			w.printXML(dos);
-		}
-		dos.writeBytes("</word>\n");
-		} catch (IOException ioe) {
+			dos.writeBytes("<word>\n");
+			dos.writeBytes("<value>" + get(0).getValue() + "</value>\n");
+
+			for (final Word w : this) {
+				w.printXML(dos);
+			}
+			dos.writeBytes("</word>\n");
+		} catch (final IOException ioe) {
 			ioe.printStackTrace();
 		}
-		
+
 	}
 }

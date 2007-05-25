@@ -7,14 +7,14 @@ import org.w3c.dom.Element;
 /**
  * 
  * @author
- *
+ * 
  */
 public class WordCounter extends XMLReader {
-	
+
 	/**
 	 * 
 	 */
-	private WordsFrequencyMap wordsFrequency; 
+	private WordsFrequencyMap wordsFrequency;
 
 	/**
 	 * 
@@ -25,38 +25,38 @@ public class WordCounter extends XMLReader {
 		super(fileName);
 		setWordsFrequency(wf);
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param path
 	 * @return
 	 */
+	@Override
 	protected void tokenize(final String text, final String document,
 			final String path) {
-		StringTokenizer tokens = new StringTokenizer(text, " ");
+		final StringTokenizer tokens = new StringTokenizer(text, " ");
 		while (tokens.hasMoreElements()) {
-			String token = tokens.nextToken();
-			String newToken = formatToken(token);
+			final String token = tokens.nextToken();
+			final String newToken = formatToken(token);
 			if (newToken != null) {
 				getWordsFrequency().addWord(newToken);
 			} else {
-				//System.out.println("'" + token + "' is not a valid token");
+				// System.out.println("'" + token + "' is not a valid token");
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
 	public final WordList readDocument() {
 		try {
-		final Element root = getDocument().getDocumentElement();
-		final String path = "/article[1]";
-		readChildren(root, path);
-		//System.out.println("WordMap size: " + getWordMap().size());
-		} catch( NullPointerException npe) {
+			final Element root = getDocument().getDocumentElement();
+			final String path = "/article[1]";
+			readChildren(root, path);
+			// System.out.println("WordMap size: " + getWordMap().size());
+		} catch (final NullPointerException npe) {
 			npe.printStackTrace();
 		}
 		return null;

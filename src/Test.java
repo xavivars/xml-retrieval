@@ -1,9 +1,11 @@
 /*
- * Copyright (C) 2007 
+ * Copyright (C) 2007
+ *  
  * Authors:
  *  Enrique Benimeli Bofarull <ebenimeli@gmail.com>
- *  David Ortega Parilla <dortega@gmail.com>
- *  Xavi Ivars <>
+ *  David Ortega Parilla <dortegaparrilla@gmail.com>
+ *  Xavier Ivars i Ribes <xavi.ivars@gmail.com>
+ *  
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -20,14 +22,9 @@
  * 02111-1307, USA.
  */
 
-import utils.DocumentReader;
 import utils.StopWordMap;
 import utils.StopWordReader;
-import utils.Word;
-import utils.WordCounter;
-import utils.WordList;
-import utils.WordMap;
-import utils.DirectoryReader;
+import utils.IndexFactory;
 
 /**
  * 
@@ -40,14 +37,11 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		StopWordReader swr = new StopWordReader("stop-words-ok.xml");
-		swr.analize();
-		StopWordMap swm = swr.readDocument();
-		//swm.print();
+		final StopWordReader swr = new StopWordReader("stop-words-ok.xml");
+		final StopWordMap swm = swr.readDocument();
 
-		DirectoryReader dirReader = new DirectoryReader();
-		dirReader.createIndexes(args[0], swm);
-		//wordMap.print();
+		final IndexFactory factory = new IndexFactory();
+		factory.index(args[0], swm);
 	}
 
 }
