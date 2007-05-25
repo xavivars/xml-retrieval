@@ -78,21 +78,23 @@ public class XMLReader {
 	 * 
 	 */
 	protected WordMap wordMap;
-	
+
 	/**
 	 * 
 	 */
 	protected StopWordMap stopWordMap;
-        
-        /**
-         *
-         *
-         */
-        protected RootIndexMap rootIndexMap;
 
+	/**
+	 * 
+	 * 
+	 */
+	protected RootIndexMap rootIndexMap;
 
-        protected Integer reference;
-        
+	/**
+	 * 
+	 */
+	protected Integer reference;
+
 	/**
 	 * 
 	 * @param fileName
@@ -136,8 +138,8 @@ public class XMLReader {
 		} catch (final Exception e) {
 			e.printStackTrace();
 			System.err
-			.println("Error: the XML document is probably not well-formed");
-			//System.exit(-1);
+					.println("Error: the XML document is probably not well-formed");
+			// System.exit(-1);
 		} finally {
 			setBuilder(null);
 			setFactory(null);
@@ -170,8 +172,8 @@ public class XMLReader {
 					}
 
 					final Element childElement = (Element) child;
-					readChildren(childElement, path + "/"
-							+ child.getNodeName() + "[" + (pos.getPos()) + "]");
+					readChildren(childElement, path + "/" + child.getNodeName()
+							+ "[" + (pos.getPos()) + "]");
 				}
 				if (child instanceof Text) {
 					final Text textElement = (Text) child;
@@ -284,14 +286,14 @@ public class XMLReader {
 				// añadimos el 'word' al WordMap
 				if (getStopWordMap().containsKey(word.getValue())) {
 					getWordMap().addWord(word);
-					//System.out.println("Add '" + word.getValue() + "'");
+					// System.out.println("Add '" + word.getValue() + "'");
 				}
-                                getRootIndexMap().addReference(word,reference);
-                                
+				getRootIndexMap().addReference(word, reference);
+
 				// añadimos el 'word' al WordList
-				//addWord(word);
+				// addWord(word);
 			} else {
-				//System.out.println("'" + token + "' is not a valid token");
+				// System.out.println("'" + token + "' is not a valid token");
 			}
 		}
 	}
@@ -305,25 +307,26 @@ public class XMLReader {
 	protected final String formatToken(final String token) {
 		String newToken;
 		String[] temp;
-		String finalPunct = "[\\.,?!;:\\]\\)\\}]";
-		String beginningPunct = "[\\(\\[\\{]";
+		final String finalPunct = "[\\.,?!;:\\]\\)\\}]";
+		final String beginningPunct = "[\\(\\[\\{]";
 
 		newToken = token.toLowerCase();
-		//Quitar signos de puntuación de final y principio de palabra
-		if (newToken.matches(beginningPunct + "\\w+") || newToken.matches("\\w+" + finalPunct) ||
-				newToken.matches(beginningPunct + "\\w+" + finalPunct)) {
+		// Quitar signos de puntuación de final y principio de palabra
+		if (newToken.matches(beginningPunct + "\\w+")
+				|| newToken.matches("\\w+" + finalPunct)
+				|| newToken.matches(beginningPunct + "\\w+" + finalPunct)) {
 			temp = newToken.split("\\W");
-			for (String t: temp) {
-				if(t.compareTo(" ") != 0 && t.compareTo("") != 0) {
+			for (final String t : temp) {
+				if ((t.compareTo(" ") != 0) && (t.compareTo("") != 0)) {
 					newToken = t;
 				}
 			}
 		}
 		// Si no es un número o una palabra
-		else if (!newToken.matches("\\d+") && !newToken.matches("[\\w&&[^\\d]]+")) {
+		else if (!newToken.matches("\\d+")
+				&& !newToken.matches("[\\w&&[^\\d]]+")) {
 			newToken = null;
 		}
-		
 
 		return newToken;
 	}
@@ -372,7 +375,7 @@ public class XMLReader {
 	protected void setWordMap(final WordMap wordMap) {
 		this.wordMap = wordMap;
 	}
-	
+
 	/**
 	 * @return the stopWordMap
 	 */
@@ -381,39 +384,41 @@ public class XMLReader {
 	}
 
 	/**
-	 * @param stopWordMap the stopWordMap to set
+	 * @param stopWordMap
+	 *            the stopWordMap to set
 	 */
 	protected void setStopWordMap(StopWordMap stopWordMap) {
 		this.stopWordMap = stopWordMap;
 	}
-        
-        /**
+
+	/**
 	 * @return the rootIndexMap
 	 */
 	protected RootIndexMap getRootIndexMap() {
 		return rootIndexMap;
 	}
-                
-        /**
-	 * @param WordMap the rootIndexMap to set
+
+	/**
+	 * @param WordMap
+	 *            the rootIndexMap to set
 	 */
 	protected void setRootIndexMap(RootIndexMap map) {
-		this.rootIndexMap = map;
+		rootIndexMap = map;
 	}
 
-        /**
+	/**
 	 * @return the referemce
 	 */
 	protected Integer getReference() {
 		return reference;
 	}
-                
-        /**
-	 * @param Integer the reference to set
+
+	/**
+	 * @param Integer
+	 *            the reference to set
 	 */
 	protected void setReference(Integer ref) {
-		this.reference = ref;
+		reference = ref;
 	}
-
 
 }

@@ -35,7 +35,6 @@ public class Word extends SimpleWord {
 	 * 
 	 */
 	private String path;
-	
 
 	/**
 	 * 
@@ -79,22 +78,26 @@ public class Word extends SimpleWord {
 	 * 
 	 * 
 	 */
+	@Override
 	public void printInfo() {
 		System.out.println("Word:      '" + getValue() + "'");
 		System.out.println("Documento: '" + getDocument() + "'");
 		System.out.println("Path:      '" + getPath() + "'");
 	}
-	
-	public final void printXML(DataOutputStream dos ) {
+
+	/**
+	 * 
+	 * @param dos
+	 */
+	public final void printXML(DataOutputStream dos) {
 		try {
 			dos.writeBytes("\t<loc>\n");
-			dos.writeBytes("\t\t<doc>" + getDocument()+ "</doc>\n");
-			dos.writeBytes("\t\t<ref>" + getPath()+ "</ref>\n");
+			dos.writeBytes("\t\t<doc>" + getDocument() + "</doc>\n");
+			dos.writeBytes("\t\t<ref>" + getPath() + "</ref>\n");
 			dos.writeBytes("\t</loc>\n");
-		} catch(Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 
 }
