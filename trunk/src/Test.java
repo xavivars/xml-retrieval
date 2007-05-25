@@ -4,7 +4,7 @@
  * Authors:
  *  Enrique Benimeli Bofarull <ebenimeli@gmail.com>
  *  David Ortega Parilla <dortegaparrilla@gmail.com>
- *  Xavier Ivars i Ribes <xavi.ivars@gmail.com>
+ *  Xavier Ivars i Ribes <xavi@infobenissa.com>
  *  
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -28,7 +28,7 @@ import xml.StopWordReader;
 
 /**
  * 
- * @author ebenimeli
+ * @author 
  * 
  */
 public class Test {
