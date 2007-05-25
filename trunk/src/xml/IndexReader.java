@@ -22,46 +22,23 @@
  * 02111-1307, USA.
  */
 
-import java.util.ArrayList;
+package xml;
 
-import query.Document;
-import query.Query;
-import query.QueryManager;
-import query.WordResult;
-import query.WordResultList;
-import index.IndexFactory;
-import utils.StopWordMap;
-import xml.QueryReader;
-import xml.StopWordReader;
+import utils.WordMap;
 
 /**
  * 
- * @author 
- * 
+ * @author ebenimeli
+ *
  */
-public class Test {
-
+public class IndexReader {
+	
 	/**
-	 * @param args
+	 * 
+	 * @return
 	 */
-	public static void main(String[] args) {
-
-		// Stop-words
-		final StopWordReader swr = new StopWordReader("stop-words-ok.xml");
-		final StopWordMap swm = swr.readDocument();
-
-		// Index
-		final IndexFactory factory = new IndexFactory();
-		factory.index(args[0], swm);
+	public WordMap read() {
 		
-		// Query
-		QueryManager queryManager = new QueryManager();
-		queryManager.setStopWordMap(swm);
-		String queryFileName = "query001.xml";
-		WordResultList wordResultList = queryManager.processQuery(queryFileName);
-		wordResultList.print();
-		
-		
+		return null;
 	}
-
 }
