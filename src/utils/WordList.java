@@ -1,8 +1,11 @@
-package utils;
-
 /*
- * Copyright (C) 2007 
- * 
+ * Copyright (C) 2007
+ *  
+ * Authors:
+ *  Enrique Benimeli Bofarull <ebenimeli@gmail.com>
+ *  David Ortega Parilla <dortegaparrilla@gmail.com>
+ *  Xavier Ivars i Ribes <xavi@infobenissa.com>
+ *  
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -19,6 +22,8 @@ package utils;
  * 02111-1307, USA.
  */
 
+package utils;
+ 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
