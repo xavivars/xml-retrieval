@@ -22,16 +22,10 @@
  * 02111-1307, USA.
  */
 
-import java.util.ArrayList;
-
-import query.Document;
-import query.Query;
-import query.QueryManager;
-import query.WordResult;
-import query.WordResultList;
 import index.IndexFactory;
+import query.QueryManager;
+import query.WordResultList;
 import utils.StopWordMap;
-import xml.QueryReader;
 import xml.StopWordReader;
 
 /**
