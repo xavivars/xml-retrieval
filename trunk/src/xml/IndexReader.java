@@ -35,6 +35,18 @@ public class IndexReader {
 	
 	/**
 	 * 
+	 */
+	int index;
+	
+	/**
+	 * 
+	 * @param i
+	 */
+	public IndexReader(int i) {
+		index = i;		
+	}
+	/**
+	 * 
 	 * @return
 	 */
 	public WordMap read() {
