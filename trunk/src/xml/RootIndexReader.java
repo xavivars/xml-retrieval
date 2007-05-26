@@ -35,10 +35,31 @@ public class RootIndexReader {
 	
 	/**
 	 * 
+	 */
+	private RootIndexMap rootIndexMap;
+	
+	/**
+	 * 
 	 * @return
 	 */
 	public RootIndexMap read() {
 		
 		return null;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private RootIndexMap getRootIndexMap() {
+		return rootIndexMap;
+	}
+
+	/**
+	 * 
+	 * @param rootIndexMap
+	 */
+	private void setRootIndexMap(RootIndexMap rootIndexMap) {
+		this.rootIndexMap = rootIndexMap;
 	}
 }

@@ -62,7 +62,6 @@ public class QueryReader extends XMLReader {
 		super(fileName);
 		query = new Query();
 		stopWords = swm;
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
