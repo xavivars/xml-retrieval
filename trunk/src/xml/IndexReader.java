@@ -36,6 +36,11 @@ public class IndexReader {
 	/**
 	 * 
 	 */
+	private WordMap wordMap;
+	
+	/**
+	 * 
+	 */
 	int index;
 	
 	/**
@@ -52,5 +57,21 @@ public class IndexReader {
 	public WordMap read() {
 		
 		return null;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private WordMap getWordMap() {
+		return wordMap;
+	}
+	
+	/**
+	 * 
+	 * @param wordMap
+	 */
+	private void setWordMap(WordMap wordMap) {
+		this.wordMap = wordMap;
 	}
 }
