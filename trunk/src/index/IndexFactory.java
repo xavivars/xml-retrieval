@@ -36,6 +36,7 @@ import utils.WordMap;
 import utils.WordsFrequencyMap;
 import xml.DocumentReader;
 
+
 /**
  * 
  * @author
@@ -44,11 +45,25 @@ import xml.DocumentReader;
 public class IndexFactory {
 
 	/**
+	 * Directory where 'root_index.xml' and 'index_i.xml' will be stored.
+	 */
+	private String outputPath;
+	
+	/**
 	 * 
 	 * 
 	 */
 	public IndexFactory() {
-
+		 //setOutputPath("/home/ebenimeli/temp/");
+		 this.setOutputPath("");
+	}
+	
+	/**
+	 * 
+	 * @param outputPath
+	 */
+	public IndexFactory(final String outputPath) {
+		setOutputPath(outputPath);
 	}
 
 	/**
@@ -147,7 +162,7 @@ public class IndexFactory {
 					if (length / (1024 * 1024) > maxSizeIndex) {
 						length = 0;
 						fileNumber++;
-						wordMap.printXML("index_" + fileNumber + ".xml");
+						wordMap.printXML(getOutputPath() + "index_" + fileNumber + ".xml");
 						wordMap = new WordMap();
 					}
 				}
@@ -155,9 +170,9 @@ public class IndexFactory {
 				// index.addAll(wordList);
 				i++;
 			}
-			wordMap.printXML("index_" + (fileNumber + 1) + ".xml");
+			wordMap.printXML( getOutputPath() + "index_" + (fileNumber + 1) + ".xml");
 
-			rootIndexMap.printXML("root_index.xml");
+			rootIndexMap.printXML(getOutputPath() + "root_index.xml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -180,6 +195,22 @@ public class IndexFactory {
 				System.out.println("File: " + file.getPath());
 			}
 		}
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private final String getOutputPath() {
+		return outputPath;
+	}
+
+	/**
+	 * 
+	 * @param outputPath
+	 */
+	private final void setOutputPath(String outputPath) {
+		this.outputPath = outputPath;
 	}
 
 }
