@@ -46,12 +46,24 @@ public class IndexReader extends SAXReader {
 	 */
 	private String fileName;
 	
+        
+        private String searchWord, tempWord, tempDocument, tempReference;
+        
+        private boolean value, document, reference, find;
+        
 	/**
 	 * 
 	 * @param i
 	 */
 	public IndexReader(String indexFile) {
-            fileName = indexFile;		
+            fileName = indexFile;	
+            value = false;
+            document = false;
+            reference = false;
+            searchWord = "";
+            tempWord = "";
+            tempDocument = "";
+            tempReference = "";
 	}
 	/**
 	 * 
@@ -62,6 +74,13 @@ public class IndexReader extends SAXReader {
             return getWordMap();
 	}
 	
+        
+        public WordMap search (String word) {
+            searchWord = word;
+            getText(fileName);
+            return getWordMap();
+        }
+        
 	/**
 	 * 
 	 * @return
@@ -77,4 +96,60 @@ public class IndexReader extends SAXReader {
 	private void setWordMap(WordMap wordMap) {
 		this.wordMap = wordMap;
 	}
+        
+         public void characters(final char[] c, final int start, final int length) {
+             
+             
+        if (length > 0) {
+            try {
+                if (value) {
+                    buffer.append(c, start, length);
+                    tempWord = buffer.toString();
+                    buffer = new StringBuilder (kStringBuilder);
+                }
+                else if (document && (tempWord.compareTo(searchWord) == 0 || searchWord.isEmpty())) {
+                    buffer.append(c, start, length);
+                    tempDocument = buffer.toString();
+                    buffer = new StringBuilder (kStringBuilder);
+                }
+                else if (reference && (tempWord.compareTo(searchWord) == 0 || searchWord.isEmpty())) {
+                    buffer.append(c, start, length);
+                    tempReference = buffer.toString();
+                    buffer = new StringBuilder (kStringBuilder);
+                }
+            }
+            catch (java.nio.BufferOverflowException x) {
+                System.err.println("Insufficient text buffer size");
+                System.exit(1);
+            }
+        }
+    }
+
+    public void startElement(final String uri, final String localName,
+                             final String tag, final Attributes attributes) {
+        if (tag.equals("value")) {
+            value = true;
+            document = false;
+            reference = false;
+        }
+        else if (tag.equals("doc")) {
+            value = false;
+            document = true;
+            reference = false;
+        }
+        else if (tag.equals("ref")) {
+            value = false;
+            document = false;
+            reference = true;
+        }
+    }
+    
+    public void endElement(final String uri, final String localName, final String tag) { 
+        if (tempWord.compareTo(searchWord) == 0 || searchWord.isEmpty()) {
+            rootIndexMap.put(tempWord, tempReference);
+        }
+        tempWord = "";
+        tempReference = new ReferenceList ();
+    }
+        
 }

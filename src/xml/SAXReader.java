@@ -46,7 +46,9 @@ public abstract class SAXReader extends DefaultHandler {
      * 
      */
     protected StringBuilder buffer = new StringBuilder(kStringBuilder);
-      
+    protected org.xml.sax.XMLReader reader = null;  
+    
+    
     /**
      * Creates a new instance of SaxReader
      *
@@ -73,20 +75,19 @@ public abstract class SAXReader extends DefaultHandler {
 	public void endElement(final String uri, final String localName, final String tag) { 
 	}
 
-	/**
+
+        /**
 	 * 
 	 * @return
 	 */
-	public org.xml.sax.XMLReader getXMLReader() {
-		org.xml.sax.XMLReader reader = null;
-		try {
+	public void getXMLReader() {
+                try {
 			reader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
 			reader.setContentHandler(this);
 		} catch (Exception x) {
 			System.err.println(x.getMessage());
 		}
-		return reader;
-	}
+        }
 
 	/**
 	 * 
@@ -95,10 +96,10 @@ public abstract class SAXReader extends DefaultHandler {
 	 */
 	public String getText(final String fileName) {
 
-		org.xml.sax.XMLReader reader = getXMLReader();
+		getXMLReader();
 		buffer = new StringBuilder(kStringBuilder);
 		try {
-			reader.parse(fileName);
+                    reader.parse(fileName);
 		} catch (Exception x) {
 			System.err.println("Error parsing " + fileName + ": " + x.getMessage());
 		}

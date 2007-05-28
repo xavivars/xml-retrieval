@@ -143,13 +143,20 @@ public class RootIndexReader extends SAXReader {
     public void endElement(final String uri, final String localName, final String tag) { 
         if (queryWords.containsKey(tempWord) || queryWords.isEmpty()) {
             rootIndexMap.put(tempWord, tempReference);
+            if(!queryWords.isEmpty()) {
+                queryWords.remove(tempWord);
+                // Si hemos encontrado todas las palabras, forzamos al parser a acabar
+                if (queryWords.isEmpty()) {
+                    reader = null;
+                }
+            }
         }
         tempWord = "";
         tempReference = new ReferenceList ();
     }
 }
 
-
+ 
 
 
 
