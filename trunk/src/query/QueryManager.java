@@ -25,6 +25,9 @@
 
 package query;
 
+import java.util.Iterator;
+import java.util.Map;
+import utils.ReferenceList;
 import utils.RootIndexMap;
 import utils.StopWordMap;
 import utils.WordMap;
@@ -73,12 +76,8 @@ public class QueryManager {
 		wordResultList = new WordResultList();
 		
 		RootIndexMap rootIndexMap = readRootIndexMap();
-		
-		WordMap indexMap = readIndexMap("index_" + 0 + ".xml");
-		
-		
-		
-		
+                searchInIndexes(rootIndexMap);
+                
 		return wordResultList;	
 	}
 	
@@ -125,6 +124,7 @@ public class QueryManager {
 		return rootIndexMap;	
 	}
 
+                       
 	/**
 	 * 
 	 * @return
@@ -135,7 +135,32 @@ public class QueryManager {
 		indexMap = indexReader.read();
 		return indexMap;	
 	}
+        
+        /**
+	 * 
+	 * @return
+	 */
+	private final WordMap searchIndexMap (String indexFile, String word) {
+		final IndexReader indexReader = new IndexReader(indexFile);
+		WordMap indexMap = null;
+		indexMap = indexReader.search(word);
+		return indexMap;	
+	}
 
 	
-	
+	private final WordMap searchInIndexes (RootIndexMap rootIndexMap) {
+            
+               //Buscamos todas las palabras en los índices en los que aparecen
+                Iterator it = rootIndexMap.entrySet().iterator();
+                
+                while (it.hasNext()) {
+                    Map.Entry e = (Map.Entry) it.next();
+                    String word = (String) e.getKey();
+                    ReferenceList refList = (ReferenceList) e.getValue();
+                    for (Integer ref: refList) {
+                        searchIndexMap("index_" + ref + ".xml", word);
+                    }
+                }
+                
+        }
 }
