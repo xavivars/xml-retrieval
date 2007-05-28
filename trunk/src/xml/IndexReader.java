@@ -24,6 +24,9 @@
 
 package xml;
 
+import java.util.HashMap;
+import query.Document;
+import query.WordResult;
 import utils.WordMap;
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
@@ -47,7 +50,11 @@ public class IndexReader extends SAXReader {
 	private String fileName;
 	
         
-        private String searchWord, tempWord, tempDocument, tempReference;
+        private String searchWord, tempWord, tempReference;
+        
+        private HashMap < String, Document > tempWordResult;
+     
+        private Document tempDocument;
         
         private boolean value, document, reference, find;
         
@@ -62,8 +69,9 @@ public class IndexReader extends SAXReader {
             reference = false;
             searchWord = "";
             tempWord = "";
-            tempDocument = "";
+            tempDocument = new Document ();
             tempReference = "";
+            tempWordResult = new HashMap < String, Document > ();
 	}
 	/**
 	 * 
@@ -109,12 +117,13 @@ public class IndexReader extends SAXReader {
                 }
                 else if (document && (tempWord.compareTo(searchWord) == 0 || searchWord.isEmpty())) {
                     buffer.append(c, start, length);
-                    tempDocument = buffer.toString();
+                    tempDocument = new Document ();
+                    tempDocument.setName(buffer.toString());
                     buffer = new StringBuilder (kStringBuilder);
                 }
                 else if (reference && (tempWord.compareTo(searchWord) == 0 || searchWord.isEmpty())) {
                     buffer.append(c, start, length);
-                    tempReference = buffer.toString();
+                    tempDocument.addPath(buffer.toString());
                     buffer = new StringBuilder (kStringBuilder);
                 }
             }
@@ -145,11 +154,11 @@ public class IndexReader extends SAXReader {
     }
     
     public void endElement(final String uri, final String localName, final String tag) { 
-        if (tempWord.compareTo(searchWord) == 0 || searchWord.isEmpty()) {
-            rootIndexMap.put(tempWord, tempReference);
-        }
-        tempWord = "";
-        tempReference = new ReferenceList ();
+       // if () {
+           //rootIndexMap.put(tempWord, tempReference);
+       // }
+       // tempWord = "";
+        //tempReference = new ReferenceList ();
     }
         
 }
