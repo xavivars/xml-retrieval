@@ -13,7 +13,7 @@ import utils.StopWordMap;
  * @author ebenimeli
  * 
  */
-public class StopWordReader extends XMLReader {
+public class StopWordReader extends DOMReader {
 
 	/**
 	 * 

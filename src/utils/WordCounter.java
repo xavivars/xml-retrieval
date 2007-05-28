@@ -28,14 +28,14 @@ import java.util.StringTokenizer;
 
 import org.w3c.dom.Element;
 
-import xml.XMLReader;
+import xml.DOMReader;
 
 /**
  * 
  * @author
  * 
  */
-public class WordCounter extends XMLReader {
+public class WordCounter extends DOMReader {
 
 	/**
 	 * 

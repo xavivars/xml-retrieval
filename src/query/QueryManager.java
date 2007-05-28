@@ -31,6 +31,7 @@ import utils.WordMap;
 import xml.IndexReader;
 import xml.QueryReader;
 import xml.RootIndexReader;
+import xml.StopWordReader;
 
 /**
  * 
@@ -43,7 +44,7 @@ public class QueryManager {
 	 * 
 	 */
 	private StopWordMap stopWordMap;
-	
+	private String rootIndexFile;
 	/**
 	 * 
 	 *
@@ -56,8 +57,9 @@ public class QueryManager {
 	 * 
 	 * @param stopWordMap
 	 */
-	public QueryManager(final StopWordMap stopWordMap) {
-		setStopWordMap(stopWordMap);
+	public QueryManager(final String stopFile, final String rootFile) {
+                stopWordMap = (new StopWordReader(stopFile).readDocument());
+                rootIndexFile = rootFile;
 	}
 	
 	/**
@@ -72,7 +74,7 @@ public class QueryManager {
 		
 		RootIndexMap rootIndexMap = readRootIndexMap();
 		
-		WordMap indexMap = readIndexMap(0);
+		WordMap indexMap = readIndexMap("index_" + 0 + ".xml");
 		
 		
 		
@@ -114,7 +116,7 @@ public class QueryManager {
 	 * @return
 	 */
 	private final RootIndexMap readRootIndexMap() {
-		final RootIndexReader rootIndexReader = new RootIndexReader();
+		final RootIndexReader rootIndexReader = new RootIndexReader(rootIndexFile);
 		RootIndexMap rootIndexMap = null;
 		
 		rootIndexMap = rootIndexReader.read();
@@ -127,8 +129,8 @@ public class QueryManager {
 	 * 
 	 * @return
 	 */
-	private final WordMap readIndexMap(int i) {
-		final IndexReader indexReader = new IndexReader(i);
+	private final WordMap readIndexMap(String indexFile) {
+		final IndexReader indexReader = new IndexReader(indexFile);
 		WordMap indexMap = null;
 		indexMap = indexReader.read();
 		return indexMap;	

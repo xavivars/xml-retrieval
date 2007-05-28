@@ -31,7 +31,7 @@ import utils.WordMap;
  * @author Enrique Benimeli Bofarull
  * 
  */
-public class DocumentReader extends XMLReader {
+public class DocumentReader extends DOMReader {
 
 	/**
 	 * 

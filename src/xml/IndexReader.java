@@ -25,13 +25,16 @@
 package xml;
 
 import utils.WordMap;
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
+import javax.xml.parsers.*;
 
 /**
  * 
  * @author ebenimeli
  *
  */
-public class IndexReader {
+public class IndexReader extends SAXReader {
 	
 	/**
 	 * 
@@ -41,22 +44,22 @@ public class IndexReader {
 	/**
 	 * 
 	 */
-	int index;
+	private String fileName;
 	
 	/**
 	 * 
 	 * @param i
 	 */
-	public IndexReader(int i) {
-		index = i;		
+	public IndexReader(String indexFile) {
+            fileName = indexFile;		
 	}
 	/**
 	 * 
 	 * @return
 	 */
 	public WordMap read() {
-		
-		return null;
+            getText(fileName);
+            return getWordMap();
 	}
 	
 	/**
