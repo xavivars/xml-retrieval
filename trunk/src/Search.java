@@ -1,3 +1,4 @@
+import query.QueryManager;
 /*
  * Copyright (C) 2007
  *  
@@ -30,6 +31,23 @@ public class Search {
     
     /** Creates a new instance of Search */
     public Search() {
+        
     }
     
+    public static void main (String [] args) {
+        
+        String stopFile, rootFile, queryFile;
+                
+        stopFile = "";
+        rootFile = "";
+        queryFile = "";
+        
+        if (args.length == 3) {
+            stopFile = args [0];
+            rootFile = args [1];
+            queryFile = args [2];
+            QueryManager qm = new QueryManager (stopFile, rootFile);
+            qm.processQuery(queryFile);
+        }
+    }  
 }

@@ -41,7 +41,7 @@ import utils.StopWordMap;
  * @author
  * 
  */
-public class QueryReader extends XMLReader {
+public class QueryReader extends DOMReader {
 
 	/**
 	 * 

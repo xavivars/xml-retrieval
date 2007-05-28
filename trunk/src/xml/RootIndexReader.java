@@ -24,42 +24,132 @@
 
 package xml;
 
+import java.util.HashMap;
+import query.Query;
 import utils.RootIndexMap;
+import utils.ReferenceList;
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
+import javax.xml.parsers.*;
+import utils.SimpleWord;
 
 /**
  * 
  * @author ebenimeli
  *
  */
-public class RootIndexReader {
-	
-	/**
-	 * 
-	 */
-	private RootIndexMap rootIndexMap;
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public RootIndexMap read() {
-		
-		return null;
-	}
+public class RootIndexReader extends SAXReader {
+    
+    private boolean value, reference, occurrence;
+    private String tempWord, fileName;
+    private ReferenceList tempReference;
+    private HashMap < SimpleWord, String > queryWords;
+    	
+    /**
+     * 
+     */
+    private RootIndexMap rootIndexMap;
+    
+    
+    public RootIndexReader (String file) {
+        value = false;
+        reference = false;
+        occurrence = false;
+        tempReference = new ReferenceList ();
+        tempWord = "";
+        rootIndexMap = new RootIndexMap ();
+        fileName = file;
+        queryWords = new HashMap < SimpleWord, String > ();
+    }
+    
+    
+    private void readQuery (Query query) {
+        for (SimpleWord word: query) {
+            queryWords.put(word, null);
+        }
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public RootIndexMap read() {
+        getText(fileName);
+        return getRootIndexMap();
+    }
 
-	/**
-	 * 
-	 * @return
-	 */
-	private RootIndexMap getRootIndexMap() {
-		return rootIndexMap;
-	}
+    public RootIndexMap search (Query query) {
+        readQuery(query);
+        getText(fileName);
+        return getRootIndexMap();
+    }    
+    
+    /**
+     * 
+     * @return
+     */
+    private RootIndexMap getRootIndexMap() {
+            return rootIndexMap;
+    }
 
-	/**
-	 * 
-	 * @param rootIndexMap
-	 */
-	private void setRootIndexMap(RootIndexMap rootIndexMap) {
-		this.rootIndexMap = rootIndexMap;
-	}
+    /**
+     * 
+     * @param rootIndexMap
+     */
+    private void setRootIndexMap(RootIndexMap rootIndexMap) {
+            this.rootIndexMap = rootIndexMap;
+    }
+
+    public void characters(final char[] c, final int start, final int length) {
+        if (length > 0) {
+            try {
+                if (value) {
+                    buffer.append(c, start, length);
+                    tempWord = buffer.toString();
+                    buffer = new StringBuilder (kStringBuilder);
+                }
+                else if (reference && (queryWords.containsKey(tempWord) || queryWords.isEmpty())) {
+                    buffer.append(c, start, length);
+                    tempReference.add(new Integer((buffer.toString())));
+                    buffer = new StringBuilder (kStringBuilder);
+                }
+            }
+            catch (java.nio.BufferOverflowException x) {
+                System.err.println("Insufficient text buffer size");
+                System.exit(1);
+            }
+        }
+    }
+
+    public void startElement(final String uri, final String localName,
+                             final String tag, final Attributes attributes) {
+        if (tag.equals("value")) {
+            value = true;
+            reference = false;
+            occurrence = false;
+        }
+        else if (tag.equals("ref")) {
+            value = false;
+            reference = true;
+            occurrence = false;
+        }
+        else if (tag.equals("ocu")) {
+            value = false;
+            reference = false;
+            occurrence = true;
+        }
+    }
+    
+    public void endElement(final String uri, final String localName, final String tag) { 
+        if (queryWords.containsKey(tempWord) || queryWords.isEmpty()) {
+            rootIndexMap.put(tempWord, tempReference);
+        }
+        tempWord = "";
+        tempReference = new ReferenceList ();
+    }
 }
+
+
+
+
+
