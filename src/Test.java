@@ -49,12 +49,12 @@ public class Test {
 		factory.index(args[0], swm);
 		
 		// Query
-		QueryManager queryManager = new QueryManager();
+		/*QueryManager queryManager = new QueryManager();
 		queryManager.setStopWordMap(swm);
-		String queryFileName = "query001.xml";
+		String queryFileName = "./topics/query001.xml";
 		WordResultList wordResultList = queryManager.processQuery(queryFileName);
 		wordResultList.print();
-		
+		*/
 		
 	}
 

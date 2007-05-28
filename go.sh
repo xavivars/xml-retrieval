@@ -1,2 +1,2 @@
 ant compile
-java -Xmx400m -jar lib/xml-retrieval.jar xml/an stop-words-ok.xml
+java -Xmx400m -jar lib/xml-retrieval.jar inex-1.4/xml/an stop-words-ok.xml

@@ -161,6 +161,6 @@ public class QueryManager {
                         searchIndexMap("index_" + ref + ".xml", word);
                     }
                 }
-                
+              return null;//!!!!!!!!!!!!!!!!!!!!!!  
         }
 }
