@@ -40,10 +40,21 @@ public class StopWordFactory extends IndexFactory {
 
 	/**
 	 * 
+	 */
+	private int bottomLimit;
+	
+	/**
+	 * 
+	 */
+	private int topLimit;
+	
+	/**
+	 * 
 	 *
 	 */
 	public StopWordFactory() {
-
+		setBottomLimit(0);
+		setTopLimit(Integer.MAX_VALUE);
 	}
 
 	/**
@@ -52,7 +63,8 @@ public class StopWordFactory extends IndexFactory {
 	 */
 	public StopWordFactory(String outputPath) {
 		super(outputPath);
-
+		setBottomLimit(0);
+		setTopLimit(Integer.MAX_VALUE);
 	}
 	
 	/**
@@ -95,16 +107,45 @@ public class StopWordFactory extends IndexFactory {
 					//1. Extraer palabra-frecuencia
 					wordCounter = new WordCounter(file.getPath(), wordsFrequencyMap);
 					wordCounter.readDocument();
-					wordsFrequencyMap.print(150);
+					//wordsFrequencyMap.print(150);
 					// si la palabra aparece < 500000 veces
 					// es decir, imprimir todas las palabras
-					wordsFrequencyMap.printXML(getOutputPath(), 500000, 500);
+					System.out.println(wordsFrequencyMap.size() + " stop-words.");
+					wordsFrequencyMap.printXML(getOutputPath(), getTopLimit(), getBottomLimit());
 				}
 				i++;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @return the bottomLimit
+	 */
+	public final int getBottomLimit() {
+		return bottomLimit;
+	}
+
+	/**
+	 * @param bottomLimit the bottomLimit to set
+	 */
+	public final void setBottomLimit(int bottomLimit) {
+		this.bottomLimit = bottomLimit;
+	}
+
+	/**
+	 * @return the topLimit
+	 */
+	public final int getTopLimit() {
+		return topLimit;
+	}
+
+	/**
+	 * @param topLimit the topLimit to set
+	 */
+	public final void setTopLimit(int topLimit) {
+		this.topLimit = topLimit;
 	}
 
 
