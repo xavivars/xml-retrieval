@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE inex_topic SYSTEM "topic.dtd">
+<inex_topic topic_id="127" query_type="CAS" ct_no="13"> 
+<title>arpanet</title>
+<description>Find paragraphs or figure-captions containing the
+definition of Godel, Lukasiewicz or other fuzzy-logic
+implications</description> 
+<narrative>Any relevant element of a section must contain the
+definition of a fuzzy-logic implication operator or a pointer to the
+element of the same article where the definition can be
+found. Elements containing criteria for identifying or comparing fuzzy
+implications are also of interest. Elements which discuss or introduce
+non-implication fuzzy operators are not relevant. </narrative> 
+<keywords>Godel implication, Lukasiewicz implication, fuzzy
+implications, fuzzy-logic implication </keywords> 
+</inex_topic> 
