@@ -54,8 +54,8 @@ public class IndexFactory {
 	 * 
 	 */
 	public IndexFactory() {
-		 //setOutputPath("/home/ebenimeli/temp/");
-		 setOutputPath("");
+		 setOutputPath("/home/ebenimeli/temp/");
+		 //setOutputPath("");
 	}
 	
 	/**
