@@ -25,11 +25,14 @@
 
 package query;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import utils.ReferenceList;
 import utils.RootIndexMap;
 import utils.StopWordMap;
+import utils.Word;
+import utils.WordList;
 import utils.WordMap;
 import xml.IndexReader;
 import xml.QueryReader;
@@ -124,43 +127,54 @@ public class QueryManager {
 		return rootIndexMap;	
 	}
 
-                       
-	/**
-	 * 
-	 * @return
-	 */
-	private final WordMap readIndexMap(String indexFile) {
-		final IndexReader indexReader = new IndexReader(indexFile);
-		WordMap indexMap = null;
-		indexMap = indexReader.read();
-		return indexMap;	
-	}
-        
+                     
+	        
         /**
 	 * 
 	 * @return
 	 */
-	private final WordMap searchIndexMap (String indexFile, String word) {
+	private final WordResultList searchIndexMap (String indexFile, WordList wl) {
 		final IndexReader indexReader = new IndexReader(indexFile);
-		WordMap indexMap = null;
-		indexMap = indexReader.search(word);
+		WordResultList indexMap = null;
+		indexMap = indexReader.search(wl);
 		return indexMap;	
 	}
 
 	
 	private final WordMap searchInIndexes (RootIndexMap rootIndexMap) {
             
+                HashMap < Integer, WordList > wordsInIndex = new HashMap < Integer, WordList > ();
+                WordList wl;
                //Buscamos todas las palabras en los índices en los que aparecen
                 Iterator it = rootIndexMap.entrySet().iterator();
-                
+                             
                 while (it.hasNext()) {
                     Map.Entry e = (Map.Entry) it.next();
                     String word = (String) e.getKey();
                     ReferenceList refList = (ReferenceList) e.getValue();
                     for (Integer ref: refList) {
-                        searchIndexMap("index_" + ref + ".xml", word);
+                        if(wordsInIndex.containsKey(ref)) {
+                            wl = wordsInIndex.get(ref);
+                        }
+                        else {
+                            wl = new WordList();
+                        }
+                        wl.add(new Word (word));
+                        wordsInIndex.put(ref,wl);
                     }
                 }
+                
+                //Buscamos en cada índice las palabras que se encuentran en cada uno
+                
+                it = wordsInIndex.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry e = (Map.Entry) it.next();
+                    Integer ref = (Integer) e.getKey();
+                    wl = (WordList) e.getValue();
+                    searchIndexMap("index_" + ref + ".xml", wl).print();
+                }
+                
+                
               return null;//!!!!!!!!!!!!!!!!!!!!!!  
         }
 }
