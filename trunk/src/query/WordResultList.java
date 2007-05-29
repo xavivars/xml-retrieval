@@ -24,6 +24,10 @@
 
 package query;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -56,4 +60,53 @@ public class WordResultList extends ArrayList<WordResult>{
 			System.out.println("");
 		}
 	}
+	
+	
+	/**
+	 * 
+	 * @param fileName
+	 */
+	public final void printXML(final String fileName) {
+		BufferedOutputStream bos;
+		FileOutputStream fos;
+		DataOutputStream dos;
+
+		try {
+			fos = new FileOutputStream(fileName);
+			bos = new BufferedOutputStream(fos);
+			dos = new DataOutputStream(bos);
+			dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
+			dos.writeBytes("<word-list>\n");
+
+			int nWords = 0;
+
+			for (final WordResult wordResult : this) {
+				dos.writeBytes("\t<word>\n");
+				dos.writeBytes("\t\t<value>" + wordResult.getName() + "</value>\n");
+				final ArrayList<Document> documents = wordResult.getDocuments();
+				for (final Document document : documents) {
+					dos.writeBytes("\t\t<document id=\"" + document.getName() + "\">\n");
+					final ArrayList<String> paths = document.getPaths();
+					for (String path : paths) {
+						dos.writeBytes("\t\t\t<path ref=\"" + path + "\"/>\n");
+					}
+					dos.writeBytes("\t\t</document>\n");
+				}
+				dos.writeBytes("\t</word>\n\n");
+			}
+
+			dos.writeBytes("</word-list>\n");
+			dos.writeBytes("<!-- " + nWords + " words -->\n");
+			fos = null;
+			bos = null;
+			dos.close();
+			dos = null;
+		} catch (final IOException e) {
+			e.printStackTrace();
+		} catch (final Exception eg) {
+			eg.printStackTrace();
+		}
+		
+	}
+
 }
