@@ -54,7 +54,7 @@ public class IndexFactory {
 	 * 
 	 */
 	public IndexFactory() {
-		 setOutputPath("/home/ebenimeli/temp/");
+		 //setOutputPath("/home/ebenimeli/temp/");
 		 setOutputPath("");
 	}
 	
@@ -106,6 +106,7 @@ public class IndexFactory {
 		final HashMap<String, String> notWellFormed = new HashMap<String, String>();
 		// los siguientes archivos XML parecen no validar con la DTD
 		// y dan problemas en el indexado. Por ahora los omitimos.
+		
 		notWellFormed.put("xml/cg/1995/g1069.xml", null);
 		notWellFormed.put("xml/cg/1996/g5071.xml", null);
 		notWellFormed.put("xml/cg/1997/g6110.xml", null);
@@ -121,6 +122,9 @@ public class IndexFactory {
 		notWellFormed.put("xml/tc/1996/t0892.xml", null);
 		notWellFormed.put("xml/tc/1997/t0162.xml", null);
 		notWellFormed.put("xml/tc/1998/t0527.xml", null);
+
+		
+		
 
 		ArrayList<File> listFiles;
 		DocumentReader currentDoc;
@@ -201,7 +205,7 @@ public class IndexFactory {
 	 * 
 	 * @return
 	 */
-	private final String getOutputPath() {
+	protected String getOutputPath() {
 		return outputPath;
 	}
 
@@ -209,7 +213,7 @@ public class IndexFactory {
 	 * 
 	 * @param outputPath
 	 */
-	private final void setOutputPath(String outputPath) {
+	public void setOutputPath(String outputPath) {
 		this.outputPath = outputPath;
 	}
 
