@@ -149,17 +149,17 @@ public class IndexReader extends SAXReader {
                 try {
                     if (value) {
                         buffer.append(c, start, length);
-                        tempWord = buffer.toString();
+                        tempWord += buffer.toString();
                         buffer = new StringBuilder (kStringBuilder);
                     }
                     else if (document && (searchWords.containsKey(tempWord))) {
                         buffer.append(c, start, length);
-                        tempDocument = buffer.toString();
+                        tempDocument += buffer.toString();
                         buffer = new StringBuilder (kStringBuilder);
                     }
                     else if (reference && (searchWords.containsKey(tempWord))) {
                         buffer.append(c, start, length);
-                        tempReference = buffer.toString();
+                        tempReference += buffer.toString();
                         buffer = new StringBuilder (kStringBuilder);
                     }
                 }
@@ -184,6 +184,7 @@ public class IndexReader extends SAXReader {
     }
     
     public void endElement(final String uri, final String localName, final String tag) { 
+        
         if(value) {
             value = false;
         }
@@ -205,13 +206,18 @@ public class IndexReader extends SAXReader {
                 ArrayList < String > paths = tempResult.get(tempWord).get(tempDocument);
                 paths.add(tempReference);
             }
+            tempDocument = "";
+            tempReference = "";
         }
         
         //Terminamos la búsqueda
-        if (tag.equals("word") && searchWords.containsKey(tempWord)) {
-            searchWords.remove(tempWord);
-            if (searchWords.isEmpty()) {
-                reader = null;
+        if (tag.equals("word")) {
+            tempWord = "";
+            if (searchWords.containsKey(tempWord)) {
+                searchWords.remove(tempWord);
+                if (searchWords.isEmpty()) {
+                    reader = null;
+                }
             }
         }
     }   

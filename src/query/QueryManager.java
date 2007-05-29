@@ -163,7 +163,7 @@ public class QueryManager {
                     Map.Entry e = (Map.Entry) it.next();
                     Integer ref = (Integer) e.getKey();
                     wl = (WordList) e.getValue();
-                    result.addAll(searchIndexMap("index_" + ref + ".xml", wl));
+                    result.addAll(searchIndexMap("../index_" + ref + ".xml", wl));
                 }
               result.print();                
               return result;
