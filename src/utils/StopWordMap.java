@@ -24,6 +24,10 @@
 
 package utils;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -58,4 +62,46 @@ public class StopWordMap extends HashMap<String, StopWord> {
 		}
 		System.out.println("Stop words: " + nStopWords);
 	}
+	
+	/**
+	 * 
+	 * @param fileName
+	 */
+	public final void printXML(final String fileName) {
+		BufferedOutputStream bos;
+		FileOutputStream fos;
+		DataOutputStream dos;
+		final Set keySet = keySet();
+		final Iterator it = keySet.iterator();
+
+		try {
+			fos = new FileOutputStream(fileName);
+			bos = new BufferedOutputStream(fos);
+			dos = new DataOutputStream(bos);
+			dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
+			dos.writeBytes("<stop-words>\n");
+
+			int nStopWords = 0;
+			while (it.hasNext()) {
+				final String key = (String) it.next();
+				final StopWord stopWord = get(key);
+				dos.writeBytes("\t<word f=\"" + stopWord.getFrequency() +"\">" + stopWord.getValue() + "</word>\n");
+				nStopWords++;
+			}
+
+			dos.writeBytes("<stop-words/>\n");
+			dos.writeBytes("<!-- " + nStopWords + " stop-words -->\n");
+			fos = null;
+			bos = null;
+			dos.close();
+			dos = null;
+		} catch (final IOException e) {
+			e.printStackTrace();
+		} catch (final Exception eg) {
+			eg.printStackTrace();
+		}
+		
+		
+	}
+	
 }

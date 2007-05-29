@@ -60,10 +60,10 @@ public class WordCounter extends DOMReader {
 	@Override
 	protected void tokenize(final String text, final String document,
 			final String path) {
-		final StringTokenizer tokens = new StringTokenizer(text, " ");
+		StringTokenizer tokens = new StringTokenizer(text, " ");
 		while (tokens.hasMoreElements()) {
-			final String token = tokens.nextToken();
-			final String newToken = formatToken(token);
+			String token = tokens.nextToken();
+			String newToken = formatToken(token);
 			if (newToken != null) {
 				getWordsFrequency().addWord(newToken);
 			} else {
