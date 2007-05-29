@@ -80,11 +80,14 @@ public class StopWordReader extends DOMReader {
 						final Element childElement = (Element) child;
 						final StopWord stopWord = readStopWord(childElement);
 						int f = stopWord.getFrequency();
-						if (!removeSize.containsKey(stopWord.getFrequency().toString())) {
+						if (removeSize.containsKey(stopWord.getFrequency().toString())) {
+							stopWordMap.put(stopWord.getValue(), stopWord);
+						} else {
 						if (f >= getBottomLimit() && f <= getTopLimit()) {
 							stopWordMap.put(stopWord.getValue(), stopWord);
 						}
 						}
+						
 					}
 				}
 				if (child instanceof Text) {
