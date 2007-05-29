@@ -101,7 +101,7 @@ public abstract class SAXReader extends DefaultHandler {
 		try {
                     reader.parse(fileName);
 		} catch (Exception x) {
-			System.err.println("Error parsing " + fileName + ": " + x.getMessage());
+			System.err.println("Error parsing " + fileName + ": " + x);
 		}
 		return buffer.toString();
 	}
