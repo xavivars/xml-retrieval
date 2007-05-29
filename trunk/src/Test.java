@@ -40,19 +40,20 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
-		// Crea las stop-words
-		//StopWordFactory swl = new StopWordFactory("stop-words-list.xml");
-		//swl.getStopWords(args[0]);
-
-		
-		
-		final StopWordReader swr = new StopWordReader(args[1]);
+		// filtramos word-freqs.xml
+		final StopWordReader swr = new StopWordReader("word-freqs.xml");
+		swr.setBottomLimit(100000);
+		swr.removeSize(new Integer(1));
+		swr.removeSize(new Integer(2));
+		swr.removeSize(new Integer(3));
 		final StopWordMap swm = swr.readDocument();
+		swm.printXML("stop-words-final.xml");
 
+		final StopWordReader swr2 = new StopWordReader("stop-words-final.xml");
+		final StopWordMap swm2 = swr2.readDocument();
 		// Index
 		final IndexFactory factory = new IndexFactory();
-		factory.index(args[0], swm);
+		factory.index(args[0], swm2);
 		
 		
 		// Query
@@ -63,6 +64,20 @@ public class Test {
 		wordResultList.print();
 		*/
 		
+	}
+
+	/**
+	 * 
+	 *
+	 */
+	private final void stopWords() {
+		// Crea un archivo con palabra-frecuencia
+		// Se insertan todas
+
+		//StopWordFactory swf = new StopWordFactory("word-freqs.xml");
+		//swf.getStopWords(args[0]);
+		
+	
 	}
 
 }
