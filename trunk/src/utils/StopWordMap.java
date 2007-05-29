@@ -89,7 +89,7 @@ public class StopWordMap extends HashMap<String, StopWord> {
 				nStopWords++;
 			}
 
-			dos.writeBytes("<stop-words/>\n");
+			dos.writeBytes("</stop-words>\n");
 			dos.writeBytes("<!-- " + nStopWords + " stop-words -->\n");
 			fos = null;
 			bos = null;
