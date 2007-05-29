@@ -23,6 +23,7 @@
  */
 
 import index.IndexFactory;
+import index.StopWordFactory;
 import query.QueryManager;
 import query.WordResultList;
 import utils.StopWordMap;
@@ -40,13 +41,19 @@ public class Test {
 	 */
 	public static void main(String[] args) {
 
-		final StopWordReader swr = new StopWordReader(args[1]);
+		// Crea las stop-words
+		//StopWordFactory swl = new StopWordFactory("stop-words-list.xml");
+		//swl.getStopWords(args[0]);
 
+		
+		
+		final StopWordReader swr = new StopWordReader(args[1]);
 		final StopWordMap swm = swr.readDocument();
 
 		// Index
 		final IndexFactory factory = new IndexFactory();
 		factory.index(args[0], swm);
+		
 		
 		// Query
 		/*QueryManager queryManager = new QueryManager();

@@ -47,7 +47,7 @@ public class WordCounter extends DOMReader {
 	 * @param fileName
 	 * @param wf
 	 */
-	protected WordCounter(String fileName, WordsFrequencyMap wf) {
+	public WordCounter(String fileName, WordsFrequencyMap wf) {
 		super(fileName);
 		setWordsFrequency(wf);
 	}
@@ -77,9 +77,10 @@ public class WordCounter extends DOMReader {
 	 * @return
 	 */
 	public final WordList readDocument() {
+		analize();
 		try {
-			final Element root = getDocument().getDocumentElement();
-			final String path = "/article[1]";
+			Element root = getDocument().getDocumentElement();
+			String path = "/article[1]";
 			readChildren(root, path);
 			// System.out.println("WordMap size: " + getWordMap().size());
 		} catch (final NullPointerException npe) {
