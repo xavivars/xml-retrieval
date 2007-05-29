@@ -34,35 +34,36 @@ import xml.StopWordReader;
  * @author 
  * 
  */
-public class Test {
+public class Test3 {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// filtramos word-freqs.xml
-		System.out.println("Test 1");
+		System.out.println("Test 3");
 		StopWordMap swm;
 		StopWordReader swr2;
 		StopWordReader swr;
 		IndexFactory factory;
 		StopWordMap swm2;
-		
-		// CASO 1
+
+		// CASO 3
 		swr = new StopWordReader("word-freqs.xml");
-		swr.setBottomLimit(100000);
+		swr.setBottomLimit(50000);
 		swr.removeSize(new Integer(1));
+		swr.removeSize(new Integer(2));
+		swr.removeSize(new Integer(3));		
 		swm = swr.readDocument();
 		swm.printXML("stop-words-final.xml");
 		swr2 = new StopWordReader("stop-words-final.xml");
 		swm2 = swr2.readDocument();
 		// Index
 		factory = new IndexFactory();
-		factory.setOutputPath("/home/ebenimeli/temp/indexes01/");
+		factory.setOutputPath("/home/ebenimeli/temp/indexes03/");
 		factory.index(args[0], swm2);
 		factory = null;
 		swr2 = null;
-
 
 		// Querybueno, 
 		/*QueryManager queryManager = new QueryManager();
