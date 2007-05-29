@@ -291,7 +291,7 @@ public abstract class DOMReader {
 				word.setPath(path);
 				word.setDocument(document);
 				// añadimos el 'word' al WordMap
-				if (getStopWordMap().containsKey(word.getValue())) {
+				if (!getStopWordMap().containsKey(word.getValue())) {
 					getWordMap().addWord(word);
                                         getRootIndexMap().addReference(word, reference);
 					// System.out.println("Add '" + word.getValue() + "'");

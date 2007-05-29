@@ -1,5 +1,7 @@
 package xml;
 
+import java.util.HashMap;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -29,6 +31,11 @@ public class StopWordReader extends DOMReader {
 	 * 
 	 */
 	private int topLimit;
+	
+	/**
+	 * 
+	 */
+	private HashMap<String,Integer> removeSize;
 
 	/**
 	 * 
@@ -36,6 +43,7 @@ public class StopWordReader extends DOMReader {
 	 */
 	public StopWordReader(String fileName) {
 		super(fileName);
+		removeSize = new HashMap<String,Integer>();
 		this.setBottomLimit(0);
 		this.setTopLimit(Integer.MAX_VALUE);
 	}
@@ -72,8 +80,10 @@ public class StopWordReader extends DOMReader {
 						final Element childElement = (Element) child;
 						final StopWord stopWord = readStopWord(childElement);
 						int f = stopWord.getFrequency();
+						if (!removeSize.containsKey(stopWord.getFrequency().toString())) {
 						if (f >= getBottomLimit() && f <= getTopLimit()) {
 							stopWordMap.put(stopWord.getValue(), stopWord);
+						}
 						}
 					}
 				}
@@ -154,6 +164,16 @@ public class StopWordReader extends DOMReader {
 	 */
 	public final void setTopLimit(int topLimit) {
 		this.topLimit = topLimit;
+	}
+	
+	/**
+	 * 
+	 * @param size
+	 */
+	public final void removeSize(Integer size) {
+		if (!removeSize.containsKey(size.toString())) {
+			removeSize.put(size.toString(), size);
+		}
 	}
 
 }
