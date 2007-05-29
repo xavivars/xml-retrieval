@@ -59,10 +59,9 @@ public class IndexReader extends SAXReader {
         /**
          * Estructura donde almacenamos temporalmente los resultados. Se utiliza un hashmap para acceder rápidamente a los elementos
          */
-        private HashMap < String, HashMap < String, ArrayList < String > > > searchWords;
+        private HashMap < String, HashMap < String, ArrayList < String > > > tempResult;
         
-                
-        private WordResultList result;
+        private HashMap < String, String > searchWords;
         
         private boolean value, document, reference;
         
@@ -75,32 +74,31 @@ public class IndexReader extends SAXReader {
             value = false;
             document = false;
             reference = false;
-            searchWords = new HashMap < String, HashMap < String, ArrayList < String > > > ();
+            tempResult = new HashMap < String, HashMap < String, ArrayList < String > > > ();
+            searchWords = new HashMap < String, String > ();
             tempWord = "";
             tempDocument = "";
             tempReference = "";
-            result = new WordResultList ();
-	}
+       	}
 	        
         public WordResultList search (WordList  wl) {
             for(Word word: wl) {
-                searchWords.put(word.getValue(), new HashMap < String, ArrayList < String > > ());
-               /* WordResult wr = new WordResult ();
-                wr.setName(word.getValue());
-                result.add(wr);*/
+                tempResult.put(word.getValue(), new HashMap < String, ArrayList < String > > ());
+                searchWords.put(word.getValue(),null);
             }
             getText(fileName);
-            buildResultList();
-            return result;
+            
+            return buildResultList();
         }
         
         /**
          *
          */
-        public void buildResultList () {
+        public WordResultList buildResultList () {
+            WordResultList result = new WordResultList ();
             WordResult wr = new WordResult ();
             
-            Iterator it1 = searchWords.entrySet().iterator();
+            Iterator it1 = tempResult.entrySet().iterator();
             //Para todas las palabras que se han buscado                 
             while (it1.hasNext()) {
                 Map.Entry < String, HashMap < String, ArrayList < String > > > e1 = (Map.Entry < String, HashMap < String, ArrayList < String > > > ) it1.next();
@@ -125,6 +123,8 @@ public class IndexReader extends SAXReader {
             }
             
             result.add(wr); //Añado la palabra al resultado
+            
+            return result;
         }
         
 	/**
@@ -144,73 +144,75 @@ public class IndexReader extends SAXReader {
 	}
         
         public void characters(final char[] c, final int start, final int length) {
-             
-             
-        if (length > 0) {
-            try {
-                if (value) {
-                    buffer.append(c, start, length);
-                    tempWord = buffer.toString();
-                    buffer = new StringBuilder (kStringBuilder);
+                   
+            if (length > 0) {
+                try {
+                    if (value) {
+                        buffer.append(c, start, length);
+                        tempWord = buffer.toString();
+                        buffer = new StringBuilder (kStringBuilder);
+                    }
+                    else if (document && (searchWords.containsKey(tempWord))) {
+                        buffer.append(c, start, length);
+                        tempDocument = buffer.toString();
+                        buffer = new StringBuilder (kStringBuilder);
+                    }
+                    else if (reference && (searchWords.containsKey(tempWord))) {
+                        buffer.append(c, start, length);
+                        tempReference = buffer.toString();
+                        buffer = new StringBuilder (kStringBuilder);
+                    }
                 }
-                else if (document && (searchWords.containsKey(tempWord))) {
-                    buffer.append(c, start, length);
-                    tempDocument = buffer.toString();
-                    buffer = new StringBuilder (kStringBuilder);
-                }
-                else if (reference && (searchWords.containsKey(tempWord))) {
-                    buffer.append(c, start, length);
-                    tempReference = buffer.toString();
-                    buffer = new StringBuilder (kStringBuilder);
+                catch (java.nio.BufferOverflowException x) {
+                    System.err.println("Insufficient text buffer size");
+                    System.exit(1);
                 }
             }
-            catch (java.nio.BufferOverflowException x) {
-                System.err.println("Insufficient text buffer size");
-                System.exit(1);
-            }
-        }
     }
 
     public void startElement(final String uri, final String localName,
                              final String tag, final Attributes attributes) {
         if (tag.equals("value")) {
             value = true;
-            document = false;
-            reference = false;
         }
         else if (tag.equals("doc")) {
-            value = false;
             document = true;
-            reference = false;
         }
         else if (tag.equals("ref")) {
-            value = false;
-            document = false;
             reference = true;
         }
     }
     
     public void endElement(final String uri, final String localName, final String tag) { 
-        
-        if(searchWords.containsKey(tempWord)) {
-            //Añadimos el documento si hace falta
-            if (document) {
-                HashMap < String, ArrayList < String > > documents = searchWords.get(tempWord);
+        if(value) {
+            value = false;
+        }
+        //Añadimos el documento si hace falta
+        else if(document) {
+            document = false;
+            if (searchWords.containsKey(tempWord)) {
+                HashMap < String, ArrayList < String > > documents = tempResult.get(tempWord);
                 if (!documents.containsKey(tempDocument)) {
                     documents.put(tempDocument, new ArrayList < String > ());
-                    searchWords.put(tempWord,documents);
+                    tempResult.put(tempWord,documents);
                 }
             }
-            //Añadimos el path
-            if (reference) {
-                ArrayList < String > paths = searchWords.get(tempWord).get(tempDocument);
+        }
+        //Añadimos el path
+        else if (reference) {
+            reference = false;
+            if (searchWords.containsKey(tempWord)) {
+                ArrayList < String > paths = tempResult.get(tempWord).get(tempDocument);
                 paths.add(tempReference);
             }
         }
-        //Terminamos la búsqueda
-        if (searchWords.isEmpty()) {
-            reader = null;
-        }
-    }
         
+        //Terminamos la búsqueda
+        if (tag.equals("word") && searchWords.containsKey(tempWord)) {
+            searchWords.remove(tempWord);
+            if (searchWords.isEmpty()) {
+                reader = null;
+            }
+        }
+    }   
 }

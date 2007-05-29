@@ -78,7 +78,7 @@ public class QueryManager {
 		
 		wordResultList = new WordResultList();
 		
-		RootIndexMap rootIndexMap = readRootIndexMap();
+		RootIndexMap rootIndexMap = searchRootIndexMap(query);
                 searchInIndexes(rootIndexMap);
                 
 		return wordResultList;	
@@ -113,21 +113,12 @@ public class QueryManager {
 		this.stopWordMap = stopWordMap;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
-	private final RootIndexMap readRootIndexMap() {
-		final RootIndexReader rootIndexReader = new RootIndexReader(rootIndexFile);
-		RootIndexMap rootIndexMap = null;
-		
-		rootIndexMap = rootIndexReader.read();
-		
-		
-		return rootIndexMap;	
-	}
-
-                     
+        private final RootIndexMap searchRootIndexMap(final Query query) {
+            final RootIndexReader rootIndexreader = new RootIndexReader (rootIndexFile);
+            RootIndexMap rootIndexMap = rootIndexreader.search(query);
+            
+            return rootIndexMap;
+        }             
 	        
         /**
 	 * 
@@ -141,8 +132,9 @@ public class QueryManager {
 	}
 
 	
-	private final WordMap searchInIndexes (RootIndexMap rootIndexMap) {
-            
+	private final WordResultList searchInIndexes (RootIndexMap rootIndexMap) {
+                
+                WordResultList result = new WordResultList ();
                 HashMap < Integer, WordList > wordsInIndex = new HashMap < Integer, WordList > ();
                 WordList wl;
                //Buscamos todas las palabras en los índices en los que aparecen
@@ -171,10 +163,9 @@ public class QueryManager {
                     Map.Entry e = (Map.Entry) it.next();
                     Integer ref = (Integer) e.getKey();
                     wl = (WordList) e.getValue();
-                    searchIndexMap("index_" + ref + ".xml", wl).print();
+                    result.addAll(searchIndexMap("index_" + ref + ".xml", wl));
                 }
-                
-                
-              return null;//!!!!!!!!!!!!!!!!!!!!!!  
+              result.print();                
+              return result;
         }
 }

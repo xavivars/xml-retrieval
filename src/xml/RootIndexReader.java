@@ -43,7 +43,7 @@ public class RootIndexReader extends SAXReader {
     private boolean value, reference, occurrence;
     private String tempWord, fileName;
     private ReferenceList tempReference;
-    private HashMap < SimpleWord, String > queryWords;
+    private HashMap < String, String > queryWords;
     	
     /**
      * 
@@ -59,24 +59,16 @@ public class RootIndexReader extends SAXReader {
         tempWord = "";
         rootIndexMap = new RootIndexMap ();
         fileName = file;
-        queryWords = new HashMap < SimpleWord, String > ();
+        queryWords = new HashMap < String, String > ();
     }
     
     
     private void readQuery (Query query) {
         for (SimpleWord word: query) {
-            queryWords.put(word, null);
+            queryWords.put(word.getValue(), null);
         }
     }
     
-    /**
-     * 
-     * @return
-     */
-    public RootIndexMap read() {
-        getText(fileName);
-        return getRootIndexMap();
-    }
 
     public RootIndexMap search (Query query) {
         readQuery(query);
@@ -108,7 +100,7 @@ public class RootIndexReader extends SAXReader {
                     tempWord = buffer.toString();
                     buffer = new StringBuilder (kStringBuilder);
                 }
-                else if (reference && (queryWords.containsKey(tempWord) || queryWords.isEmpty())) {
+                else if (reference && queryWords.containsKey(tempWord)) {
                     buffer.append(c, start, length);
                     tempReference.add(new Integer((buffer.toString())));
                     buffer = new StringBuilder (kStringBuilder);
@@ -125,24 +117,25 @@ public class RootIndexReader extends SAXReader {
                              final String tag, final Attributes attributes) {
         if (tag.equals("value")) {
             value = true;
-            reference = false;
-            occurrence = false;
         }
         else if (tag.equals("ref")) {
-            value = false;
             reference = true;
-            occurrence = false;
         }
         else if (tag.equals("ocu")) {
-            value = false;
-            reference = false;
             occurrence = true;
         }
     }
     
     public void endElement(final String uri, final String localName, final String tag) { 
+        if(value) {
+            value = false;
+        }
+        if (reference) {
+            reference = false;
+        }
         if (occurrence) {
-            if (queryWords.containsKey(tempWord) || queryWords.isEmpty()) {
+            occurrence = false;
+            if (queryWords.containsKey(tempWord)) {
                 rootIndexMap.put(tempWord, tempReference);
                 if(!queryWords.isEmpty()) {
                     queryWords.remove(tempWord);
@@ -152,9 +145,9 @@ public class RootIndexReader extends SAXReader {
                     }
                 }
             }
+            tempWord = "";
+            tempReference = new ReferenceList ();
         }
-        tempWord = "";
-        tempReference = new ReferenceList ();
     }
 }
 
