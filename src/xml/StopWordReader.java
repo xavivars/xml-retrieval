@@ -19,6 +19,16 @@ public class StopWordReader extends DOMReader {
 	 * 
 	 */
 	private StopWordMap stopWordMap;
+	
+	/**
+	 * 
+	 */
+	private int bottomLimit;
+	
+	/**
+	 * 
+	 */
+	private int topLimit;
 
 	/**
 	 * 
@@ -26,6 +36,8 @@ public class StopWordReader extends DOMReader {
 	 */
 	public StopWordReader(String fileName) {
 		super(fileName);
+		this.setBottomLimit(0);
+		this.setTopLimit(Integer.MAX_VALUE);
 	}
 
 	/**
@@ -56,11 +68,13 @@ public class StopWordReader extends DOMReader {
 				final Node child = children.item(i);
 				if (child instanceof Element) {
 					final String nodeName = child.getNodeName();
-
 					if (nodeName.equals("word")) {
 						final Element childElement = (Element) child;
 						final StopWord stopWord = readStopWord(childElement);
-						stopWordMap.put(stopWord.getValue(), stopWord);
+						int f = stopWord.getFrequency();
+						if (f >= getBottomLimit() && f <= getTopLimit()) {
+							stopWordMap.put(stopWord.getValue(), stopWord);
+						}
 					}
 				}
 				if (child instanceof Text) {
@@ -112,6 +126,34 @@ public class StopWordReader extends DOMReader {
 	@Override
 	public final void setStopWordMap(StopWordMap stopWordMap) {
 		this.stopWordMap = stopWordMap;
+	}
+
+	/**
+	 * @return the bottomLimit
+	 */
+	public final int getBottomLimit() {
+		return bottomLimit;
+	}
+
+	/**
+	 * @param bottomLimit the bottomLimit to set
+	 */
+	public final void setBottomLimit(int bottomLimit) {
+		this.bottomLimit = bottomLimit;
+	}
+
+	/**
+	 * @return the topLimit
+	 */
+	public final int getTopLimit() {
+		return topLimit;
+	}
+
+	/**
+	 * @param topLimit the topLimit to set
+	 */
+	public final void setTopLimit(int topLimit) {
+		this.topLimit = topLimit;
 	}
 
 }
