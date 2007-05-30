@@ -50,6 +50,7 @@ public class Search {
             QueryManager qm = new QueryManager (stopFile, rootFile);
             wrl=qm.processQuery(queryFile);
             Relevance relevance=qm.transform(wrl);
+            relevance.setRelevance();
             Collections.sort(relevance);
 
         }
