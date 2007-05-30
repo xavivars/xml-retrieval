@@ -33,11 +33,14 @@ import java.util.ArrayList;
  */
 public class Relevance extends ArrayList<DocumentRelevance>{
 
+	/**
+	 *
+	 */
 	public final boolean contains(final String str) {
 
 		boolean ret = false;
 
-		foreach(final DocumentRelevance dr : this)
+		for(final DocumentRelevance dr : this)
 		{
 			if(dr.getName()==str) {
 				ret = true;
@@ -48,10 +51,13 @@ public class Relevance extends ArrayList<DocumentRelevance>{
 		return ret;
 	}
 
+	/**
+	 *
+	 */
 	public final DocumentRelevance get(Strint name) {
 		DocumentRelevance ret = null;
 
-		foreach(final DocumentRelevance dr : this)
+		for(final DocumentRelevance dr : this)
 		{
 			if(dr.getName()==str) {
 				ret = dr;
@@ -62,6 +68,9 @@ public class Relevance extends ArrayList<DocumentRelevance>{
 		return ret;
 	}
 
+	/**
+	 *
+	 */
 	public final void print() {
 		for (final DocumentRelevance dr : this) {
 			System.out.println("Document: " + dr.getName());
