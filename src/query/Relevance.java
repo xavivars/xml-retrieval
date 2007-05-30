@@ -74,8 +74,8 @@ public class Relevance extends ArrayList<DocumentRelevance>{
 	public final void print() {
 		for (final DocumentRelevance dr : this) {
 			System.out.println("Document: " + dr.getName());
-			final ArrayList<WordPath> wps = dr.getWordPaths();
-			for (final WordPath wp : wps) {
+			final ArrayList<WordPaths> wps = dr.getWordPaths();
+			for (final WordPaths wp : wps) {
 				System.out.println("\tWord: "+ wp.getName());
 				final ArrayList<String> paths = wp.getPaths();
 				for (String path : paths) {
@@ -85,5 +85,16 @@ public class Relevance extends ArrayList<DocumentRelevance>{
 			System.out.println("");
 		}
 	}
+
+	/**
+	 *
+	 */
+	public final void setRelevance() {
+
+		for (final DocumentRelevance dr : this) {
+			documentRelevance.calcWeight();
+		}
+	}
+
 
 }
