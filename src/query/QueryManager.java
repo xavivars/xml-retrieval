@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2007
- *  
+ *
  * Authors:
  *  Enrique Benimeli Bofarull <ebenimeli@gmail.com>
  *  David Ortega Parilla <dortegaparrilla@gmail.com>
  *  Xavier Ivars i Ribes <xavi@infobenissa.com>
- *  
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -40,52 +40,100 @@ import xml.RootIndexReader;
 import xml.StopWordReader;
 
 /**
- * 
+ *
  * @author ebenimeli
  *
  */
 public class QueryManager {
 
 	/**
-	 * 
+	 *
 	 */
 	private StopWordMap stopWordMap;
 	private String rootIndexFile;
 	/**
-	 * 
+	 *
 	 *
 	 */
 	public QueryManager() {
-		
+
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param stopWordMap
 	 */
 	public QueryManager(final String stopFile, final String rootFile) {
                 stopWordMap = (new StopWordReader(stopFile).readDocument());
                 rootIndexFile = rootFile;
 	}
-	
+
 	/**
-	 * 
+	 *
+	 *
+	 */
+	public final Relevance transform(final WordResultList wrl)
+	{
+		Relevance relevance = new Relevance();
+
+		for (final WordResult wordResult : wrl) {
+			//System.out.println("Word: " + wordResult.getName());
+
+			final ArrayList<Document> documents = wordResult.getDocuments();
+
+			for (final Document document : documents) {
+
+				boolean added = false;
+				String dName = document.getName();
+				DocumentRelevance documentRelevance = null;
+
+
+				if(!relevance.contains(dName)) {
+					added = true;
+
+					documentRelevance = new DocumentRelevance();
+
+					documentRelevance.setName(dName);
+				}
+				else {
+					documentRelevance = relevance.get(dName);
+				}
+
+				WordPaths wp = new WordPaths();
+
+				wp.setName(wordResult.getName());
+
+				wp.setPaths(document.getPaths());
+
+				documentRelevance.add(wp);
+
+				if(added)
+					relevance.add(documentRelevance);
+
+
+
+			}
+	}
+
+
+	/**
+	 *
 	 * @param query
 	 * @return
 	 */
 	public final WordResultList processQuery(final Query query) {
 		WordResultList wordResultList = null;
-		
+
 		wordResultList = new WordResultList();
-		
+
 		RootIndexMap rootIndexMap = searchRootIndexMap(query);
                 searchInIndexes(rootIndexMap);
-                
-		return wordResultList;	
+
+		return wordResultList;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param queryFileName
 	 * @return
 	 */
@@ -94,7 +142,7 @@ public class QueryManager {
 		final Query query = queryReader.readDocument();
 
 		WordResultList wordResultList = processQuery(query);
-		
+
 		return wordResultList;
 
 	}
@@ -112,34 +160,34 @@ public class QueryManager {
 	public final void setStopWordMap(StopWordMap stopWordMap) {
 		this.stopWordMap = stopWordMap;
 	}
-	
+
         private final RootIndexMap searchRootIndexMap(final Query query) {
             final RootIndexReader rootIndexreader = new RootIndexReader (rootIndexFile);
             RootIndexMap rootIndexMap = rootIndexreader.search(query);
-            
+
             return rootIndexMap;
-        }             
-	        
+        }
+
         /**
-	 * 
+	 *
 	 * @return
 	 */
 	private final WordResultList searchIndexMap (String indexFile, WordList wl) {
 		final IndexReader indexReader = new IndexReader(indexFile);
 		WordResultList indexMap = null;
 		indexMap = indexReader.search(wl);
-		return indexMap;	
+		return indexMap;
 	}
 
-	
+
 	private final WordResultList searchInIndexes (RootIndexMap rootIndexMap) {
-                
+
                 WordResultList result = new WordResultList ();
                 HashMap < Integer, WordList > wordsInIndex = new HashMap < Integer, WordList > ();
                 WordList wl;
                //Buscamos todas las palabras en los índices en los que aparecen
                 Iterator it = rootIndexMap.entrySet().iterator();
-                             
+
                 while (it.hasNext()) {
                     Map.Entry e = (Map.Entry) it.next();
                     String word = (String) e.getKey();
@@ -155,9 +203,9 @@ public class QueryManager {
                         wordsInIndex.put(ref,wl);
                     }
                 }
-                
+
                 //Buscamos en cada índice las palabras que se encuentran en cada uno
-                
+
                 it = wordsInIndex.entrySet().iterator();
                 while (it.hasNext()) {
                     Map.Entry e = (Map.Entry) it.next();
@@ -165,7 +213,7 @@ public class QueryManager {
                     wl = (WordList) e.getValue();
                     result.addAll(searchIndexMap("../index_" + ref + ".xml", wl));
                 }
-              result.print();                
+              result.print();
               return result;
         }
 }
