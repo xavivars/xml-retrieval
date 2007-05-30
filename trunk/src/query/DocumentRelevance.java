@@ -55,8 +55,10 @@ public class DocumentRelevance implements Comparable<DocumentRelevance>{
 
 		this.weight = 0;
 
-		for(WordPaths wp : wordPaths) {
-			this.weight += wp.calcWeight();
+		if(this.wordPaths.size()>0) {
+			for(WordPaths wp : wordPaths) {
+				this.weight += wp.calcWeight();
+			}
 		}
 
 	}
@@ -107,11 +109,25 @@ public class DocumentRelevance implements Comparable<DocumentRelevance>{
 	 *
 	 */
 	public final int compareTo(DocumentRelevance dr) {
-		return (int) (this.weight - dr.weight);
+
+		int ret = 0;
+
+		if(this.weight > dr.weight)
+			ret = -1;
+		else
+			if(this.weight < dr.weight)
+				ret = 1;
+
+		return ret;
 	}
 
 	public final void addWordPaths(WordPaths wp) {
-		wordPaths.add(wp);
+
+		if(wordPaths == null)
+			wordPaths = new ArrayList<WordPaths> () ;
+
+			wordPaths.add(wp);
+
 	}
 
 
