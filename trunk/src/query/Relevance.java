@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2007
- *  
+ *
  * Authors:
  *  Enrique Benimeli Bofarull <ebenimeli@gmail.com>
  *  David Ortega Parilla <dortegaparrilla@gmail.com>
  *  Xavier Ivars i Ribes <xavi@infobenissa.com>
- *  
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -27,10 +27,39 @@ package query;
 import java.util.ArrayList;
 
 /**
- * 
+ *
  * @author ebenimeli
  *
  */
 public class Relevance extends ArrayList<DocumentRelevance>{
+
+	public final boolean contains(final String str) {
+
+		boolean ret = false;
+
+		foreach(final DocumentRelevance dr : this)
+		{
+			if(dr.getName()==str) {
+				ret = true;
+				break;
+			}
+		}
+
+		return ret;
+	}
+
+	public final DocumentRelevance get(Strint name) {
+		DocumentRelevance ret = null;
+
+		foreach(final DocumentRelevance dr : this)
+		{
+			if(dr.getName()==str) {
+				ret = dr;
+				break;
+			}
+		}
+
+		return ret;
+	}
 
 }
