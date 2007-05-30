@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2007
- *  
+ *
  * Authors:
  *  Enrique Benimeli Bofarull <ebenimeli@gmail.com>
  *  David Ortega Parilla <dortegaparrilla@gmail.com>
  *  Xavier Ivars i Ribes <xavi@infobenissa.com>
- *  
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -27,24 +27,24 @@ package query;
 import java.util.ArrayList;
 
 /**
- * 
+ *
  * @author ebenimeli
  *
  */
 public class WordPaths {
 
 	/**
-	 * 
+	 *
 	 */
 	private String name;
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private double weight;
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private ArrayList<String> paths;
 
@@ -89,7 +89,16 @@ public class WordPaths {
 	public final void setWeight(double weight) {
 		this.weight = weight;
 	}
-	
-	
-	
+
+	public final double calcWeight() {
+
+		int times = paths.size();
+
+		weight = 1 + ((times -1)/times);
+
+		return weight;
+	}
+
+
+
 }
