@@ -40,7 +40,7 @@ public class Search {
     }
 
     public static void main (String [] args) {
-        
+
 
         String stopFile, rootFile, queryFile;
 
@@ -56,7 +56,9 @@ public class Search {
             WordResultList wrl=qm.processQuery(queryFile);
             Relevance relevance=qm.transform(wrl);
             relevance.setRelevance();
+            relevance.print();
             Collections.sort(relevance);
+            relevance.print();
 
 
         }
