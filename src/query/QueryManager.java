@@ -26,6 +26,7 @@
 package query;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import utils.ReferenceList;
@@ -109,7 +110,6 @@ public class QueryManager {
 
 				if(added)
 					relevance.add(documentRelevance);
-
 			}
 		}
 
