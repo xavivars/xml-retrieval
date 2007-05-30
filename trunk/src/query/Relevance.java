@@ -62,4 +62,19 @@ public class Relevance extends ArrayList<DocumentRelevance>{
 		return ret;
 	}
 
+	public final void print() {
+		for (final DocumentRelevance dr : this) {
+			System.out.println("Document: " + dr.getName());
+			final ArrayList<WordPath> wps = dr.getWordPaths();
+			for (final WordPath wp : wps) {
+				System.out.println("\tWord: "+ wp.getName());
+				final ArrayList<String> paths = wp.getPaths();
+				for (String path : paths) {
+					System.out.println("\t\tPath: " + path);
+				}
+			}
+			System.out.println("");
+		}
+	}
+
 }
