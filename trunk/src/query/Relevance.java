@@ -54,7 +54,7 @@ public class Relevance extends ArrayList<DocumentRelevance>{
 	/**
 	 *
 	 */
-	public final DocumentRelevance get(Strint name) {
+	public final DocumentRelevance get(String name) {
 		DocumentRelevance ret = null;
 
 		for(final DocumentRelevance dr : this)
