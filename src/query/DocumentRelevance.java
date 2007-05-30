@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2007
- *  
+ *
  * Authors:
  *  Enrique Benimeli Bofarull <ebenimeli@gmail.com>
  *  David Ortega Parilla <dortegaparrilla@gmail.com>
  *  Xavier Ivars i Ribes <xavi@infobenissa.com>
- *  
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -27,19 +27,24 @@ package query;
 import java.util.ArrayList;
 
 /**
- * 
+ *
  * @author ebenimeli
  *
  */
 public class DocumentRelevance {
 
 	/**
-	 * 
+	 *
 	 */
 	private double weight;
-	
+
 	/**
-	 * 
+	 *
+	 */
+	private String name;
+
+	/**
+	 *
 	 */
 	private ArrayList<WordPaths> wordPaths;
 
@@ -58,6 +63,20 @@ public class DocumentRelevance {
 	}
 
 	/**
+	 * @return the name
+	 */
+	public final double getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public final void setName(double name) {
+		this.name = name;
+	}
+
+	/**
 	 * @return the wordPaths
 	 */
 	public final ArrayList<WordPaths> getWordPaths() {
@@ -72,6 +91,6 @@ public class DocumentRelevance {
 	}
 
 
-	
-	
+
+
 }
