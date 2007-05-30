@@ -110,8 +110,6 @@ public class QueryManager {
 				if(added)
 					relevance.add(documentRelevance);
 
-
-
 			}
 	}
 
