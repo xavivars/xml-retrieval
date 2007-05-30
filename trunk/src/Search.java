@@ -22,7 +22,8 @@
  * 02111-1307, USA.
  */
 
-import query.QueryManager;
+import query.*;
+import java.util.Collections;
 
 /**
  *
@@ -48,7 +49,7 @@ public class Search {
             rootFile = args [1];
             queryFile = args [2];
             QueryManager qm = new QueryManager (stopFile, rootFile);
-            wrl=qm.processQuery(queryFile);
+            WordResultList wrl=qm.processQuery(queryFile);
             Relevance relevance=qm.transform(wrl);
             relevance.setRelevance();
             Collections.sort(relevance);

@@ -52,7 +52,7 @@ public class DocumentRelevance {
 	 *
 	 */
 	public final void calcWeight() {
-		this.weight = this.wordPaths.length;
+		this.weight = this.wordPaths.size();
 	}
 
 	/**
@@ -72,14 +72,14 @@ public class DocumentRelevance {
 	/**
 	 * @return the name
 	 */
-	public final double getName() {
+	public final String getName() {
 		return name;
 	}
 
 	/**
 	 * @param name the name to set
 	 */
-	public final void setName(double name) {
+	public final void setName(String name) {
 		this.name = name;
 	}
 
@@ -101,7 +101,7 @@ public class DocumentRelevance {
 	 *
 	 */
 	public final int compareTo(DocumentRelevance dr) {
-		return this.weight - dr.weight;
+		return (int) this.weight - dr.weight;
 	}
 
 
