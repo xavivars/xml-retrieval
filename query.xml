@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE inex_topic SYSTEM "topic.dtd">
+<inex_topic topic_id="100" query_type="CO" ct_no="35">
+<title>fuzzy</title>
+<description> Retrieve information about association rule mining in
+medical databases </description>
+<narrative> We have a medical data mining project and I want to find
+out how other people have applied association rule mining in this
+area. A relevant snippet will discuss the application of association
+rule mining to a medical database. Discussion of association rule
+mining outside medical databases is not relevant. Discussion of
+medical databases without association rule mining is also not
+relevant. </narrative>
+<keywords>association, mining, rule, medical</keywords>
+</inex_topic>
+
