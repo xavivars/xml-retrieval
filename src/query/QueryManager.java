@@ -106,7 +106,7 @@ public class QueryManager {
 
 				wp.setPaths(document.getPaths());
 
-				documentRelevance.add(wp);
+				documentRelevance.addWordPaths(wp);
 
 				if(added)
 					relevance.add(documentRelevance);

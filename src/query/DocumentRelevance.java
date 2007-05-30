@@ -101,7 +101,11 @@ public class DocumentRelevance {
 	 *
 	 */
 	public final int compareTo(DocumentRelevance dr) {
-		return (int) this.weight - dr.weight;
+		return (int) (this.weight - dr.weight);
+	}
+
+	public final void addWordPaths(WordPaths wp) {
+		wordPaths.add(wp);
 	}
 
 
