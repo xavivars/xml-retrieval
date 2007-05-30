@@ -56,9 +56,17 @@ public class Search {
             WordResultList wrl=qm.processQuery(queryFile);
             Relevance relevance=qm.transform(wrl);
             relevance.setRelevance();
+            System.out.println("Unsorted Relevances");
+            System.out.println("----------");
             relevance.print();
+            System.out.println("----------");
+            System.out.println("End unsorted relevances");
+            System.out.println("Sorted Relevances");
+            System.out.println("----------");
             Collections.sort(relevance);
             relevance.print();
+            System.out.println("----------");
+            System.out.println("End relevances");
 
 
         }
