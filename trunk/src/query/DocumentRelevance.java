@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * @author ebenimeli
  *
  */
-public class DocumentRelevance  implements Comparable{
+public class DocumentRelevance implements Comparable{
 
 	/**
 	 *
