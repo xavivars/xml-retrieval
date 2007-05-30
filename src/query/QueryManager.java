@@ -107,10 +107,15 @@ public class QueryManager {
 
 				documentRelevance.add(wp);
 
+				documentRelevance.calcWeight();
+
 				if(added)
 					relevance.add(documentRelevance);
 
 			}
+		}
+
+		return relevance;
 	}
 
 
