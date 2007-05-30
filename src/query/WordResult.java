@@ -25,6 +25,7 @@
 package query;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * 
@@ -72,12 +73,43 @@ public class WordResult {
 	}
 	
 	/**
-	 * 
+	 * ¡¡¡¡¡ATENCIÓN RENDIMIENTO!!!!
 	 * @param document
 	 */
 	public final void addDocument(final Document document) {
-		documents.add(document);
+            boolean find = false;
+            Iterator it = documents.iterator();
+            while (it.hasNext() && !find) {
+        //    for (int i = 0 ; i < documents.size() && !find ; i++) {
+                Document current = (Document) it.next();
+  //              Document current = documents.get(i);
+                if (document.getName().compareTo(current.getName()) == 0) {
+//                    documents.remove(i);
+                    System.out.println(current.getName());
+                    find = true;
+                    for(String path: document.getPaths()) {
+                        current.addPath(path);
+                    }
+                    
+                }
+            }
+            if (!find) {
+                documents.add(document);
+            }
 	}
+        
+        public final boolean containsDocument (final Document document) {
+            boolean find = false;
+            Iterator it = documents.iterator();
+            while (it.hasNext() && !find) {
+                Document current = (Document) it.next();
+                if (document.getName().compareTo(current.getName()) == 0) {
+                    find = true;
+                }
+            }
+            
+            return find;
+        }
 	
 	
 }

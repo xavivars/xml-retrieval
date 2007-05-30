@@ -29,6 +29,7 @@ import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * 
@@ -57,7 +58,7 @@ public class WordResultList extends ArrayList<WordResult>{
 					System.out.println("\t\tPath: " + path);
 				}
 			}
-			System.out.println("");
+                        System.out.println("");
 		}
 	}
 	
@@ -108,5 +109,29 @@ public class WordResultList extends ArrayList<WordResult>{
 		}
 		
 	}
+        
+        public void addWordResultList (WordResultList wrl) {
+            boolean find;            
+            WordResult oldwr = new WordResult ();
+            
+            for (WordResult newwr: wrl) {
+                find = false;
+                Iterator it = iterator();
+                while (it.hasNext() && !find) {
+                    oldwr = (WordResult) it.next();
+                    if(oldwr.getName().compareTo(newwr.getName()) == 0) {
+                        find = true;
+                    }
+                }
+                if (!find) {
+                    add(newwr);
+                }
+                else {
+                    for(Document doc: newwr.getDocuments()) {
+                        oldwr.addDocument(doc);
+                    }
+                }
+            }
+        }
 
 }

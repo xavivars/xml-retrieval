@@ -25,6 +25,7 @@
 package query;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import utils.SimpleWord;
 
@@ -50,4 +51,19 @@ public class Query extends ArrayList<SimpleWord> {
 		}
 	}
 
+        
+        public final boolean containsQuery (String word) {
+            boolean find = false;
+            
+            Iterator it = iterator();
+            
+            while (it.hasNext() && !find) {
+                String w = ((SimpleWord) it.next()).getValue();
+                if (w.compareTo(word) == 0) {
+                    find = true;
+                }
+            }
+            
+            return find;
+        }
 }
