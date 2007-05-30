@@ -10,12 +10,15 @@
 	<property name="lib.dir" location="lib" />
 	<property name="zip.dir" location="zip" />
 	<property name="appName" value="xml-retrieval" />
+	<property name="log.dir" value="log" />
+	<property name="zip.file" value="xml-retrieval" />
+	
 	
 	
 	<!-- PROPERTIES -->
 	<!-- Memory -->
 	<property name="minMem" value="32" />
-	<property name="maxMem" value="600" />
+	<property name="maxMem" value="400" />
 	<!-- Time Stamp -->
 	<tstamp>
 		<format property="pack.timestamp" pattern="yyMMdd-HHmm" />
@@ -51,14 +54,29 @@
 	<!-- Test action -->
 	<target name="test" depends="compile" >
 		<echo message="Running..." />
-		<java classname="${mainClass}" classpath="${lib.dir}/${appName}.jar" fork="true" output="${outputFile}">
+		<java classname="Test" classpath="${lib.dir}/${appName}.jar" fork="true" output="${outputFile}">
 			<jvmarg value="-Xms${minMem}m" />
 			<jvmarg value="-Xmx${maxMem}m" />
-			<arg value="xml/an" />
+			<arg value="xml-orig" />
 			<arg value="stop-words-ok.xml" />
 		</java>
 		<antcall target="clean" />
-		<echo message="Results in '${log.dir}/${outputFile}'" />
+		<echo message="Results in '${outputFile}'" />
+		<echo message="Done!" />
+	</target>
+
+	<!-- Search action -->
+	<target name="search" depends="compile" >
+		<echo message="Running..." />
+		<java classname="Search" classpath="${lib.dir}/${appName}.jar" fork="true" output="${outputFile}">
+			<jvmarg value="-Xms${minMem}m" />
+			<jvmarg value="-Xmx${maxMem}m" />
+			<arg value="stop-words-final.xml" />
+			<arg value="root_index.xml" />			
+			<arg value="query001.xml" />
+		</java>
+		<antcall target="clean" />
+		<echo message="Log in '${outputFile}'" />
 		<echo message="Done!" />
 	</target>
 
@@ -75,15 +93,15 @@
 		
 		<tar tarfile="${zip.dir}/${zip.file}.tar">
 			<tarfileset dir="../">
-				<include name="cross-dics/build.xml"/>
-				<include name="cross-dics/src/*.java"/>
-				<include name="cross-dics/src/utils/*.java"/>
-				<include name="cross-dics/lib/xml-retrieval.jar"/>
-				<include name="cross-dics/log"/>
-				<include name="cross-dics/META-INF/manifest.mf"/>
-				<include name="cross-dics/AUTHORS"/>
-				<include name="cross-dics/COPYING"/>
-				<include name="cross-dics/README"/>								
+				<include name="xml-retrieval/build.xml"/>
+				<include name="xml-retrieval/src/*.java"/>
+				<include name="xml-retrieval/src/utils/*.java"/>
+				<include name="xml-retrieval/lib/xml-retrieval.jar"/>
+				<include name="xml-retrieval/log"/>
+				<include name="xml-retrieval/META-INF/manifest.mf"/>
+				<include name="xml-retrieval/AUTHORS"/>
+				<include name="xml-retrieval/COPYING"/>
+				<include name="xml-retrieval/README"/>								
 			</tarfileset>
 		</tar>
 		<gzip zipfile="${zip.dir}/${zip.file}.tar.gz" src="${zip.dir}/${zip.file}.tar"/>
