@@ -42,7 +42,7 @@ public class Relevance extends ArrayList<DocumentRelevance>{
 
 		for(final DocumentRelevance dr : this)
 		{
-			if(dr.getName()==str) {
+			if(dr.getName().equals(str)) {
 				ret = true;
 				break;
 			}
@@ -59,7 +59,7 @@ public class Relevance extends ArrayList<DocumentRelevance>{
 
 		for(final DocumentRelevance dr : this)
 		{
-			if(dr.getName()==name) {
+			if(dr.getName().equals(name)) {
 				ret = dr;
 				break;
 			}

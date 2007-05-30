@@ -94,7 +94,7 @@ public class WordPaths {
 
 		int times = paths.size();
 
-		weight = 1 + ((times -1)/times);
+		weight = 1.0 + ((times -1.0)/times);
 
 		return weight;
 	}

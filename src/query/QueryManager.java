@@ -88,6 +88,8 @@ public class QueryManager {
 				String dName = document.getName();
 				DocumentRelevance documentRelevance = null;
 
+				if(dName.equals("../../inex-2004_files/inex-1.4/xml/an/1996/a3077.xml"))
+					added = false;
 
 				if(!relevance.contains(dName)) {
 					added = true;
@@ -125,10 +127,9 @@ public class QueryManager {
 	public final WordResultList processQuery(final Query query) {
 		WordResultList wordResultList = null;
 
-		wordResultList = new WordResultList();
 
 		RootIndexMap rootIndexMap = searchRootIndexMap(query);
-                searchInIndexes(rootIndexMap);
+		wordResultList = searchInIndexes(rootIndexMap);
 
 		return wordResultList;
 	}
