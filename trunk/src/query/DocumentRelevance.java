@@ -49,6 +49,13 @@ public class DocumentRelevance {
 	private ArrayList<WordPaths> wordPaths;
 
 	/**
+	 *
+	 */
+	public final void calcWeight() {
+		this.weight = this.wordPaths.length;
+	}
+
+	/**
 	 * @return the weight
 	 */
 	public final double getWeight() {
@@ -90,7 +97,12 @@ public class DocumentRelevance {
 		this.wordPaths = wordPaths;
 	}
 
-
+	/**
+	 *
+	 */
+	public final int compareTo(DocumentRelevance dr) {
+		return this.weight - dr.weight;
+	}
 
 
 }
