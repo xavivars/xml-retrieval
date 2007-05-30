@@ -120,10 +120,10 @@ public class IndexReader extends SAXReader {
                 }
                 
                 wr.setDocuments(documents); // Añado el array de documentos
+                result.add(wr); //Añado la palabra al resultado
+                wr = new WordResult();
             }
-            
-            result.add(wr); //Añado la palabra al resultado
-            
+            //result.add(wr);
             return result;
         }
         

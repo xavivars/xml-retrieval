@@ -102,7 +102,7 @@ public class QueryReader extends DOMReader {
 					final String[] words = text.split("\\s+");
 					for (String word : words) {
 						word = word.toLowerCase();
-						if (!word.isEmpty() && !stopWords.containsKey(word)) {
+						if (!word.isEmpty() && !stopWords.containsKey(word) && !query.containsQuery(word)) {
 							query.add(new SimpleWord(word));
 						}
 						// System.out.println(word);
