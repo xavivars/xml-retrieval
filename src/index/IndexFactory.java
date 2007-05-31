@@ -45,6 +45,11 @@ import xml.DocumentReader;
 public class IndexFactory {
 
 	/**
+	 * 
+	 */
+	private int maxSizeIndex;
+	
+	/**
 	 * Directory where 'root_index.xml' and 'index_i.xml' will be stored.
 	 */
 	private String outputPath;
@@ -54,8 +59,8 @@ public class IndexFactory {
 	 * 
 	 */
 	public IndexFactory() {
-		 //setOutputPath("/home/ebenimeli/temp/");
 		 setOutputPath("");
+		 setMaxSizeIndex(10);
 	}
 	
 	/**
@@ -64,6 +69,7 @@ public class IndexFactory {
 	 */
 	public IndexFactory(final String outputPath) {
 		setOutputPath(outputPath);
+		 setMaxSizeIndex(10);
 	}
 
 	/**
@@ -101,7 +107,7 @@ public class IndexFactory {
 		final WordsFrequencyMap wordsFrequencyMap = new WordsFrequencyMap();
 		int fileNumber = 0;
 		int length = 0;
-		int maxSizeIndex = 10; // 15 MB de tamaño máximo
+		int maxSizeIndex = getMaxSizeIndex();
 
 		final HashMap<String, String> notWellFormed = new HashMap<String, String>();
 		// los siguientes archivos XML parecen no validar con la DTD
@@ -215,6 +221,20 @@ public class IndexFactory {
 	 */
 	public void setOutputPath(String outputPath) {
 		this.outputPath = outputPath;
+	}
+
+	/**
+	 * @return the maxSizeIndex
+	 */
+	public final int getMaxSizeIndex() {
+		return maxSizeIndex;
+	}
+
+	/**
+	 * @param maxSizeIndex the maxSizeIndex to set
+	 */
+	public final void setMaxSizeIndex(int maxSizeIndex) {
+		this.maxSizeIndex = maxSizeIndex;
 	}
 
 }
