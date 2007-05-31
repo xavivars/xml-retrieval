@@ -49,13 +49,17 @@ public class Index {
 		String sourceXMLDir = args[0];
 		String stopWordsFile = args[1];
 		String indexesDir = args[2];
-
+		String sMaxSizeIndex = args[3];
+		Integer iMaxSizeIndex = new Integer(sMaxSizeIndex);
+		
 		swr2 = new StopWordReader(stopWordsFile);
 		swm2 = swr2.readDocument();
 		// Index
 		factory = new IndexFactory();
 		factory.setOutputPath(indexesDir);
+		factory.setMaxSizeIndex(iMaxSizeIndex);
 		factory.index(sourceXMLDir, swm2);
+		
 		factory = null;
 		swr2 = null;
 		
