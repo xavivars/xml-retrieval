@@ -108,7 +108,7 @@ public class DocumentRelevance implements Comparable<DocumentRelevance>{
 	/**
 	 *
 	 */
-	public final int compareTo(DocumentRelevance dr) {
+	public final int compareTo(final DocumentRelevance dr) {
 
 		int ret = 0;
 
