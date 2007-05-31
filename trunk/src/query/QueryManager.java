@@ -25,16 +25,16 @@
 
 package query;
 
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
 import utils.ReferenceList;
 import utils.RootIndexMap;
 import utils.StopWordMap;
 import utils.Word;
 import utils.WordList;
-import utils.WordMap;
 import xml.IndexReader;
 import xml.QueryReader;
 import xml.RootIndexReader;
@@ -48,10 +48,24 @@ import xml.StopWordReader;
 public class QueryManager {
 
 	/**
+	 * 
+	 */
+	private String indexSourceDir;
+	
+	/**
 	 *
 	 */
 	private StopWordMap stopWordMap;
+	
+	/**
+	 * 
+	 */
 	private String rootIndexFile;
+	
+	/**
+	 * 
+	 */
+	private String resultXMLFile;
 	/**
 	 *
 	 *
@@ -213,9 +227,38 @@ public class QueryManager {
                     Map.Entry e = (Map.Entry) it.next();
                     Integer ref = (Integer) e.getKey();
                     wl = (WordList) e.getValue();
-                    result.addWordResultList(searchIndexMap("index_" + ref + ".xml", wl));
+                    result.addWordResultList(searchIndexMap(getIndexSourceDir() + "index_" + ref + ".xml", wl));
                 }
-              result.print();
+              //result.print();
+              result.printXML(getResultXMLFile());
               return result;
         }
+
+	/**
+	 * @return the indexSourceDir
+	 */
+	public final String getIndexSourceDir() {
+		return indexSourceDir;
+	}
+
+	/**
+	 * @param indexSourceDir the indexSourceDir to set
+	 */
+	public final void setIndexSourceDir(String indexSourceDir) {
+		this.indexSourceDir = indexSourceDir;
+	}
+
+	/**
+	 * @return the resultXMLFile
+	 */
+	public final String getResultXMLFile() {
+		return resultXMLFile;
+	}
+
+	/**
+	 * @param resultXMLFile the resultXMLFile to set
+	 */
+	public final void setResultXMLFile(String resultXMLFile) {
+		this.resultXMLFile = resultXMLFile;
+	}
 }

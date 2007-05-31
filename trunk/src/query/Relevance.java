@@ -31,7 +31,12 @@ import java.util.ArrayList;
  * @author ebenimeli
  *
  */
-public class Relevance extends ArrayList<DocumentRelevance>{
+public class Relevance extends ArrayList<DocumentRelevance> {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 *
@@ -78,7 +83,7 @@ public class Relevance extends ArrayList<DocumentRelevance>{
 			for (final WordPaths wp : wps) {
 				System.out.println("\tWord: "+ wp.getName());
 				final ArrayList<String> paths = wp.getPaths();
-				for (String path : paths) {
+				for (final String path : paths) {
 					System.out.println("\t\tPath: " + path);
 				}
 			}

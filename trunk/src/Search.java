@@ -22,7 +22,6 @@
  * 02111-1307, USA.
  */
 
-
 import java.util.Collections;
 import query.QueryManager;
 import query.Relevance;
@@ -34,25 +33,40 @@ import query.WordResultList;
  */
 public class Search {
 
-    /** Creates a new instance of Search */
-    public Search() {
+	/** Creates a new instance of Search */
+	public Search() {
 
-    }
+	}
 
-    public static void main (String [] args) {
+	/**
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
 
+		System.out.println("Searching...");
+		String stopFile, rootFile, queryFile, sourceIndexDir, resultXMLFile;
 
-        String stopFile, rootFile, queryFile;
+		stopFile = "";
+		rootFile = "";
+		queryFile = "";
 
-        stopFile = "";
-        rootFile = "";
-        queryFile = "";
-
-        if (args.length == 3) {
-            stopFile = args [0];
-            rootFile = args [1];
-            queryFile = args [2];
+        if (args.length == 5) {
+			stopFile = args[0];
+			System.out.println("Stop-words file: " + stopFile);
+			rootFile = args[1];
+			System.out.println("Root index file: " + rootFile);
+			queryFile = args[2];
+			System.out.println("Query file: " + queryFile);
+			sourceIndexDir = args[3];
+			System.out.println("Source index directory: " + sourceIndexDir);
+			resultXMLFile = args[4];
+			System.out.println("Result XML file: " + resultXMLFile);
+			
             QueryManager qm = new QueryManager (stopFile, rootFile);
+            qm.setIndexSourceDir(sourceIndexDir);
+            qm.setResultXMLFile(resultXMLFile);
+            
             WordResultList wrl=qm.processQuery(queryFile);
             Relevance relevance=qm.transform(wrl);
             relevance.setRelevance();
