@@ -94,10 +94,10 @@
 			<jvmarg value="-Xms${minMem}m" />
 			<jvmarg value="-Xmx${maxMem}m" />
 			<arg value="${stop-words-file}" />
-			<arg value="${indexes-dir}/${root-index-file}" />
+			<arg value="${indexes-dir}${root-index-file}" />
 			<arg value="${query-file}" />
-			<arg value="${indexes-dir}/" />
-			<arg value="${result-file}/" />						
+			<arg value="${indexes-dir}" />
+			<arg value="${result-file}" />						
 		</java>
 		<antcall target="clean" />
 		<echo message="Log in '${outputFile}'" />
