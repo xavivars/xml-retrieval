@@ -6,8 +6,9 @@
 	<!-- Files -->
 	<property name="stop-words-file" value="stop-words-final.xml" />
 	<property name="indexes-dir" value="/home/ebenimeli/temp/indices/" />
-	<property name="root-index-file" value="root_index.xml" />	
-	<property name="query-file" value="query.xml" />
+	<property name="root-index-file" value="root_index.xml" />
+	<property name="max-size-index" value="10" />
+	<property name="query-file" value="topics/102.xml" />
 	<property name="xml-files-dir" value="xml-orig" />
 	<property name="result-file" value="result.xml" />		
 	
@@ -80,7 +81,8 @@
 			<jvmarg value="-Xmx${maxMem}m" />
 			<arg value="${xml-files-dir}" />
 			<arg value="${stop-words-file}" />
-			<arg value="${indexes-dir}" />			
+			<arg value="${indexes-dir}" />
+			<arg value="${max-size-index}" />
 		</java>
 		<antcall target="clean" />
 		<echo message="Results in '${outputFile}'" />
