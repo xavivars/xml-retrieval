@@ -48,22 +48,22 @@ import xml.StopWordReader;
 public class QueryManager {
 
 	/**
-	 * 
+	 *
 	 */
 	private String indexSourceDir;
-	
+
 	/**
 	 *
 	 */
 	private StopWordMap stopWordMap;
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private String rootIndexFile;
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private String resultXMLFile;
 	/**
@@ -102,8 +102,8 @@ public class QueryManager {
 				String dName = document.getName();
 				DocumentRelevance documentRelevance = null;
 
-				if(dName.equals("../../inex-2004_files/inex-1.4/xml/an/1996/a3077.xml"))
-					added = false;
+				//if(dName.equals("../../inex-2004_files/inex-1.4/xml/an/1996/a3077.xml"))
+				//	added = false;
 
 				if(!relevance.contains(dName)) {
 					added = true;
