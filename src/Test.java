@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2007
- *  
+ *
  * Authors:
  *  Enrique Benimeli Bofarull <ebenimeli@gmail.com>
  *  David Ortega Parilla <dortegaparrilla@gmail.com>
  *  Xavier Ivars i Ribes <xavi@infobenissa.com>
- *  
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -30,9 +30,9 @@ import utils.StopWordMap;
 import xml.StopWordReader;
 
 /**
- * 
- * @author 
- * 
+ *
+ * @author
+ *
  */
 public class Test {
 
@@ -47,7 +47,7 @@ public class Test {
 		StopWordReader swr;
 		IndexFactory factory;
 		StopWordMap swm2;
-		
+
 		// CASO 1
 		swr = new StopWordReader("word-freqs.xml");
 		swr.setBottomLimit(100000);
@@ -58,24 +58,24 @@ public class Test {
 		swm2 = swr2.readDocument();
 		// Index
 		factory = new IndexFactory();
-		factory.setOutputPath("/home/ebenimeli/temp/indexes01/");
+		factory.setOutputPath("../indexes01/");
 		factory.index(args[0], swm2);
-		factory = null; 
+		factory = null;
 		swr2 = null;
 
 
-		// Querybueno, 
+		// Querybueno,
 		/*QueryManager queryManager = new QueryManager();
 		queryManager.setStopWordMap(swm);
 		String queryFileName = "./topics/query001.xml";
 		WordResultList wordResultList = queryManager.processQuery(queryFileName);
 		wordResultList.print();
 		*/
-		
+
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 */
 	private final void stopWords() {
@@ -84,8 +84,8 @@ public class Test {
 
 		//StopWordFactory swf = new StopWordFactory("word-freqs.xml");
 		//swf.getStopWords(args[0]);
-		
-	
+
+
 	}
 
 }

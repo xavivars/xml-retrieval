@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2007
- *  
+ *
  * Authors:
  *  Enrique Benimeli Bofarull <ebenimeli@gmail.com>
  *  David Ortega Parilla <dortegaparrilla@gmail.com>
  *  Xavier Ivars i Ribes <xavi@infobenissa.com>
- *  
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -28,19 +28,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * 
+ *
  * @author ebenimeli
  *
  */
 public class WordResult {
 
 	/**
-	 * 
+	 *
 	 */
 	private String name;
-	
+
 	/**
-	 * 
+	 *
+	 */
+	private String times;
+
+	/**
+	 *
 	 */
 	private ArrayList<Document> documents;
 
@@ -71,7 +76,7 @@ public class WordResult {
 	public final void setDocuments(ArrayList<Document> documents) {
 		this.documents = documents;
 	}
-	
+
 	/**
 	 * ¡¡¡¡¡ATENCIÓN RENDIMIENTO!!!!
 	 * @param document
@@ -90,14 +95,14 @@ public class WordResult {
                     for(String path: document.getPaths()) {
                         current.addPath(path);
                     }
-                    
+
                 }
             }
             if (!find) {
                 documents.add(document);
             }
 	}
-        
+
         public final boolean containsDocument (final Document document) {
             boolean find = false;
             Iterator it = documents.iterator();
@@ -107,9 +112,17 @@ public class WordResult {
                     find = true;
                 }
             }
-            
+
             return find;
         }
-	
-	
+
+		public String getTimes() {
+			return times;
+		}
+
+		public void setTimes(String times) {
+			this.times = times;
+		}
+
+
 }
