@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2007
- *  
+ *
  * Authors:
  *  Enrique Benimeli Bofarull <ebenimeli@gmail.com>
  *  David Ortega Parilla <dortegaparrilla@gmail.com>
  *  Xavier Ivars i Ribes <xavi@infobenissa.com>
- *  
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -34,50 +34,52 @@ import javax.xml.parsers.*;
 import utils.SimpleWord;
 
 /**
- * 
+ *
  * @author ebenimeli
  *
  */
 public class RootIndexReader extends SAXReader {
-    
+
     private boolean value, reference, occurrence;
     private String tempWord, fileName;
     private ReferenceList tempReference;
+    private Integer tempOccurrence;
     private HashMap < String, String > queryWords;
-    	
+
     /**
-     * 
+     *
      */
     private RootIndexMap rootIndexMap;
-    
-    
+
+
     public RootIndexReader (String file) {
         value = false;
         reference = false;
         occurrence = false;
         tempReference = new ReferenceList ();
+        tempOccurrence = 0;
         tempWord = "";
         rootIndexMap = new RootIndexMap ();
         fileName = file;
         queryWords = new HashMap < String, String > ();
     }
-    
-    
+
+
     private void readQuery (Query query) {
         for (SimpleWord word: query) {
             queryWords.put(word.getValue(), null);
         }
     }
-    
+
 
     public RootIndexMap search (Query query) {
         readQuery(query);
         getText(fileName);
         return getRootIndexMap();
-    }    
-    
+    }
+
     /**
-     * 
+     *
      * @return
      */
     private RootIndexMap getRootIndexMap() {
@@ -85,7 +87,7 @@ public class RootIndexReader extends SAXReader {
     }
 
     /**
-     * 
+     *
      * @param rootIndexMap
      */
     private void setRootIndexMap(RootIndexMap rootIndexMap) {
@@ -104,6 +106,10 @@ public class RootIndexReader extends SAXReader {
                     buffer.append(c, start, length);
                     tempReference.add(new Integer((buffer.toString())));
                     buffer = new StringBuilder (kStringBuilder);
+                }
+                else if (occurrence) {
+                	buffer.append(c, start, length);
+                	tempOccurrence = Integer.parseInt(buffer.toString());
                 }
             }
             catch (java.nio.BufferOverflowException x) {
@@ -125,8 +131,8 @@ public class RootIndexReader extends SAXReader {
             occurrence = true;
         }
     }
-    
-    public void endElement(final String uri, final String localName, final String tag) { 
+
+    public void endElement(final String uri, final String localName, final String tag) {
         if(value) {
             value = false;
         }
@@ -136,6 +142,7 @@ public class RootIndexReader extends SAXReader {
         if (occurrence) {
             occurrence = false;
             if (queryWords.containsKey(tempWord)) {
+            	tempReference.setOccurrences(tempOccurrence);
                 rootIndexMap.put(tempWord, tempReference);
                 if(!queryWords.isEmpty()) {
                     queryWords.remove(tempWord);
@@ -151,7 +158,7 @@ public class RootIndexReader extends SAXReader {
     }
 }
 
- 
+
 
 
 
