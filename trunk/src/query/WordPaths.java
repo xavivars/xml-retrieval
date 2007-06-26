@@ -46,6 +46,11 @@ public class WordPaths {
 	/**
 	 *
 	 */
+	private int occurrences;
+
+	/**
+	 *
+	 */
 	private ArrayList<String> paths;
 
 	/**
@@ -97,6 +102,14 @@ public class WordPaths {
 		weight = (1.0 + ((times -1.0)/times)) / 2.0;
 
 		return weight;
+	}
+
+	public int getOccurrences() {
+		return occurrences;
+	}
+
+	public void setOccurrences(int occurrences) {
+		this.occurrences = occurrences;
 	}
 
 

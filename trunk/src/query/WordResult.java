@@ -42,7 +42,7 @@ public class WordResult {
 	/**
 	 *
 	 */
-	private String times;
+	private int times;
 
 	/**
 	 *
@@ -116,11 +116,12 @@ public class WordResult {
             return find;
         }
 
-		public String getTimes() {
+		public int getTimes() {
 			return times;
 		}
 
-		public void setTimes(String times) {
+
+		public void setTimes(int times) {
 			this.times = times;
 		}
 
