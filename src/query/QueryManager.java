@@ -122,6 +122,8 @@ public class QueryManager {
 
 				wp.setPaths(document.getPaths());
 
+				wp.setOccurrences(wordResult.getTimes());
+
 				documentRelevance.addWordPaths(wp);
 
 				if(added)
@@ -211,9 +213,11 @@ public class QueryManager {
                     for (Integer ref: refList) {
                         if(wordsInIndex.containsKey(ref)) {
                             wl = wordsInIndex.get(ref);
+                            wl.setTimes(refList.getOccurrences());
                         }
                         else {
                             wl = new WordList();
+                            wl.setTimes(refList.getOccurrences());
                         }
                         wl.add(new Word (word));
                         wordsInIndex.put(ref,wl);
