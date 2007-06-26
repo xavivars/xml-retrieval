@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2007
- *  
+ *
  * Authors:
  *  Enrique Benimeli Bofarull <ebenimeli@gmail.com>
  *  David Ortega Parilla <dortegaparrilla@gmail.com>
  *  Xavier Ivars i Ribes <xavi@infobenissa.com>
- *  
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -23,26 +23,31 @@
  */
 
 package utils;
- 
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * 
+ *
  * @author ebenimeli
- * 
+ *
  */
 public class WordList extends ArrayList<Word> {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 
-	 * 
+	 *
+	 */
+	private int times;
+
+	/**
+	 *
+	 *
 	 */
 	public final void print() {
 		for (final Word w : this) {
@@ -51,7 +56,7 @@ public class WordList extends ArrayList<Word> {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param dos
 	 */
 	public final void printXML(DataOutputStream dos) {
@@ -67,5 +72,13 @@ public class WordList extends ArrayList<Word> {
 			ioe.printStackTrace();
 		}
 
+	}
+
+	public int getTimes() {
+		return times;
+	}
+
+	public void setTimes(int times) {
+		this.times = times;
 	}
 }
