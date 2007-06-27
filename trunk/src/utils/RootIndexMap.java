@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2007
- *  
+ *
  * Authors:
  *  Enrique Benimeli Bofarull <ebenimeli@gmail.com>
  *  David Ortega Parilla <dortegaparrilla@gmail.com>
  *  Xavier Ivars i Ribes <xavi@infobenissa.com>
- *  
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -33,26 +33,26 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * 
+ *
  * @author david
  */
 public class RootIndexMap extends HashMap<String, ReferenceList> {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Creates a new instance of RootIndexWord
-	 * 
+	 *
 	 */
 	public RootIndexMap() {
 
 	}
 
 	/**
-	 * 
+	 *
 	 * @param word
 	 */
 	public final void addReference(final Word word, final Integer reference) {
@@ -68,13 +68,13 @@ public class RootIndexMap extends HashMap<String, ReferenceList> {
 			// System.out.println("New word: " + word.getValue());
 			referenceList = new ReferenceList();
 			referenceList.add(reference);
-                        referenceList.setOccurrences(1);
+            referenceList.setOccurrences(1);
 			put(word.getValue(), referenceList);
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 * @param fileName
 	 */
 	public void printXML(final String fileName) {
