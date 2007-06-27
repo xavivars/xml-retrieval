@@ -25,6 +25,9 @@
 package query;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  *
@@ -32,11 +35,16 @@ import java.util.ArrayList;
  *
  */
 public class Relevance extends ArrayList<DocumentRelevance> {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 *
+	 */
+	private HashMap <String, Integer> ocs = null;
 
 	/**
 	 *
@@ -96,9 +104,26 @@ public class Relevance extends ArrayList<DocumentRelevance> {
 	 */
 	public final void setRelevance() {
 
-		for (final DocumentRelevance dr : this) {
-			dr.calcWeight();
+		int totalOcs = 0;
+
+		Iterator it = ocs.entrySet().iterator();
+
+		while (it.hasNext()) {
+			Map.Entry e = (Map.Entry) it.next();
+
+			totalOcs += (Integer) e.getValue();
 		}
+
+		for (final DocumentRelevance dr : this) {
+			dr.calcWeight(totalOcs);
+		}
+	}
+
+	/**
+	 * @param ocs the ocs to set
+	 */
+	public void setOcs(HashMap<String, Integer> ocs) {
+		this.ocs = ocs;
 	}
 
 

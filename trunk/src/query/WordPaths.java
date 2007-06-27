@@ -95,11 +95,13 @@ public class WordPaths {
 		this.weight = weight;
 	}
 
-	public final double calcWeight() {
+	public final double calcWeight(int totalOcs) {
 
 		int times = paths.size();
 
-		weight = (1.0 + ((times -1.0)/times)) / 2.0;
+		//weight = (1.0 + ((times -1.0)/times)) / 2.0;
+
+		weight = times * (((double) occurrences) / ((double) totalOcs));
 
 		return weight;
 	}

@@ -90,6 +90,7 @@ public class QueryManager {
 	public final Relevance transform(final WordResultList wrl)
 	{
 		Relevance relevance = new Relevance();
+		HashMap <String, Integer> ocs = new HashMap <String, Integer> ();
 
 		for (final WordResult wordResult : wrl) {
 			//System.out.println("Word: " + wordResult.getName());
@@ -120,6 +121,10 @@ public class QueryManager {
 
 				wp.setName(wordResult.getName());
 
+				if(!(ocs.containsKey(wordResult.getName()))) {
+					ocs.put(wordResult.getName(),wordResult.getTimes());
+				}
+
 				wp.setPaths(document.getPaths());
 
 				wp.setOccurrences(wordResult.getTimes());
@@ -130,6 +135,7 @@ public class QueryManager {
 					relevance.add(documentRelevance);
 			}
 		}
+		relevance.setOcs(ocs);
 
 		return relevance;
 	}
@@ -213,11 +219,9 @@ public class QueryManager {
                     for (Integer ref: refList) {
                         if(wordsInIndex.containsKey(ref)) {
                             wl = wordsInIndex.get(ref);
-                            wl.setTimes(refList.getOccurrences());
                         }
                         else {
                             wl = new WordList();
-                            wl.setTimes(refList.getOccurrences());
                         }
                         wl.add(new Word (word));
                         wordsInIndex.put(ref,wl);
@@ -233,6 +237,21 @@ public class QueryManager {
                     wl = (WordList) e.getValue();
                     result.addWordResultList(searchIndexMap(getIndexSourceDir() + "index_" + ref + ".xml", wl));
                 }
+
+
+                // desde el rootindexmap actualizamos las ocurrencias de los wordresults
+                it = result.iterator();
+                while(it.hasNext())
+                {
+                	Map.Entry e = (Map.Entry) it.next();
+
+                	WordResult wrt = (WordResult) e.getValue();
+
+                	wrt.setTimes(rootIndexMap.get(wrt.getName()).getOccurrences());
+                }
+
+
+
               //result.print();
               result.printXML(getResultXMLFile());
               return result;
