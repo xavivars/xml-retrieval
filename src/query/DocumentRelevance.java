@@ -51,13 +51,13 @@ public class DocumentRelevance implements Comparable<DocumentRelevance>{
 	/**
 	 *
 	 */
-	public final void calcWeight() {
+	public final void calcWeight(int totalOcs) {
 
 		this.weight = 0;
 
 		if(this.wordPaths.size()>0) {
 			for(WordPaths wp : wordPaths) {
-				this.weight += wp.calcWeight();
+				this.weight += wp.calcWeight(totalOcs);
 			}
 		}
 
