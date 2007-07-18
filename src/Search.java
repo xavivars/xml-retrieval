@@ -68,6 +68,7 @@ public class Search {
             qm.setResultXMLFile(resultXMLFile);
             
             WordResultList wrl=qm.processQuery(queryFile);
+            
             Relevance relevance=qm.transform(wrl);
             relevance.setRelevance();
             System.out.println("Unsorted Relevances");
@@ -81,8 +82,9 @@ public class Search {
             relevance.print();
             System.out.println("----------");
             System.out.println("End relevances");
-
-
+        } else {
+        	System.err.println("Usage: java Search <stop-words-file> <root-index-file> <query-file> <src-index-dir> <result-xml-file>");
         }
+
     }
 }
