@@ -47,13 +47,14 @@ public abstract class SAXReader extends DefaultHandler {
      */
     protected StringBuilder buffer = new StringBuilder(kStringBuilder);
     protected org.xml.sax.XMLReader reader = null;  
-    
+   
     
     /**
      * Creates a new instance of SaxReader
      *
      */
     public SAXReader() {
+    	
     }
     
     /**
@@ -62,17 +63,16 @@ public abstract class SAXReader extends DefaultHandler {
     public void characters(final char[] c, final int start, final int length) {
     }
 
-    /**
-     * 
-     */
     public void startElement(final String uri, final String localName,
-                             final String tag, final Attributes attributes) {
-	}
+            final String tag, final Attributes attributes) throws SAXException {
 
+    }
+    
+    
     /**
      * 
      */
-	public void endElement(final String uri, final String localName, final String tag) { 
+	public void endElement(final String uri, final String localName, final String tag) throws SAXException { 
 	}
 
 
@@ -100,8 +100,11 @@ public abstract class SAXReader extends DefaultHandler {
 		buffer = new StringBuilder(kStringBuilder);
 		try {
                     reader.parse(fileName);
-		} catch (Exception x) {
+		} catch (IOException x) {
 			System.err.println("Error parsing " + fileName + ": " + x);
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return buffer.toString();
 	}
