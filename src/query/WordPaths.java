@@ -101,7 +101,7 @@ public class WordPaths {
 
 		//weight = (1.0 + ((times -1.0)/times)) / 2.0;
 
-		weight = times * (((double) occurrences) / ((double) totalOcs));
+		weight = times * (((double) (totalOcs - occurrences)) / ((double) totalOcs));
 
 		return weight;
 	}
