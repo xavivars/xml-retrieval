@@ -31,7 +31,7 @@ import xml.StopWordReader;
 
 /**
  * 
- * @author 
+ * @author
  * 
  */
 public class Test3 {
@@ -53,7 +53,7 @@ public class Test3 {
 		swr.setBottomLimit(50000);
 		swr.removeSize(new Integer(1));
 		swr.removeSize(new Integer(2));
-		swr.removeSize(new Integer(3));		
+		swr.removeSize(new Integer(3));
 		swm = swr.readDocument();
 		swm.printXML("stop-words-final.xml");
 		swr2 = new StopWordReader("stop-words-final.xml");
@@ -65,28 +65,27 @@ public class Test3 {
 		factory = null;
 		swr2 = null;
 
-		// Querybueno, 
-		/*QueryManager queryManager = new QueryManager();
-		queryManager.setStopWordMap(swm);
-		String queryFileName = "./topics/query001.xml";
-		WordResultList wordResultList = queryManager.processQuery(queryFileName);
-		wordResultList.print();
-		*/
-		
+		// Querybueno,
+		/*
+		 * QueryManager queryManager = new QueryManager();
+		 * queryManager.setStopWordMap(swm); String queryFileName =
+		 * "./topics/query001.xml"; WordResultList wordResultList =
+		 * queryManager.processQuery(queryFileName); wordResultList.print();
+		 */
+
 	}
 
 	/**
 	 * 
-	 *
+	 * 
 	 */
 	private final void stopWords() {
 		// Crea un archivo con palabra-frecuencia
 		// Se insertan todas
 
-		//StopWordFactory swf = new StopWordFactory("word-freqs.xml");
-		//swf.getStopWords(args[0]);
-		
-	
+		// StopWordFactory swf = new StopWordFactory("word-freqs.xml");
+		// swf.getStopWords(args[0]);
+
 	}
 
 }

@@ -29,25 +29,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *
+ * 
  * @author ebenimeli
- *
+ * 
  */
 public class WordList extends ArrayList<Word> {
 
 	/**
-	 *
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 *
+	 * 
 	 */
 	private int times;
 
 	/**
-	 *
-	 *
+	 * 
+	 * 
 	 */
 	public final void print() {
 		for (final Word w : this) {
@@ -56,7 +56,7 @@ public class WordList extends ArrayList<Word> {
 	}
 
 	/**
-	 *
+	 * 
 	 * @param dos
 	 */
 	public final void printXML(DataOutputStream dos) {

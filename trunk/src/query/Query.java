@@ -51,19 +51,28 @@ public class Query extends ArrayList<SimpleWord> {
 		}
 	}
 
-        
-        public final boolean containsQuery (String word) {
-            boolean find = false;
-            
-            Iterator it = iterator();
-            
-            while (it.hasNext() && !find) {
-                String w = ((SimpleWord) it.next()).getValue();
-                if (w.compareTo(word) == 0) {
-                    find = true;
-                }
-            }
-            
-            return find;
-        }
+	/**
+	 * 
+	 * 
+	 */
+	public final void printWords() {
+		for (final SimpleWord w : this) {
+			System.out.print(w.getValue() + " ");
+		}
+	}
+
+	public final boolean containsQuery(String word) {
+		boolean find = false;
+
+		Iterator it = iterator();
+
+		while (it.hasNext() && !find) {
+			String w = ((SimpleWord) it.next()).getValue();
+			if (w.compareTo(word) == 0) {
+				find = true;
+			}
+		}
+
+		return find;
+	}
 }

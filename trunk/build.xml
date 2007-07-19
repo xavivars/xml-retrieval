@@ -4,13 +4,13 @@
 	<description>XML Retrieval</description>
 
 	<!-- Files -->
-	<property name="stop-words-file" value="stop-words-ok.xml" />
-	<property name="indexes-dir" value="/home/ebenimeli/temp/indices-10MB/" />
+	<property name="stop-words-file" value="stop-words-final.xml" />
+	<property name="indexes-dir" value="/home/ebenimeli/temp/indices-20MB/" />
 	<property name="root-index-file" value="root_index.xml" />
-	<property name="max-size-index" value="10" />
+	<property name="max-size-index" value="20" />
 	<property name="query-file" value="topics/query.xml" />
 	<property name="xml-files-dir" value="xml-orig" />
-	<property name="result-file" value="result.xml" />		
+	<property name="result-file" value="document-relevance.xml" />
 	
 	<!-- Directories -->
 	<property name="build.dir" location="classes" />
@@ -92,7 +92,7 @@
 	<!-- Search action -->
 	<target name="search" depends="compile" >
 		<echo message="Searching..." />
-		<java classname="Search" classpath="${lib.dir}/${appName}.jar" fork="true" output="${outputFile}">
+		<java classname="Search" classpath="${lib.dir}/${appName}.jar" fork="true">
 			<jvmarg value="-Xms${minMem}m" />
 			<jvmarg value="-Xmx${maxMem}m" />
 			<arg value="${stop-words-file}" />

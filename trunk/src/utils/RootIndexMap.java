@@ -33,48 +33,48 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- *
+ * 
  * @author david
  */
 public class RootIndexMap extends HashMap<String, ReferenceList> {
 
 	/**
-	 *
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Creates a new instance of RootIndexWord
-	 *
+	 * 
 	 */
 	public RootIndexMap() {
 
 	}
 
 	/**
-	 *
+	 * 
 	 * @param word
 	 */
 	public final void addReference(final Word word, final Integer reference) {
 		ReferenceList referenceList = null;
 		if (containsKey(word.getValue())) {
 			referenceList = get(word.getValue());
-                        if (!referenceList.exists(reference)) {
-                            referenceList.addReference(reference);
-                        }
-                        referenceList.incOccurrences();
+			if (!referenceList.exists(reference)) {
+				referenceList.addReference(reference);
+			}
+			referenceList.incOccurrences();
 			put(word.getValue(), referenceList);
 		} else {
 			// System.out.println("New word: " + word.getValue());
 			referenceList = new ReferenceList();
 			referenceList.add(reference);
-            referenceList.setOccurrences(1);
+			referenceList.setOccurrences(1);
 			put(word.getValue(), referenceList);
 		}
 	}
 
 	/**
-	 *
+	 * 
 	 * @param fileName
 	 */
 	public void printXML(final String fileName) {

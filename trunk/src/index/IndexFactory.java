@@ -36,7 +36,6 @@ import utils.WordMap;
 import utils.WordsFrequencyMap;
 import xml.DocumentReader;
 
-
 /**
  * 
  * @author
@@ -48,28 +47,28 @@ public class IndexFactory {
 	 * 
 	 */
 	private int maxSizeIndex;
-	
+
 	/**
 	 * Directory where 'root_index.xml' and 'index_i.xml' will be stored.
 	 */
 	private String outputPath;
-	
+
 	/**
 	 * 
 	 * 
 	 */
 	public IndexFactory() {
-		 setOutputPath("");
-		 setMaxSizeIndex(10);
+		setOutputPath("");
+		setMaxSizeIndex(10);
 	}
-	
+
 	/**
 	 * 
 	 * @param outputPath
 	 */
 	public IndexFactory(final String outputPath) {
 		setOutputPath(outputPath);
-		 setMaxSizeIndex(10);
+		setMaxSizeIndex(10);
 	}
 
 	/**
@@ -112,7 +111,7 @@ public class IndexFactory {
 		final HashMap<String, String> notWellFormed = new HashMap<String, String>();
 		// los siguientes archivos XML parecen no validar con la DTD
 		// y dan problemas en el indexado. Por ahora los omitimos.
-		
+
 		notWellFormed.put("xml/cg/1995/g1069.xml", null);
 		notWellFormed.put("xml/cg/1996/g5071.xml", null);
 		notWellFormed.put("xml/cg/1997/g6110.xml", null);
@@ -128,9 +127,6 @@ public class IndexFactory {
 		notWellFormed.put("xml/tc/1996/t0892.xml", null);
 		notWellFormed.put("xml/tc/1997/t0162.xml", null);
 		notWellFormed.put("xml/tc/1998/t0527.xml", null);
-
-		
-		
 
 		ArrayList<File> listFiles;
 		DocumentReader currentDoc;
@@ -172,7 +168,8 @@ public class IndexFactory {
 					if (length / (1024 * 1024) > maxSizeIndex) {
 						length = 0;
 						fileNumber++;
-						wordMap.printXML(getOutputPath() + "index_" + fileNumber + ".xml");
+						wordMap.printXML(getOutputPath() + "index_"
+								+ fileNumber + ".xml");
 						wordMap = new WordMap();
 					}
 				}
@@ -180,7 +177,8 @@ public class IndexFactory {
 				// index.addAll(wordList);
 				i++;
 			}
-			wordMap.printXML( getOutputPath() + "index_" + (fileNumber + 1) + ".xml");
+			wordMap.printXML(getOutputPath() + "index_" + (fileNumber + 1)
+					+ ".xml");
 
 			rootIndexMap.printXML(getOutputPath() + "root_index.xml");
 		} catch (Exception e) {
@@ -231,7 +229,8 @@ public class IndexFactory {
 	}
 
 	/**
-	 * @param maxSizeIndex the maxSizeIndex to set
+	 * @param maxSizeIndex
+	 *            the maxSizeIndex to set
 	 */
 	public final void setMaxSizeIndex(int maxSizeIndex) {
 		this.maxSizeIndex = maxSizeIndex;

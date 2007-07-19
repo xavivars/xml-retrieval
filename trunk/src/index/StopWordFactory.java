@@ -34,7 +34,7 @@ import utils.WordsFrequencyMap;
 /**
  * 
  * @author ebenimeli
- *
+ * 
  */
 public class StopWordFactory extends IndexFactory {
 
@@ -42,15 +42,15 @@ public class StopWordFactory extends IndexFactory {
 	 * 
 	 */
 	private int bottomLimit;
-	
+
 	/**
 	 * 
 	 */
 	private int topLimit;
-	
+
 	/**
 	 * 
-	 *
+	 * 
 	 */
 	public StopWordFactory() {
 		setBottomLimit(0);
@@ -66,7 +66,7 @@ public class StopWordFactory extends IndexFactory {
 		setBottomLimit(0);
 		setTopLimit(Integer.MAX_VALUE);
 	}
-	
+
 	/**
 	 * 
 	 * @param directory
@@ -78,7 +78,7 @@ public class StopWordFactory extends IndexFactory {
 		final HashMap<String, String> notWellFormed = new HashMap<String, String>();
 		// los siguientes archivos XML parecen no validar con la DTD
 		// y dan problemas en el indexado. Por ahora los omitimos.
-		
+
 		notWellFormed.put("xml/cg/1995/g1069.xml", null);
 		notWellFormed.put("xml/cg/1996/g5071.xml", null);
 		notWellFormed.put("xml/cg/1997/g6110.xml", null);
@@ -104,14 +104,17 @@ public class StopWordFactory extends IndexFactory {
 			int i = 0;
 			for (final File file : listFiles) {
 				if (!notWellFormed.containsKey(file.getPath())) {
-					//1. Extraer palabra-frecuencia
-					wordCounter = new WordCounter(file.getPath(), wordsFrequencyMap);
+					// 1. Extraer palabra-frecuencia
+					wordCounter = new WordCounter(file.getPath(),
+							wordsFrequencyMap);
 					wordCounter.readDocument();
-					//wordsFrequencyMap.print(150);
+					// wordsFrequencyMap.print(150);
 					// si la palabra aparece < 500000 veces
 					// es decir, imprimir todas las palabras
-					System.out.println(wordsFrequencyMap.size() + " stop-words.");
-					wordsFrequencyMap.printXML(getOutputPath(), getTopLimit(), getBottomLimit());
+					System.out.println(wordsFrequencyMap.size()
+							+ " stop-words.");
+					wordsFrequencyMap.printXML(getOutputPath(), getTopLimit(),
+							getBottomLimit());
 				}
 				i++;
 			}
@@ -128,7 +131,8 @@ public class StopWordFactory extends IndexFactory {
 	}
 
 	/**
-	 * @param bottomLimit the bottomLimit to set
+	 * @param bottomLimit
+	 *            the bottomLimit to set
 	 */
 	public final void setBottomLimit(int bottomLimit) {
 		this.bottomLimit = bottomLimit;
@@ -142,11 +146,11 @@ public class StopWordFactory extends IndexFactory {
 	}
 
 	/**
-	 * @param topLimit the topLimit to set
+	 * @param topLimit
+	 *            the topLimit to set
 	 */
 	public final void setTopLimit(int topLimit) {
 		this.topLimit = topLimit;
 	}
-
 
 }

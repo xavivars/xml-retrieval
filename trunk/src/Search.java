@@ -28,7 +28,7 @@ import query.Relevance;
 import query.WordResultList;
 
 /**
- *
+ * 
  * @author david
  */
 public class Search {
@@ -44,14 +44,13 @@ public class Search {
 	 */
 	public static void main(String[] args) {
 
-		System.out.println("Searching...");
 		String stopFile, rootFile, queryFile, sourceIndexDir, resultXMLFile;
 
 		stopFile = "";
 		rootFile = "";
 		queryFile = "";
 
-        if (args.length == 5) {
+		if (args.length == 5) {
 			stopFile = args[0];
 			System.out.println("Stop-words file: " + stopFile);
 			rootFile = args[1];
@@ -61,30 +60,24 @@ public class Search {
 			sourceIndexDir = args[3];
 			System.out.println("Source index directory: " + sourceIndexDir);
 			resultXMLFile = args[4];
-			System.out.println("Result XML file: " + resultXMLFile);
-			
-            QueryManager qm = new QueryManager (stopFile, rootFile);
-            qm.setIndexSourceDir(sourceIndexDir);
-            qm.setResultXMLFile(resultXMLFile);
-            
-            WordResultList wrl=qm.processQuery(queryFile);
-            
-            Relevance relevance=qm.transform(wrl);
-            relevance.setRelevance();
-            System.out.println("Unsorted Relevances");
-            System.out.println("----------");
-            relevance.print();
-            System.out.println("----------");
-            System.out.println("End unsorted relevances");
-            System.out.println("Sorted Relevances");
-            System.out.println("----------");
-            Collections.sort(relevance);
-            relevance.print();
-            System.out.println("----------");
-            System.out.println("End relevances");
-        } else {
-        	System.err.println("Usage: java Search <stop-words-file> <root-index-file> <query-file> <src-index-dir> <result-xml-file>");
-        }
 
-    }
+			QueryManager qm = new QueryManager(stopFile, rootFile);
+			qm.setIndexSourceDir(sourceIndexDir);
+			// qm.setResultXMLFile("");
+			System.out.println("Searching...");
+
+			WordResultList wrl = qm.processQuery(queryFile);
+			Relevance relevance = qm.transform(wrl);
+			relevance.setRelevance();
+			Collections.sort(relevance);
+			relevance.printXML(resultXMLFile);
+
+			System.out.println("Result XML file: " + resultXMLFile);
+
+		} else {
+			System.err
+					.println("Usage: java Search <stop-words-file> <root-index-file> <query-file> <src-index-dir> <result-xml-file>");
+		}
+
+	}
 }

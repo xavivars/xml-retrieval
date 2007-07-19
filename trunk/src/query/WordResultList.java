@@ -34,9 +34,9 @@ import java.util.Iterator;
 /**
  * 
  * @author ebenimeli
- *
+ * 
  */
-public class WordResultList extends ArrayList<WordResult>{
+public class WordResultList extends ArrayList<WordResult> {
 
 	/**
 	 * 
@@ -45,24 +45,23 @@ public class WordResultList extends ArrayList<WordResult>{
 
 	/**
 	 * 
-	 *
+	 * 
 	 */
 	public final void print() {
 		for (final WordResult wordResult : this) {
 			System.out.println("Word: " + wordResult.getName());
 			final ArrayList<Document> documents = wordResult.getDocuments();
 			for (final Document document : documents) {
-				System.out.println("\tDocument: "+ document.getName());
+				System.out.println("\tDocument: " + document.getName());
 				final ArrayList<String> paths = document.getPaths();
 				for (String path : paths) {
 					System.out.println("\t\tPath: " + path);
 				}
 			}
-                        System.out.println("");
+			System.out.println("");
 		}
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param fileName
@@ -83,10 +82,12 @@ public class WordResultList extends ArrayList<WordResult>{
 
 			for (final WordResult wordResult : this) {
 				dos.writeBytes("\t<word>\n");
-				dos.writeBytes("\t\t<value>" + wordResult.getName() + "</value>\n");
+				dos.writeBytes("\t\t<value>" + wordResult.getName()
+						+ "</value>\n");
 				final ArrayList<Document> documents = wordResult.getDocuments();
 				for (final Document document : documents) {
-					dos.writeBytes("\t\t<document id=\"" + document.getName() + "\">\n");
+					dos.writeBytes("\t\t<document id=\"" + document.getName()
+							+ "\">\n");
 					final ArrayList<String> paths = document.getPaths();
 					for (String path : paths) {
 						dos.writeBytes("\t\t\t<path ref=\"" + path + "\"/>\n");
@@ -107,31 +108,30 @@ public class WordResultList extends ArrayList<WordResult>{
 		} catch (final Exception eg) {
 			eg.printStackTrace();
 		}
-		
+
 	}
-        
-        public void addWordResultList (WordResultList wrl) {
-            boolean find;            
-            WordResult oldwr = new WordResult ();
-            
-            for (WordResult newwr: wrl) {
-                find = false;
-                Iterator it = iterator();
-                while (it.hasNext() && !find) {
-                    oldwr = (WordResult) it.next();
-                    if(oldwr.getName().compareTo(newwr.getName()) == 0) {
-                        find = true;
-                    }
-                }
-                if (!find) {
-                    add(newwr);
-                }
-                else {
-                    for(Document doc: newwr.getDocuments()) {
-                        oldwr.addDocument(doc);
-                    }
-                }
-            }
-        }
+
+	public void addWordResultList(WordResultList wrl) {
+		boolean find;
+		WordResult oldwr = new WordResult();
+
+		for (WordResult newwr : wrl) {
+			find = false;
+			Iterator it = iterator();
+			while (it.hasNext() && !find) {
+				oldwr = (WordResult) it.next();
+				if (oldwr.getName().compareTo(newwr.getName()) == 0) {
+					find = true;
+				}
+			}
+			if (!find) {
+				add(newwr);
+			} else {
+				for (Document doc : newwr.getDocuments()) {
+					oldwr.addDocument(doc);
+				}
+			}
+		}
+	}
 
 }

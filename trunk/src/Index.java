@@ -23,15 +23,12 @@
  */
 
 import index.IndexFactory;
-import index.StopWordFactory;
-import query.QueryManager;
-import query.WordResultList;
 import utils.StopWordMap;
 import xml.StopWordReader;
 
 /**
  * 
- * @author 
+ * @author
  * 
  */
 public class Index {
@@ -40,18 +37,17 @@ public class Index {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// filtramos word-freqs.xml
 		System.out.println("Indexing...");
 		StopWordReader swr2;
 		IndexFactory factory;
 		StopWordMap swm2;
-		
+
 		String sourceXMLDir = args[0];
 		String stopWordsFile = args[1];
 		String indexesDir = args[2];
 		String sMaxSizeIndex = args[3];
 		Integer iMaxSizeIndex = new Integer(sMaxSizeIndex);
-		
+
 		swr2 = new StopWordReader(stopWordsFile);
 		swm2 = swr2.readDocument();
 		// Index
@@ -59,24 +55,10 @@ public class Index {
 		factory.setOutputPath(indexesDir);
 		factory.setMaxSizeIndex(iMaxSizeIndex);
 		factory.index(sourceXMLDir, swm2);
-		
+
 		factory = null;
 		swr2 = null;
-		
-	}
 
-	/**
-	 * 
-	 *
-	 */
-	private final void stopWords() {
-		// Crea un archivo con palabra-frecuencia
-		// Se insertan todas
-
-		//StopWordFactory swf = new StopWordFactory("word-freqs.xml");
-		//swf.getStopWords(args[0]);
-		
-	
 	}
 
 }

@@ -29,7 +29,7 @@ import java.util.ArrayList;
 /**
  * 
  * @author ebenimeli
- *
+ * 
  */
 public class Document {
 
@@ -37,7 +37,7 @@ public class Document {
 	 * 
 	 */
 	private String name;
-	
+
 	/**
 	 * 
 	 */
@@ -51,7 +51,8 @@ public class Document {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public final void setName(String name) {
 		this.name = name;
@@ -65,12 +66,13 @@ public class Document {
 	}
 
 	/**
-	 * @param paths the paths to set
+	 * @param paths
+	 *            the paths to set
 	 */
 	public final void setPaths(ArrayList<String> paths) {
 		this.paths = paths;
 	}
-	
+
 	/**
 	 * 
 	 * @param path
@@ -78,5 +80,5 @@ public class Document {
 	public final void addPath(final String path) {
 		paths.add(path);
 	}
-	
+
 }

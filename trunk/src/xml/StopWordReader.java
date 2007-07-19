@@ -21,21 +21,21 @@ public class StopWordReader extends DOMReader {
 	 * 
 	 */
 	private StopWordMap stopWordMap;
-	
+
 	/**
 	 * 
 	 */
 	private int bottomLimit;
-	
+
 	/**
 	 * 
 	 */
 	private int topLimit;
-	
+
 	/**
 	 * 
 	 */
-	private HashMap<String,Integer> removeSize;
+	private HashMap<String, Integer> removeSize;
 
 	/**
 	 * 
@@ -43,9 +43,9 @@ public class StopWordReader extends DOMReader {
 	 */
 	public StopWordReader(String fileName) {
 		super(fileName);
-		removeSize = new HashMap<String,Integer>();
-		this.setBottomLimit(0);
-		this.setTopLimit(Integer.MAX_VALUE);
+		removeSize = new HashMap<String, Integer>();
+		setBottomLimit(0);
+		setTopLimit(Integer.MAX_VALUE);
 	}
 
 	/**
@@ -80,14 +80,15 @@ public class StopWordReader extends DOMReader {
 						final Element childElement = (Element) child;
 						final StopWord stopWord = readStopWord(childElement);
 						int f = stopWord.getFrequency();
-						if (removeSize.containsKey(stopWord.getFrequency().toString())) {
+						if (removeSize.containsKey(stopWord.getFrequency()
+								.toString())) {
 							stopWordMap.put(stopWord.getValue(), stopWord);
 						} else {
-						if (f >= getBottomLimit() && f <= getTopLimit()) {
-							stopWordMap.put(stopWord.getValue(), stopWord);
+							if ((f >= getBottomLimit()) && (f <= getTopLimit())) {
+								stopWordMap.put(stopWord.getValue(), stopWord);
+							}
 						}
-						}
-						
+
 					}
 				}
 				if (child instanceof Text) {
@@ -149,7 +150,8 @@ public class StopWordReader extends DOMReader {
 	}
 
 	/**
-	 * @param bottomLimit the bottomLimit to set
+	 * @param bottomLimit
+	 *            the bottomLimit to set
 	 */
 	public final void setBottomLimit(int bottomLimit) {
 		this.bottomLimit = bottomLimit;
@@ -163,12 +165,13 @@ public class StopWordReader extends DOMReader {
 	}
 
 	/**
-	 * @param topLimit the topLimit to set
+	 * @param topLimit
+	 *            the topLimit to set
 	 */
 	public final void setTopLimit(int topLimit) {
 		this.topLimit = topLimit;
 	}
-	
+
 	/**
 	 * 
 	 * @param size

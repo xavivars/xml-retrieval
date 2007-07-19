@@ -28,7 +28,7 @@ import utils.WordMap;
 
 /**
  * 
- * @author Enrique Benimeli Bofarull
+ * @author
  * 
  */
 public class DocumentReader extends DOMReader {
@@ -60,7 +60,7 @@ public class DocumentReader extends DOMReader {
 			readChildren(root, path);
 			// System.out.println("WordMap size: " + getWordMap().size());
 		} catch (final NullPointerException npe) {
-			npe.printStackTrace();
+			// npe.printStackTrace();
 		}
 		return null;
 	}

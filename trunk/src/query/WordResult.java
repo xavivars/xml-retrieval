@@ -28,24 +28,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- *
+ * 
  * @author ebenimeli
- *
+ * 
  */
 public class WordResult {
 
 	/**
-	 *
+	 * 
 	 */
 	private String name;
 
 	/**
-	 *
+	 * 
 	 */
 	private int times;
 
 	/**
-	 *
+	 * 
 	 */
 	private ArrayList<Document> documents;
 
@@ -57,7 +57,8 @@ public class WordResult {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public final void setName(String name) {
 		this.name = name;
@@ -71,7 +72,8 @@ public class WordResult {
 	}
 
 	/**
-	 * @param documents the documents to set
+	 * @param documents
+	 *            the documents to set
 	 */
 	public final void setDocuments(ArrayList<Document> documents) {
 		this.documents = documents;
@@ -79,51 +81,50 @@ public class WordResult {
 
 	/**
 	 * ¡¡¡¡¡ATENCIÓN RENDIMIENTO!!!!
+	 * 
 	 * @param document
 	 */
 	public final void addDocument(final Document document) {
-            boolean find = false;
-            Iterator it = documents.iterator();
-            while (it.hasNext() && !find) {
-        //    for (int i = 0 ; i < documents.size() && !find ; i++) {
-                Document current = (Document) it.next();
-  //              Document current = documents.get(i);
-                if (document.getName().compareTo(current.getName()) == 0) {
-//                    documents.remove(i);
-                    System.out.println(current.getName());
-                    find = true;
-                    for(String path: document.getPaths()) {
-                        current.addPath(path);
-                    }
+		boolean find = false;
+		Iterator it = documents.iterator();
+		while (it.hasNext() && !find) {
+			// for (int i = 0 ; i < documents.size() && !find ; i++) {
+			Document current = (Document) it.next();
+			// Document current = documents.get(i);
+			if (document.getName().compareTo(current.getName()) == 0) {
+				// documents.remove(i);
+				System.out.println(current.getName());
+				find = true;
+				for (String path : document.getPaths()) {
+					current.addPath(path);
+				}
 
-                }
-            }
-            if (!find) {
-                documents.add(document);
-            }
+			}
+		}
+		if (!find) {
+			documents.add(document);
+		}
 	}
 
-        public final boolean containsDocument (final Document document) {
-            boolean find = false;
-            Iterator it = documents.iterator();
-            while (it.hasNext() && !find) {
-                Document current = (Document) it.next();
-                if (document.getName().compareTo(current.getName()) == 0) {
-                    find = true;
-                }
-            }
-
-            return find;
-        }
-
-		public int getTimes() {
-			return times;
+	public final boolean containsDocument(final Document document) {
+		boolean find = false;
+		Iterator it = documents.iterator();
+		while (it.hasNext() && !find) {
+			Document current = (Document) it.next();
+			if (document.getName().compareTo(current.getName()) == 0) {
+				find = true;
+			}
 		}
 
+		return find;
+	}
 
-		public void setTimes(int times) {
-			this.times = times;
-		}
+	public int getTimes() {
+		return times;
+	}
 
+	public void setTimes(int times) {
+		this.times = times;
+	}
 
 }
