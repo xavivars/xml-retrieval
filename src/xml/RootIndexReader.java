@@ -110,6 +110,7 @@ public class RootIndexReader extends SAXReader {
                 else if (occurrence) {
                 	buffer.append(c, start, length);
                 	tempOccurrence = Integer.parseInt(buffer.toString());
+                	buffer = new StringBuilder (kStringBuilder);
                 }
             }
             catch (java.nio.BufferOverflowException x) {
