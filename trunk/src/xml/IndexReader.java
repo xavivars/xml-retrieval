@@ -171,7 +171,7 @@ public class IndexReader extends SAXReader {
     }
 
     public void startElement(final String uri, final String localName,
-                             final String tag, final Attributes attributes) {
+                             final String tag, final Attributes attributes) throws SAXException {
         if (tag.equals("value")) {
             value = true;
         }
@@ -183,7 +183,7 @@ public class IndexReader extends SAXReader {
         }
     }
     
-    public void endElement(final String uri, final String localName, final String tag) { 
+    public void endElement(final String uri, final String localName, final String tag) throws SAXException  { 
         
         if(value) {
             value = false;
@@ -216,7 +216,7 @@ public class IndexReader extends SAXReader {
             if (searchWords.containsKey(tempWord)) {
                 searchWords.remove(tempWord);
                 if (searchWords.isEmpty()) {
-                    reader = null;
+                	throw new SAXException ("Finish"); 
                 }
             }
         }

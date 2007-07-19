@@ -24,6 +24,7 @@
 
 package xml;
 
+import java.io.IOException;
 import java.util.HashMap;
 import query.Query;
 import utils.RootIndexMap;
@@ -121,7 +122,7 @@ public class RootIndexReader extends SAXReader {
     }
 
     public void startElement(final String uri, final String localName,
-                             final String tag, final Attributes attributes) {
+                             final String tag, final Attributes attributes) throws SAXException {
         if (tag.equals("value")) {
             value = true;
         }
@@ -133,7 +134,7 @@ public class RootIndexReader extends SAXReader {
         }
     }
 
-    public void endElement(final String uri, final String localName, final String tag) {
+    public void endElement(final String uri, final String localName, final String tag) throws SAXException {
         if(value) {
             value = false;
         }
@@ -149,7 +150,7 @@ public class RootIndexReader extends SAXReader {
                     queryWords.remove(tempWord);
                     // Si hemos encontrado todas las palabras, forzamos al parser a acabar
                     if (queryWords.isEmpty()) {
-                        reader = null;
+                    	throw new SAXException ("Finish");
                     }
                 }
             }
@@ -157,6 +158,25 @@ public class RootIndexReader extends SAXReader {
             tempReference = new ReferenceList ();
         }
     }
+    /**
+	 * 
+	 * @param fileName
+	 * @return
+	 */
+	public String getText(final String fileName) {
+
+		getXMLReader();
+		buffer = new StringBuilder(kStringBuilder);
+		try {
+                    reader.parse(fileName);
+		} catch (SAXException x) {
+			System.err.println("Error parsing " + fileName + ": " + x);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return buffer.toString();
+	}
 }
 
 
