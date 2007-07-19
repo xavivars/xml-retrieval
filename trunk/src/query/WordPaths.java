@@ -102,15 +102,17 @@ public class WordPaths {
 
 		int times = paths.size();
 
-		// weight = (1.0 + ((times -1.0)/times)) / 2.0;
+		/*
+		double apariciones = ((double)times)/((double)occurrences);
 
-		double apariciones = ((double) times) / ((double) occurrences);
+		double entropia = - (((double)occurrences) / ((double)totalOcs)) * Math.log(1.0/(((double)totalOcs)/((double)occurrences)));
 
-		double entropia = -(((double) occurrences) / ((double) totalOcs))
-				* Math
-						.log(1.0 / (((double) totalOcs) / ((double) occurrences)));
+		weight =  apariciones * entropia;
+		*/
 
-		weight = apariciones * entropia;
+		// apariciones * entropia (simplificando)
+		weight = (((double)times)/((double)totalOcs)) * Math.log(1.0/(((double)totalOcs)/((double)occurrences)));
+
 
 		return weight;
 	}
