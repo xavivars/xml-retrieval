@@ -240,7 +240,7 @@ public class QueryManager {
 
 
                 // desde el rootindexmap actualizamos las ocurrencias de los wordresults
-                it = result.iterator();
+                /*it = result.iterator();
                 while(it.hasNext())
                 {
                 	Map.Entry e = (Map.Entry) it.next();
@@ -250,7 +250,9 @@ public class QueryManager {
                 	wrt.setTimes(rootIndexMap.get(wrt.getName()).getOccurrences());
                 }
 
-
+*/				for (WordResult wrt: result) {
+					wrt.setTimes(rootIndexMap.get(wrt.getName()).getOccurrences());
+				}
 
               //result.print();
               result.printXML(getResultXMLFile());

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE inex_topic SYSTEM "topic.dtd">
+<!--<!DOCTYPE inex_topic SYSTEM "topic.dtd">-->
 <inex_topic topic_id="100" query_type="CO" ct_no="35">
-<title>fuzzy</title>
+<title>strumming abuhaiba</title>
 <description> Retrieve information about association rule mining in
 medical databases </description>
 <narrative> We have a medical data mining project and I want to find
