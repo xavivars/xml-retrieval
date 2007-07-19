@@ -27,37 +27,37 @@ package query;
 import java.util.ArrayList;
 
 /**
- *
+ * 
  * @author ebenimeli
- *
+ * 
  */
-public class DocumentRelevance implements Comparable<DocumentRelevance>{
+public class DocumentRelevance implements Comparable<DocumentRelevance> {
 
 	/**
-	 *
+	 * 
 	 */
 	private double weight;
 
 	/**
-	 *
+	 * 
 	 */
 	private String name;
 
 	/**
-	 *
+	 * 
 	 */
 	private ArrayList<WordPaths> wordPaths;
 
 	/**
-	 *
+	 * 
 	 */
 	public final void calcWeight(int totalOcs) {
 
-		this.weight = 0;
+		weight = 0;
 
-		if(this.wordPaths.size()>0) {
-			for(WordPaths wp : wordPaths) {
-				this.weight += wp.calcWeight(totalOcs);
+		if (wordPaths.size() > 0) {
+			for (WordPaths wp : wordPaths) {
+				weight += wp.calcWeight(totalOcs);
 			}
 		}
 
@@ -71,7 +71,8 @@ public class DocumentRelevance implements Comparable<DocumentRelevance>{
 	}
 
 	/**
-	 * @param weight the weight to set
+	 * @param weight
+	 *            the weight to set
 	 */
 	public final void setWeight(double weight) {
 		this.weight = weight;
@@ -85,7 +86,8 @@ public class DocumentRelevance implements Comparable<DocumentRelevance>{
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public final void setName(String name) {
 		this.name = name;
@@ -99,36 +101,37 @@ public class DocumentRelevance implements Comparable<DocumentRelevance>{
 	}
 
 	/**
-	 * @param wordPaths the wordPaths to set
+	 * @param wordPaths
+	 *            the wordPaths to set
 	 */
 	public final void setWordPaths(ArrayList<WordPaths> wordPaths) {
 		this.wordPaths = wordPaths;
 	}
 
 	/**
-	 *
+	 * 
 	 */
 	public final int compareTo(final DocumentRelevance dr) {
 
 		int ret = 0;
 
-		if(this.weight > dr.weight)
+		if (weight > dr.weight) {
 			ret = -1;
-		else
-			if(this.weight < dr.weight)
-				ret = 1;
+		} else if (weight < dr.weight) {
+			ret = 1;
+		}
 
 		return ret;
 	}
 
 	public final void addWordPaths(WordPaths wp) {
 
-		if(wordPaths == null)
-			wordPaths = new ArrayList<WordPaths> () ;
+		if (wordPaths == null) {
+			wordPaths = new ArrayList<WordPaths>();
+		}
 
-			wordPaths.add(wp);
+		wordPaths.add(wp);
 
 	}
-
 
 }

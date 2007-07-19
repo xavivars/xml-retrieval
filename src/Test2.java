@@ -31,7 +31,7 @@ import xml.StopWordReader;
 
 /**
  * 
- * @author 
+ * @author
  * 
  */
 public class Test2 {
@@ -47,7 +47,6 @@ public class Test2 {
 		StopWordReader swr;
 		IndexFactory factory;
 		StopWordMap swm2;
-		
 
 		// CASO 2
 		swr = new StopWordReader("word-freqs.xml");
@@ -65,29 +64,27 @@ public class Test2 {
 		factory = null;
 		swr2 = null;
 
+		// Querybueno,
+		/*
+		 * QueryManager queryManager = new QueryManager();
+		 * queryManager.setStopWordMap(swm); String queryFileName =
+		 * "./topics/query001.xml"; WordResultList wordResultList =
+		 * queryManager.processQuery(queryFileName); wordResultList.print();
+		 */
 
-		// Querybueno, 
-		/*QueryManager queryManager = new QueryManager();
-		queryManager.setStopWordMap(swm);
-		String queryFileName = "./topics/query001.xml";
-		WordResultList wordResultList = queryManager.processQuery(queryFileName);
-		wordResultList.print();
-		*/
-		
 	}
 
 	/**
 	 * 
-	 *
+	 * 
 	 */
 	private final void stopWords() {
 		// Crea un archivo con palabra-frecuencia
 		// Se insertan todas
 
-		//StopWordFactory swf = new StopWordFactory("word-freqs.xml");
-		//swf.getStopWords(args[0]);
-		
-	
+		// StopWordFactory swf = new StopWordFactory("word-freqs.xml");
+		// swf.getStopWords(args[0]);
+
 	}
 
 }

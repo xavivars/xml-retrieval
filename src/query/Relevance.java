@@ -24,38 +24,41 @@
 
 package query;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 /**
- *
+ * 
  * @author ebenimeli
- *
+ * 
  */
 public class Relevance extends ArrayList<DocumentRelevance> {
 
 	/**
-	 *
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 *
+	 * 
 	 */
-	private HashMap <String, Integer> ocs = null;
+	private HashMap<String, Integer> ocs = null;
 
 	/**
-	 *
+	 * 
 	 */
 	public final boolean contains(final String str) {
 
 		boolean ret = false;
 
-		for(final DocumentRelevance dr : this)
-		{
-			if(dr.getName().equals(str)) {
+		for (final DocumentRelevance dr : this) {
+			if (dr.getName().equals(str)) {
 				ret = true;
 				break;
 			}
@@ -65,14 +68,13 @@ public class Relevance extends ArrayList<DocumentRelevance> {
 	}
 
 	/**
-	 *
+	 * 
 	 */
 	public final DocumentRelevance get(String name) {
 		DocumentRelevance ret = null;
 
-		for(final DocumentRelevance dr : this)
-		{
-			if(dr.getName().equals(name)) {
+		for (final DocumentRelevance dr : this) {
+			if (dr.getName().equals(name)) {
 				ret = dr;
 				break;
 			}
@@ -82,14 +84,15 @@ public class Relevance extends ArrayList<DocumentRelevance> {
 	}
 
 	/**
-	 *
+	 * 
 	 */
 	public final void print() {
 		for (final DocumentRelevance dr : this) {
-			System.out.println("Document: " + dr.getName() + " (weight: " + dr.getWeight() + ")");
+			System.out.println("Document: " + dr.getName() + " (weight: "
+					+ dr.getWeight() + ")");
 			final ArrayList<WordPaths> wps = dr.getWordPaths();
 			for (final WordPaths wp : wps) {
-				System.out.println("\tWord: "+ wp.getName());
+				System.out.println("\tWord: " + wp.getName());
 				final ArrayList<String> paths = wp.getPaths();
 				for (final String path : paths) {
 					System.out.println("\t\tPath: " + path);
@@ -100,7 +103,59 @@ public class Relevance extends ArrayList<DocumentRelevance> {
 	}
 
 	/**
-	 *
+	 * 
+	 * 
+	 */
+	public final void printXML(final String fileName) {
+
+		BufferedOutputStream bos;
+		FileOutputStream fos;
+		DataOutputStream dos;
+
+		try {
+			fos = new FileOutputStream(fileName);
+			bos = new BufferedOutputStream(fos);
+			dos = new DataOutputStream(bos);
+			dos.writeBytes("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n");
+			dos.writeBytes("<search-result>\n");
+
+			for (final DocumentRelevance dr : this) {
+				// System.out.println("Document: " + dr.getName() + " (weight: "
+				// + dr.getWeight() + ")");
+				dos.writeBytes("\t<document relevance=\"" + dr.getWeight()
+						+ "\" name=\"" + dr.getName() + "\">\n");
+				final ArrayList<WordPaths> wps = dr.getWordPaths();
+				for (final WordPaths wp : wps) {
+					// System.out.println("\tWord: "+ wp.getName());
+					dos.writeBytes("\t\t<word>\n");
+					dos.writeBytes("\t\t\t<value>" + wp.getName()
+							+ "</value>\n");
+					dos.writeBytes("\t\t\t<paths>\n");
+					final ArrayList<String> paths = wp.getPaths();
+					for (final String path : paths) {
+						dos.writeBytes("\t\t\t\t<path>" + path + "</path>\n");
+					}
+					dos.writeBytes("\t\t\t</paths>\n");
+					dos.writeBytes("\t\t<word>\n");
+				}
+				dos.writeBytes("\t</document>\n");
+			}
+			dos.writeBytes("</search-result>\n");
+
+			fos = null;
+			bos = null;
+			dos.close();
+			dos = null;
+		} catch (final IOException e) {
+			e.printStackTrace();
+		} catch (final Exception eg) {
+			eg.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * 
 	 */
 	public final void setRelevance() {
 
@@ -120,11 +175,11 @@ public class Relevance extends ArrayList<DocumentRelevance> {
 	}
 
 	/**
-	 * @param ocs the ocs to set
+	 * @param ocs
+	 *            the ocs to set
 	 */
 	public void setOcs(HashMap<String, Integer> ocs) {
 		this.ocs = ocs;
 	}
-
 
 }

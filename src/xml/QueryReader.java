@@ -78,8 +78,6 @@ public class QueryReader extends DOMReader {
 			for (int i = 0; (i < children.getLength()) && !exit; i++) {
 				final Node child = children.item(i);
 				if (child instanceof Element) {
-					// System.out.println("Found: <" + child.getNodeName() +
-					// ">");
 					final String nodeName = child.getNodeName();
 					Position pos = null;
 					if (!positions.containsKey(nodeName)) {
@@ -102,11 +100,10 @@ public class QueryReader extends DOMReader {
 					final String[] words = text.split("\\s+");
 					for (String word : words) {
 						word = word.toLowerCase();
-						if (!word.isEmpty() && !stopWords.containsKey(word) && !query.containsQuery(word)) {
+						if (!word.isEmpty() && !stopWords.containsKey(word)
+								&& !query.containsQuery(word)) {
 							query.add(new SimpleWord(word));
 						}
-						// System.out.println(word);
-
 					}
 					exit = true;
 				}
@@ -122,7 +119,6 @@ public class QueryReader extends DOMReader {
 	public final Query readDocument() {
 		analize();
 		try {
-			// System.out.println("Reading document '" + getFileName() + "'");
 			final Element root = getDocument().getDocumentElement();
 			final String path = "/article[1]";
 			readQuery(root, path);

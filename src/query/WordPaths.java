@@ -27,29 +27,29 @@ package query;
 import java.util.ArrayList;
 
 /**
- *
+ * 
  * @author ebenimeli
- *
+ * 
  */
 public class WordPaths {
 
 	/**
-	 *
+	 * 
 	 */
 	private String name;
 
 	/**
-	 *
+	 * 
 	 */
 	private double weight;
 
 	/**
-	 *
+	 * 
 	 */
 	private int occurrences;
 
 	/**
-	 *
+	 * 
 	 */
 	private ArrayList<String> paths;
 
@@ -61,7 +61,8 @@ public class WordPaths {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public final void setName(String name) {
 		this.name = name;
@@ -75,7 +76,8 @@ public class WordPaths {
 	}
 
 	/**
-	 * @param paths the paths to set
+	 * @param paths
+	 *            the paths to set
 	 */
 	public final void setPaths(ArrayList<String> paths) {
 		this.paths = paths;
@@ -89,7 +91,8 @@ public class WordPaths {
 	}
 
 	/**
-	 * @param weight the weight to set
+	 * @param weight
+	 *            the weight to set
 	 */
 	public final void setWeight(double weight) {
 		this.weight = weight;
@@ -99,14 +102,15 @@ public class WordPaths {
 
 		int times = paths.size();
 
-		//weight = (1.0 + ((times -1.0)/times)) / 2.0;
+		// weight = (1.0 + ((times -1.0)/times)) / 2.0;
 
-		double apariciones = ((double)times)/((double)occurrences);
+		double apariciones = ((double) times) / ((double) occurrences);
 
-		double entropia = - (((double)occurrences) / ((double)totalOcs)) * Math.log(1.0/(((double)totalOcs)/((double)occurrences)));
+		double entropia = -(((double) occurrences) / ((double) totalOcs))
+				* Math
+						.log(1.0 / (((double) totalOcs) / ((double) occurrences)));
 
-		weight =  apariciones * entropia;
-
+		weight = apariciones * entropia;
 
 		return weight;
 	}
@@ -118,7 +122,5 @@ public class WordPaths {
 	public void setOccurrences(int occurrences) {
 		this.occurrences = occurrences;
 	}
-
-
 
 }

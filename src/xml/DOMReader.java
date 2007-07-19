@@ -114,11 +114,11 @@ public abstract class DOMReader {
 			setFactory(DocumentBuilderFactory.newInstance());
 			setBuilder(getFactory().newDocumentBuilder());
 		} catch (final ParserConfigurationException pce) {
-			pce.printStackTrace();
+			// pce.printStackTrace();
 			System.err.println("Error parsing XML document.");
 			System.exit(-1);
 		} catch (final Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.exit(-1);
 		}
 	}
@@ -135,15 +135,15 @@ public abstract class DOMReader {
 					+ "' file.");
 			System.exit(-1);
 		} catch (final SAXException saxE) {
-			saxE.printStackTrace();
+			// saxE.printStackTrace();
 			System.err.println("Error: could not parse '" + getDicFile() + "'");
 			System.exit(-1);
 		} catch (final IOException ioE) {
-			ioE.printStackTrace();
+			// ioE.printStackTrace();
 			System.err.println("I/O error");
 			System.exit(-1);
 		} catch (final Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.err
 					.println("Error: the XML document is probably not well-formed");
 			// System.exit(-1);
@@ -293,10 +293,10 @@ public abstract class DOMReader {
 				// añadimos el 'word' al WordMap
 				if (!getStopWordMap().containsKey(word.getValue())) {
 					getWordMap().addWord(word);
-                                        getRootIndexMap().addReference(word, reference);
+					getRootIndexMap().addReference(word, reference);
 					// System.out.println("Add '" + word.getValue() + "'");
 				}
-                                 //Añadimos el 'word' al WordList
+				// Añadimos el 'word' al WordList
 				// addWord(word);
 			} else {
 				// System.out.println("'" + token + "' is not a valid token");

@@ -62,7 +62,7 @@ public class StopWordMap extends HashMap<String, StopWord> {
 		}
 		System.out.println("Stop words: " + nStopWords);
 	}
-	
+
 	/**
 	 * 
 	 * @param fileName
@@ -85,7 +85,8 @@ public class StopWordMap extends HashMap<String, StopWord> {
 			while (it.hasNext()) {
 				final String key = (String) it.next();
 				final StopWord stopWord = get(key);
-				dos.writeBytes("\t<word f=\"" + stopWord.getFrequency() +"\">" + stopWord.getValue() + "</word>\n");
+				dos.writeBytes("\t<word f=\"" + stopWord.getFrequency() + "\">"
+						+ stopWord.getValue() + "</word>\n");
 				nStopWords++;
 			}
 
@@ -100,8 +101,7 @@ public class StopWordMap extends HashMap<String, StopWord> {
 		} catch (final Exception eg) {
 			eg.printStackTrace();
 		}
-		
-		
+
 	}
-	
+
 }
